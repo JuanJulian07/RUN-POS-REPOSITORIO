@@ -34,4 +34,14 @@ public abstract class Empleado {
     public String get_nombre(){
         return nombre;
     }
+
+    public long get_num_documento(){
+        return numero_documento;
+    }
+
+    public String get_tipo_empleado(){
+        return tipo_empleado;
+    }
+
+    
 }

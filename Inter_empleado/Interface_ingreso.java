@@ -1,11 +1,11 @@
 package Inter_empleado;
 
-import java.awt.Color;
+
 
 import javax.swing.*;
 import Empleados.Empleado;
 import Leer_Bases_de_datos.*;
-
+import Carpeta_de_ejecucion.*;
 
 public class Interface_ingreso extends JFrame{
     
@@ -13,6 +13,7 @@ public class Interface_ingreso extends JFrame{
     protected String contra;
     protected JPanel panel;
     protected Empleado user;
+    
 
 
     public Interface_ingreso(){
@@ -25,7 +26,8 @@ public class Interface_ingreso extends JFrame{
         add(panel);
         
         setVisible(true);
-
+        
+        
     }
 
     protected void Panel_ingreso(){
@@ -73,11 +75,21 @@ public class Interface_ingreso extends JFrame{
             else{
                 user = verificacion.get_empleado();
                 JOptionPane.showMessageDialog(this,"Has ingresado correctamente " + user.get_nombre());
+                this.dispose();
+                
+                
             }
+            
         });
 
         panel.add(ingreso);
     }
-    
+
+    public Empleado get_empleado(){
+        if(user == null){
+            return null;
+        }
+        return user;
+    }
     
 }
