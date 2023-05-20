@@ -1,34 +1,74 @@
 package Inter_empleado;
 
+import java.awt.Color;
+
 import javax.swing.*;
 import Empleados.Empleado;
+import Leer_Bases_de_datos.*;
 
 
 public class Interface_ingreso extends JFrame{
     
     protected String usuario;
-    protected String contrasñea;
+    protected String contra;
     protected JPanel panel;
     protected Empleado user;
 
 
     public Interface_ingreso(){
         super("Ventana de ingreso");
-        this.setSize(800,800);
-        panel = Panel_ingreso();
+        setSize(500,500);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        //Aprender lamdas para hacer el boton y repasar interfaces
+        setLocationRelativeTo(null);
+        Panel_ingreso();
+        
         add(panel);
-        pack();
+        
         setVisible(true);
 
     }
 
-    protected JPanel Panel_ingreso(){
+    protected void Panel_ingreso(){
         //Retorna la configuracion del panel o la distribucion principalmente para el ingreso del personal con todos los botones
-        JPanel p = new JPanel(/*Ingresar el layout */);
+        panel = new JPanel();
+        panel.setLayout(null);
+        panel.setSize(getWidth(), getHeight());
         
-        return p;
+
+        JLabel inUsuario = new JLabel();
+        inUsuario.setText("Ingrese su nombre de Usuario");
+        inUsuario.setBounds(getWidth()/2 - 100, 30, 200, 20);
+
+        panel.add(inUsuario);
+
+        JTextField nombre_usuario = new JTextField();
+        nombre_usuario.setBounds(getWidth()/2 -100,50, 200, 20);
+
+        panel.add(nombre_usuario);
+
+        JLabel inContra = new JLabel();
+        inContra.setText("Ingrese su nombre de Usuario");
+        inContra.setBounds(getWidth()/2-100, 100, 200, 20);
+
+        panel.add(inContra);
+
+        JTextField contra_usuario = new JTextField();
+        contra_usuario.setBounds(getWidth()/2 -100,120, 200, 20);
+
+        panel.add(contra_usuario);
+
+        JButton ingreso = new JButton("Ingresar");
+        ingreso.setBounds(getWidth()/2-100, 160, 100,20);
+
+        ingreso.addActionListener(accion -> {
+            usuario = nombre_usuario.getText();
+            contra = contra_usuario.getText();
+            Leer_empleados verificacion = new Leer_empleados(usuario, contra);
+            System.out.println(verificacion.get_acceso());
+        });
+
+        panel.add(ingreso);
     }
+    
     
 }
