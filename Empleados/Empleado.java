@@ -30,4 +30,8 @@ public abstract class Empleado {
 
     //Metodo a implementar
     abstract public int tipo_inter_grafica();
+
+    public String get_nombre(){
+        return nombre;
+    }
 }

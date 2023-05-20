@@ -64,7 +64,16 @@ public class Interface_ingreso extends JFrame{
             usuario = nombre_usuario.getText();
             contra = contra_usuario.getText();
             Leer_empleados verificacion = new Leer_empleados(usuario, contra);
-            System.out.println(verificacion.get_acceso());
+            
+            if(verificacion.get_acceso()== false){
+                JOptionPane.showMessageDialog(this,"No pudimos encontrar tu usuario\n Intentalo nuevamente");
+                nombre_usuario.setText("");
+                contra_usuario.setText("");
+            }
+            else{
+                user = verificacion.get_empleado();
+                JOptionPane.showMessageDialog(this,"Has ingresado correctamente " + user.get_nombre());
+            }
         });
 
         panel.add(ingreso);
