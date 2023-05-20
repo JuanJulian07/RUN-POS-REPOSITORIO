@@ -21,6 +21,7 @@ public class Main {
             usuario = ingreso.get_empleado();
             try{
                 Thread.sleep(1000);
+                
             }
             catch(InterruptedException a){}
             

@@ -61,7 +61,7 @@ public class Interface_ingreso extends JFrame{
 
         JButton ingreso = new JButton("Ingresar");
         ingreso.setBounds(getWidth()/2-100, 160, 100,20);
-
+        
         ingreso.addActionListener(accion -> {
             usuario = nombre_usuario.getText();
             contra = contra_usuario.getText();
