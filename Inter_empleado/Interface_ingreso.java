@@ -1,11 +1,8 @@
 package Inter_empleado;
 
-
-
 import javax.swing.*;
 import Empleados.Empleado;
 import Leer_Bases_de_datos.*;
-import Carpeta_de_ejecucion.*;
 
 public class Interface_ingreso extends JFrame{
     

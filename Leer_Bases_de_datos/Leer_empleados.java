@@ -11,7 +11,6 @@ public class Leer_empleados {
     private String dir = new String("Bases_de_datos\\Base_empleados.csv"); //Esta es la direccion por defecto del archivo de la base de datos
     private boolean acceso = false; //Sirve para verificar si podemos obtener acceso
 
-
     public Leer_empleados(String usuario, String contra){
         try{
             Scanner be = new Scanner(new File(dir));
@@ -40,6 +39,7 @@ public class Leer_empleados {
         catch(IOException exepcion){
             //Falta implementar un throw para la interface grafica
             String mensaje = new String ("No encontramos el archivo Base_empleados.csv en la direccion " + dir);
+            System.out.print(mensaje);
             
         }
     }

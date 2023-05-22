@@ -1,8 +1,7 @@
 package Carpeta_de_ejecucion;
 import Empleados.*;
-import java.util.*;
 import Inter_empleado.*;
-import Leer_Bases_de_datos.Leer_Menu;
+
 
 
 
@@ -14,7 +13,7 @@ public class Main {
         //Enlace de los diagramas
         //https://lucid.app/lucidchart/e688b790-61e5-4f3c-b4fe-9bc67ce1aa03/edit?invitationId=inv_fa273c72-f1d5-47cb-a82a-f0f1505e27bd&page=0GSVd8AeXx9V#
         
-       /*  Empleado usuario = null;
+        Empleado usuario = null;
         Interface_ingreso ingreso = new Interface_ingreso();
         
         
@@ -27,11 +26,9 @@ public class Main {
             catch(InterruptedException a){}
             
             //Esto es solamente para el puncionamiento del programa y evitar el ciclo infinito
-        }*/
+        }
 
-        Leer_Menu menu = new Leer_Menu();
-
-        System.out.println(menu.get_menu_listado().size());
+        Interface_Gerente gerente = new Interface_Gerente(usuario);
         
         
         
