@@ -1,5 +1,8 @@
 package Inter_empleado;
 
+import java.awt.Color;
+import java.awt.Image;
+
 import javax.swing.*;
 import Empleados.Empleado;
 import Leer_Bases_de_datos.*;
@@ -34,6 +37,7 @@ public class Interface_ingreso extends JFrame{
         panel.setLayout(null);
         panel.setSize(getWidth(), getHeight());
         
+        
 
         JLabel inUsuario = new JLabel();
         inUsuario.setText("Ingrese su nombre de Usuario");
@@ -47,8 +51,9 @@ public class Interface_ingreso extends JFrame{
         panel.add(nombre_usuario);
 
         JLabel inContra = new JLabel();
-        inContra.setText("Ingrese su nombre de Usuario");
+        inContra.setText("Ingrese tu contraseña");
         inContra.setBounds(getWidth()/2-100, 100, 200, 20);
+        
 
         panel.add(inContra);
 
@@ -60,10 +65,13 @@ public class Interface_ingreso extends JFrame{
 
         JButton ingreso = new JButton("Ingresar");
         ingreso.setBounds(getWidth()/2-100, 160, 100,20);
+
+        
+
         
         ingreso.addActionListener(accion -> {
             usuario = nombre_usuario.getText();
-            contra = contra_usuario.getText();
+            contra = new String(contra_usuario.getPassword());
             Leer_empleados verificacion = new Leer_empleados(usuario, contra);
             
             if(verificacion.get_acceso()== false){
@@ -82,6 +90,13 @@ public class Interface_ingreso extends JFrame{
         });
 
         panel.add(ingreso);
+
+        /*ImageIcon im = new ImageIcon("Recursos_fotograficos\\imagen1.jpg");
+        ImageIcon im2 = new ImageIcon(im.getImage().getScaledInstance(getWidth(), getHeight(), 1));
+        JLabel imagen_fondo = new JLabel(im2);
+        imagen_fondo.setBounds(0, 0, getWidth(), getHeight());
+        panel.add(imagen_fondo);*/
+        
     }
 
     public Empleado get_empleado(){

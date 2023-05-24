@@ -8,7 +8,7 @@ public class Leer_empleados {
     
     //Atributos
     private Empleado em = null; //Guarda el empleado encontrado
-    private String dir = new String("Bases_de_datos\\Base_empleados.csv"); //Esta es la direccion por defecto del archivo de la base de datos
+    private String dir = new String("src\\Bases_de_datos\\Base_empleados.csv"); //Esta es la direccion por defecto del archivo de la base de datos
     private boolean acceso = false; //Sirve para verificar si podemos obtener acceso
 
     public Leer_empleados(String usuario, String contra){
