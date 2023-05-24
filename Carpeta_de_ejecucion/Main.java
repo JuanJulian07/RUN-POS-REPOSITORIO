@@ -1,4 +1,7 @@
 package Carpeta_de_ejecucion;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+
 import Empleados.*;
 import Inter_empleado.*;
 
@@ -20,7 +23,8 @@ public class Main {
         while(usuario == null){
             usuario = ingreso.get_empleado();
             try{
-                Thread.sleep(1000);
+                Thread.sleep(100);
+                
                 
             }
             catch(InterruptedException a){}
@@ -28,8 +32,9 @@ public class Main {
             //Esto es solamente para el puncionamiento del programa y evitar el ciclo infinito
         }
 
-        Interface_Gerente gerente = new Interface_Gerente(usuario);
+        ingreso = null;
         
+        Interface_Gerente gerente = new Interface_Gerente(usuario);
         
         
     }

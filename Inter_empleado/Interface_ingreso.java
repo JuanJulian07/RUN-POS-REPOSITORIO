@@ -27,6 +27,7 @@ public class Interface_ingreso extends JFrame{
         
     }
 
+    
     protected void Panel_ingreso(){
         //Retorna la configuracion del panel o la distribucion principalmente para el ingreso del personal con todos los botones
         panel = new JPanel();
@@ -51,7 +52,8 @@ public class Interface_ingreso extends JFrame{
 
         panel.add(inContra);
 
-        JTextField contra_usuario = new JTextField();
+       
+        JPasswordField contra_usuario = new JPasswordField();
         contra_usuario.setBounds(getWidth()/2 -100,120, 200, 20);
 
         panel.add(contra_usuario);
@@ -70,10 +72,10 @@ public class Interface_ingreso extends JFrame{
                 contra_usuario.setText("");
             }
             else{
-                user = verificacion.get_empleado();
-                JOptionPane.showMessageDialog(this,"Has ingresado correctamente " + user.get_nombre());
-                this.dispose();
                 
+                JOptionPane.showMessageDialog(this,"Has ingresado correctamente " + verificacion.get_empleado().get_nombre());
+                user = verificacion.get_empleado();
+                this.dispose();
                 
             }
             
