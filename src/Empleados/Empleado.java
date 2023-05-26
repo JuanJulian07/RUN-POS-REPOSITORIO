@@ -44,5 +44,11 @@ public abstract class Empleado {
         return tipo_empleado;
     }
 
-    
+    public String get_usuario(){
+        return nombre_usuario;
+    }
+
+    public String get_contraseña(){
+        return contraseña;
+    }
 }

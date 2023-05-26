@@ -217,24 +217,29 @@ class ventana_ingreso_personal extends JDialog{
                 
                 switch (valor_auxiliar){
                     case Empleado.GERENTE: 
-                        empleado = new Gerente(nombre_usuario.getText(),Long.parseLong(ingreso_documento.getText()),ingreso_nombre_usuario.getText(),ingreso_contraseña.getText());
+                        empleado = new Gerente(ingreso_nombre.getText(),Long.parseLong(ingreso_documento.getText()),ingreso_nombre_usuario.getText(),ingreso_contraseña.getText());
                         break;
                     case Empleado.ADMINISTRADOR:
-                        empleado = new Administrativo(nombre_usuario.getText(),Long.parseLong(ingreso_documento.getText()),ingreso_nombre_usuario.getText(),ingreso_contraseña.getText());
+                        empleado = new Administrativo(ingreso_nombre.getText(),Long.parseLong(ingreso_documento.getText()),ingreso_nombre_usuario.getText(),ingreso_contraseña.getText());
                         break;
                     case Empleado.COCINERO:
-                        new Cocinero(nombre_usuario.getText(),Long.parseLong(ingreso_documento.getText()),ingreso_nombre_usuario.getText(),ingreso_contraseña.getText());
+                        empleado = new Cocinero(ingreso_nombre.getText(),Long.parseLong(ingreso_documento.getText()),ingreso_nombre_usuario.getText(),ingreso_contraseña.getText());
                         break;
                     case Empleado.MESERO:
-                        new Mesero(nombre_usuario.getText(),Long.parseLong(ingreso_documento.getText()),ingreso_nombre_usuario.getText(),ingreso_contraseña.getText());
+                        empleado = new Mesero(ingreso_nombre.getText(),Long.parseLong(ingreso_documento.getText()),ingreso_nombre_usuario.getText(),ingreso_contraseña.getText());
                         break;
                 }
-
-                Escribir_empleados escribir = new Escribir_empleados(empleado);
+                try{
+                    Escribir_empleados escribir = new Escribir_empleados(empleado);
                 //Encerrar en try catch
                 JOptionPane.showMessageDialog(this, "Has ingresado correctamente el siguiente empleado:\n" + ingreso_nombre.getText() + "\n" + ingreso_documento.getText() + "\n" + ingreso_nombre_usuario.getText() + "\n" + ingreso_contraseña.getText(), "Ingreso exitoso", JOptionPane.INFORMATION_MESSAGE, null);
                 
                 setVisible(false);
+                }
+                catch(NullPointerException ex){
+                    JOptionPane.showMessageDialog(this, "El usuario con documento: " + empleado.get_num_documento() + ", ya se encuentra registrado en la base de datos", "Error al registrar", JOptionPane.ERROR_MESSAGE, null);
+                }
+                
                 
             }
 

@@ -25,7 +25,7 @@ public class Leer_empleados {
                 
 
                 if(documento == Long.parseLong(aux[0])){//Verificamos que si coincida algun usuario y procedemos a guardarlo dependiendo de su rol
-                    
+                    acceso = false;
                     break;
                 }
                 else{
@@ -33,6 +33,7 @@ public class Leer_empleados {
                 }
                 
             }
+            be.close();
 
         }
         catch(IOException exepcion){
@@ -41,6 +42,7 @@ public class Leer_empleados {
             System.out.print(mensaje);
             
         }
+        
 
     }
     //Este constructor lee si hay un empleado con concidencias de usuario y contraseña
@@ -67,12 +69,13 @@ public class Leer_empleados {
                 }
                 
             }
+            be.close();
 
         }
         catch(IOException exepcion){
             //Falta implementar un throw para la interface grafica
             String mensaje = new String ("No encontramos el archivo Base_empleados.csv en la direccion " + dir);
-            System.out.print(mensaje);
+            System.out.print(mensaje);//Implementar joptionpane
             
         }
     }
@@ -100,6 +103,10 @@ public class Leer_empleados {
         else{
             return null;
         }
+    }
+
+    public String get_dir(){
+        return dir;
     }
 
 
