@@ -1,13 +1,11 @@
 package Inter_empleado;
 import java.awt.*;
-import java.util.ArrayList;
+
 
 import javax.swing.*;
-
-
 import Empleados.*;
 import Leer_Bases_de_datos.Escribir_empleados;
-import Bases_de_datos.*;
+
 
 
 
@@ -18,7 +16,7 @@ public class Interface_Gerente extends JFrame{
     private Empleado empleado = null;
     private static final Dimension DIMENSION_DEFECTO = new Dimension(1000,700);
     
-
+    //Constructor de la ventana principal de gerente
     public Interface_Gerente(Empleado empleado){
         super("Gerente");
         this.empleado = empleado;
@@ -36,12 +34,14 @@ public class Interface_Gerente extends JFrame{
         setVisible(true);
 
     }
-
+    //En este apartado registramos todas las posibles acciones que puede hacer el Gerente
     private JPanel panel(){
         JPanel p_gerente = new JPanel();
 
         p_gerente.setSize(1000,700);
         p_gerente.setLayout(null);
+
+        //Mensaje de bienvenida al usuario gerente
 
         JLabel saludo = new JLabel("Bienvendio "+ empleado.get_nombre());
         saludo.setBounds(0, 10, 1000, 40);
@@ -49,23 +49,20 @@ public class Interface_Gerente extends JFrame{
         saludo.setHorizontalAlignment(saludo.CENTER);
         p_gerente.add(saludo);
 
+        //Primer apartado para registro y cambio de empleados
         JLabel ingresar_empleado = new JLabel("01. Registro y cambio de usiarios y contraseñas");
         ingresar_empleado.setFont(new Font("arial", Font.BOLD,14));
         ingresar_empleado.setBounds(20,60,pixel_label,20);
-        
-    
         p_gerente.add(ingresar_empleado);
 
-        
-        
-
-        p_gerente.add(boton_bie());
+        p_gerente.add(boton_bie()); //Esta funcion es la encargada del boton
         
         // Agregar los botones xd y demas para el gerente y asi mismo el resto de cuestiones xd;
 
         return p_gerente;
     }
 
+    //Este metodo se encarga de crear y establecer acciones para el boton, lo cual nos despliega una ventana JDialog
     private JButton boton_bie(){
 
         JButton bie = new JButton("Ingresar");
@@ -84,8 +81,6 @@ public class Interface_Gerente extends JFrame{
                 ventana_ingreso = null;
             }
             
-            //ventana_ingreso_personal ventana_aux = new ventana_ingreso_personal(null);
-            
         });
 
         return bie;
@@ -93,6 +88,8 @@ public class Interface_Gerente extends JFrame{
 
     
 }
+
+//Calse especifica para el apartado de ingresar empleados nuevos
 class ventana_ingreso_personal extends JDialog{
 
     private static final int alineacion = 350;
@@ -170,7 +167,8 @@ class ventana_ingreso_personal extends JDialog{
         JButton ingresar = new JButton("Ingresar");
         ingresar.setBounds(alineacion, ingreso_contraseña.getY()+40, 100, 20);
         ingresar.addActionListener(accoin -> {
-            //Metodo para guardar el empleado en la base de datos
+
+            //En este apartado revisamos que todos los campos esten llenos correctamente
             String[] error = {"","","","",""};
             boolean band = true;
 
@@ -206,15 +204,18 @@ class ventana_ingreso_personal extends JDialog{
                 error[4] = "El ingreso de la contraseña es obligatorio";
                 band = false;
             }
-            //Este me bota todos los errores que se hayan recogido
+            
+            //En caso que tengamos errores de ingreso de datos o datos nulos el programa nos avisara
             if(band == false){
                 JOptionPane.showMessageDialog(this, error[0]+ error[1]+ error[2]+ error[3] + error[4], "Error en Ingreso", JOptionPane.ERROR_MESSAGE, null);
 
             }
             else{
+
+                //En caso que no hayamos tenido errores, procederemos a verificar si el usuiario que se ingreso es nuevo o ya esta registrado
                 String valor_auxiliar = valores_combobox[tipo.getSelectedIndex()];
                 
-                
+                //Instanciamos nuestro tipo de empleado
                 switch (valor_auxiliar){
                     case Empleado.GERENTE: 
                         empleado = new Gerente(ingreso_nombre.getText(),Long.parseLong(ingreso_documento.getText()),ingreso_nombre_usuario.getText(),ingreso_contraseña.getText());
@@ -229,15 +230,21 @@ class ventana_ingreso_personal extends JDialog{
                         empleado = new Mesero(ingreso_nombre.getText(),Long.parseLong(ingreso_documento.getText()),ingreso_nombre_usuario.getText(),ingreso_contraseña.getText());
                         break;
                 }
+                //Aqui verificamos que realmente es un nuevo empleado
                 try{
                     Escribir_empleados escribir = new Escribir_empleados(empleado);
-                //Encerrar en try catch
+                //Si no presenta un throw quiere decir que el empleado se ingreso correctamente a la base de datos y cerrara la ventana JDialog
                 JOptionPane.showMessageDialog(this, "Has ingresado correctamente el siguiente empleado:\n" + ingreso_nombre.getText() + "\n" + ingreso_documento.getText() + "\n" + ingreso_nombre_usuario.getText() + "\n" + ingreso_contraseña.getText(), "Ingreso exitoso", JOptionPane.INFORMATION_MESSAGE, null);
                 
                 setVisible(false);
                 }
+                //En caso que tengamos el error el programa nos avisara y tendremos que digitar un empleado valido o simplemente salir de la ventana
                 catch(NullPointerException ex){
-                    JOptionPane.showMessageDialog(this, "El usuario con documento: " + empleado.get_num_documento() + ", ya se encuentra registrado en la base de datos", "Error al registrar", JOptionPane.ERROR_MESSAGE, null);
+                    JOptionPane.showMessageDialog(this, "El usuario con documento: " + empleado.get_num_documento() + ", ya se encuentra registrado en la base de datos.", "Error al registrar", JOptionPane.ERROR_MESSAGE, null);
+                    ingreso_nombre.setText("");
+                    ingreso_documento.setText("");
+                    ingreso_nombre_usuario.setText("");
+                    ingreso_contraseña.setText("");
                 }
                 
                 
@@ -250,6 +257,7 @@ class ventana_ingreso_personal extends JDialog{
         return p_gerente;
     }
 
+    //Metodo para los label y optimizar el codigo
     private JLabel label(String texto, int x, int y, int ancho, int largo){
         JLabel l = new JLabel(texto);
         l.setFont(new Font("arial", Font.BOLD,14));
@@ -257,6 +265,7 @@ class ventana_ingreso_personal extends JDialog{
         return l; 
     }
 
+    //Metodo para los botones y optimizar el codigo
     private JTextField in_text(int x, int y, int ancho, int largo){
         JTextField text = new JTextField();
         text.setBounds(x, y, ancho, largo);
