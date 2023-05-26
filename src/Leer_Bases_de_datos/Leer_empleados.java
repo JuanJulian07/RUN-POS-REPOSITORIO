@@ -3,6 +3,7 @@ package Leer_Bases_de_datos;
 import java.util.*;
 import Empleados.*;
 import java.io.*;
+import javax.swing.JOptionPane;
 
 public class Leer_empleados {
     
@@ -10,9 +11,10 @@ public class Leer_empleados {
     private Empleado em = null; //Guarda el empleado encontrado
     private String dir = new String("src\\Bases_de_datos\\Base_empleados.csv"); //Esta es la direccion por defecto del archivo de la base de datos
     private boolean acceso = false; //Sirve para verificar si podemos obtener acceso
+    private boolean acceso2 = false; //Para que nos retorne un usuario encontrado
 
     //Este constructor busque si hay un empleado registrado con el numero de identificacion
-    public Leer_empleados(long documento){
+    public Leer_empleados(long documento, String nombre_usuario){
 
         try{
             Scanner be = new Scanner(new File(dir));
@@ -22,10 +24,22 @@ public class Leer_empleados {
                 String datos_empleado = be.nextLine();
                 String aux[] = datos_empleado.split(";"); //Obtenemos un arreglo de Strings donde tenemos por separado cada tipo de dato
 
-                
+                switch(aux[2]){
+                    case "Gerente": em = new Gerente(aux[1],Long.parseLong(aux[0]), aux[3], aux[4]); break;
+                    case "Administrativo": em = new Administrativo(aux[1],Long.parseLong(aux[0]), aux[3], aux[4]); break;
+                    case "Cocinero": em = new Cocinero(aux[1],Long.parseLong(aux[0]), aux[3], aux[4]); break;
+                    case "Mesero": em = new Mesero(aux[1],Long.parseLong(aux[0]), aux[3], aux[4]); break;
+                }
 
                 if(documento == Long.parseLong(aux[0])){//Verificamos que si coincida algun usuario y procedemos a guardarlo dependiendo de su rol
                     acceso = false;
+                    acceso2 = true;
+                    
+                    break;
+                }
+                if(nombre_usuario.equals(aux[3])){
+                    acceso = false;
+                    acceso2 = true;
                     break;
                 }
                 else{
@@ -37,10 +51,9 @@ public class Leer_empleados {
 
         }
         catch(IOException exepcion){
-            //Falta implementar un throw para la interface grafica
-            String mensaje = new String ("No encontramos el archivo Base_empleados.csv en la direccion " + dir);
-            System.out.print(mensaje);
             
+            JOptionPane.showMessageDialog(null, "No encontramos el archivo Base_empleados.csv en la direccion " + dir, "Error Base de datos Empleado", JOptionPane.ERROR_MESSAGE,null);
+            System.exit(0);
         }
         
 
@@ -73,10 +86,9 @@ public class Leer_empleados {
 
         }
         catch(IOException exepcion){
-            //Falta implementar un throw para la interface grafica
-            String mensaje = new String ("No encontramos el archivo Base_empleados.csv en la direccion " + dir);
-            System.out.print(mensaje);//Implementar joptionpane
             
+            JOptionPane.showMessageDialog(null, "No encontramos el archivo Base_empleados.csv en la direccion " + dir, "Error Base de datos Empleado", JOptionPane.ERROR_MESSAGE,null);
+            System.exit(0);
         }
     }
 
@@ -97,11 +109,14 @@ public class Leer_empleados {
     }
 
     public Empleado get_empleado(){//retorna el empleado que fue encontrado segun sea el caso
-        if(acceso == true){
+        if(acceso)
             return em;
-        }
         else{
-            return null;
+            if(acceso2)
+                return em;
+            
+            else
+                return null;
         }
     }
 

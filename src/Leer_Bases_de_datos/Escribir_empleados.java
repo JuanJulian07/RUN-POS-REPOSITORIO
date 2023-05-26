@@ -5,6 +5,7 @@ import Empleados.*;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.swing.JOptionPane;
 
 
 
@@ -15,9 +16,10 @@ public class Escribir_empleados {
     public Escribir_empleados(Empleado empleado){
         this.empleado = empleado;
 
-        Leer_empleados leer = new Leer_empleados(empleado.get_num_documento());
+        Leer_empleados leer = new Leer_empleados(empleado.get_num_documento(), empleado.get_usuario());
         if(!leer.get_acceso()){
-            NullPointerException ex = new NullPointerException();
+            empleado = leer.get_empleado();
+            NullPointerException ex = new NullPointerException("Nombre: " + empleado.get_nombre() + ".\nNumero de documento: " + empleado.get_num_documento() + ".\nUsuario: " + empleado.get_usuario() + ".");
             throw ex;
         }
 
@@ -39,10 +41,14 @@ public class Escribir_empleados {
             guardar.close();
         }
         catch(IOException e){
-            String mensaje = new String ("No encontramos el archivo Base_empleados.csv en la direccion " + dir);
-            System.out.print(mensaje); // implementar joption pane
+            JOptionPane.showMessageDialog(null, "No encontramos el archivo Base_empleados.csv en la direccion " + dir, "Error Base de datos Empleado", JOptionPane.ERROR_MESSAGE,null);
+            System.exit(0);
         }
         
+    }
+
+    public Empleado get_Empleado(){
+        return empleado;
     }
     
 }

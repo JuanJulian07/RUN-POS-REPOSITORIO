@@ -96,7 +96,6 @@ class ventana_ingreso_personal extends JDialog{
     private Empleado empleado;
     private String valores_combobox[] = {Empleado.GERENTE,Empleado.ADMINISTRADOR,Empleado.COCINERO,Empleado.MESERO};
 
-
     public ventana_ingreso_personal(JFrame padre,Component component){
         
         super(padre,true);
@@ -233,14 +232,15 @@ class ventana_ingreso_personal extends JDialog{
                 //Aqui verificamos que realmente es un nuevo empleado
                 try{
                     Escribir_empleados escribir = new Escribir_empleados(empleado);
-                //Si no presenta un throw quiere decir que el empleado se ingreso correctamente a la base de datos y cerrara la ventana JDialog
-                JOptionPane.showMessageDialog(this, "Has ingresado correctamente el siguiente empleado:\n" + ingreso_nombre.getText() + "\n" + ingreso_documento.getText() + "\n" + ingreso_nombre_usuario.getText() + "\n" + ingreso_contraseña.getText(), "Ingreso exitoso", JOptionPane.INFORMATION_MESSAGE, null);
+                    //Si no presenta un throw quiere decir que el empleado se ingreso correctamente a la base de datos y cerrara la ventana JDialog
+                    JOptionPane.showMessageDialog(this, "Has ingresado correctamente el siguiente empleado:\n" + ingreso_nombre.getText() + "\n" + ingreso_documento.getText() + "\n" + ingreso_nombre_usuario.getText() + "\n" + ingreso_contraseña.getText(), "Ingreso exitoso", JOptionPane.INFORMATION_MESSAGE, null);
                 
-                setVisible(false);
+                    setVisible(false);
                 }
                 //En caso que tengamos el error el programa nos avisara y tendremos que digitar un empleado valido o simplemente salir de la ventana
                 catch(NullPointerException ex){
-                    JOptionPane.showMessageDialog(this, "El usuario con documento: " + empleado.get_num_documento() + ", ya se encuentra registrado en la base de datos.", "Error al registrar", JOptionPane.ERROR_MESSAGE, null);
+                    
+                    JOptionPane.showMessageDialog(this, "El usuario que intentas ingresar se encuentra registrado con los siguientes datos.\n\n"+ex.getMessage(), "Error al registrar", JOptionPane.ERROR_MESSAGE, null);
                     ingreso_nombre.setText("");
                     ingreso_documento.setText("");
                     ingreso_nombre_usuario.setText("");
