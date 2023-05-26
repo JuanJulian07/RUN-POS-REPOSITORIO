@@ -22,7 +22,7 @@ public class Interface_ingreso extends JFrame{
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         Panel_ingreso();
-        
+        setResizable(false);
         add(panel);
         
         setVisible(true);
@@ -67,7 +67,7 @@ public class Interface_ingreso extends JFrame{
         ingreso.setBounds(getWidth()/2-100, 160, 100,20);
 
         
-
+        ingreso.setSelected(false);
         
         ingreso.addActionListener(accion -> {
             usuario = nombre_usuario.getText();
@@ -84,6 +84,7 @@ public class Interface_ingreso extends JFrame{
                 JOptionPane.showMessageDialog(this,"Has ingresado correctamente " + verificacion.get_empleado().get_nombre());
                 user = verificacion.get_empleado();
                 this.dispose();
+                
                 
             }
             

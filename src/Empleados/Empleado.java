@@ -1,15 +1,16 @@
 package Empleados;
 
 public abstract class Empleado {
-    protected static final String GERENTE = "Gerente";
-    protected static final String MESERO = "Mesero";
-    protected static final String ADMINISTRADOR = "Administrador";
-    protected static final String COCINERO = "Cocinero";
+    public static final String GERENTE = "Gerente";
+    public static final String MESERO = "Mesero";
+    public static final String ADMINISTRADOR = "Administrador";
+    public static final String COCINERO = "Cocinero";
     protected String nombre;
     protected long numero_documento;
     protected String tipo_empleado;
     protected String contraseña;
     protected String nombre_usuario;
+    
     
     //Constructor para ingresar datos 
     protected Empleado(String nombre, long documento, String nombre_usuario, String contraseña){

@@ -1,6 +1,4 @@
 package Carpeta_de_ejecucion;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
 
 import Empleados.*;
 import Inter_empleado.*;
@@ -31,7 +29,7 @@ public class Main {
             
             //Esto es solamente para el puncionamiento del programa y evitar el ciclo infinito
         }
-
+        
         ingreso = null;
         
         Interface_Gerente gerente = new Interface_Gerente(usuario);
