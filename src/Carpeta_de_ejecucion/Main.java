@@ -15,7 +15,7 @@ public class Main {
         //Enlace de los diagramas
         //https://lucid.app/lucidchart/e688b790-61e5-4f3c-b4fe-9bc67ce1aa03/edit?invitationId=inv_fa273c72-f1d5-47cb-a82a-f0f1505e27bd&page=0GSVd8AeXx9V#
         
-        /*Empleado usuario = null;
+        Empleado usuario = null;
         Interface_ingreso ingreso = new Interface_ingreso();
         
         
@@ -32,12 +32,8 @@ public class Main {
         }
         
         ingreso = null;
-        */
-        Empleado usuario = new Gerente("Juan David Beltran Orjuela",1068972260,"jbeltrano","pr1m3ro123");
         Interface_Gerente gerente = new Interface_Gerente(usuario);
         
-        
-
         
     }
 }
