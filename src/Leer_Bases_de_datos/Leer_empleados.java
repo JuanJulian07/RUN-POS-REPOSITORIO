@@ -11,6 +11,39 @@ public class Leer_empleados {
     private String dir = new String("src\\Bases_de_datos\\Base_empleados.csv"); //Esta es la direccion por defecto del archivo de la base de datos
     private boolean acceso = false; //Sirve para verificar si podemos obtener acceso
 
+    //Este constructor busque si hay un empleado registrado con el numero de identificacion
+    public Leer_empleados(long documento){
+
+        try{
+            Scanner be = new Scanner(new File(dir));
+            be.nextLine();
+
+            while(be.hasNextLine()){
+                String datos_empleado = be.nextLine();
+                String aux[] = datos_empleado.split(";"); //Obtenemos un arreglo de Strings donde tenemos por separado cada tipo de dato
+
+                
+
+                if(documento == Long.parseLong(aux[0])){//Verificamos que si coincida algun usuario y procedemos a guardarlo dependiendo de su rol
+                    
+                    break;
+                }
+                else{
+                    acceso = true;
+                }
+                
+            }
+
+        }
+        catch(IOException exepcion){
+            //Falta implementar un throw para la interface grafica
+            String mensaje = new String ("No encontramos el archivo Base_empleados.csv en la direccion " + dir);
+            System.out.print(mensaje);
+            
+        }
+
+    }
+    //Este constructor lee si hay un empleado con concidencias de usuario y contraseña
     public Leer_empleados(String usuario, String contra){
         try{
             Scanner be = new Scanner(new File(dir));

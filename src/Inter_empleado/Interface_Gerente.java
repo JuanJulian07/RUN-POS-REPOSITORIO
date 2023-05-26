@@ -6,6 +6,7 @@ import javax.swing.*;
 
 
 import Empleados.*;
+import Leer_Bases_de_datos.Escribir_empleados;
 import Bases_de_datos.*;
 
 
@@ -24,6 +25,7 @@ public class Interface_Gerente extends JFrame{
         
         
         ventana();
+        
     }
 
     private void ventana(){
@@ -77,7 +79,9 @@ public class Interface_Gerente extends JFrame{
             num_selection = JOptionPane.showOptionDialog(this, "Selecciona la opcion que deceas realizar", "Ingreso o cambio de empleados", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opciones, 0);
 
             if(num_selection == 0){
-                ventana_ingreso_personal ventana_ingreso = new ventana_ingreso_personal(null);
+                ventana_ingreso_personal ventana_ingreso = new ventana_ingreso_personal(this,null);
+                ventana_ingreso.setVisible(true);
+                ventana_ingreso = null;
             }
             
             //ventana_ingreso_personal ventana_aux = new ventana_ingreso_personal(null);
@@ -89,19 +93,25 @@ public class Interface_Gerente extends JFrame{
 
     
 }
-class ventana_ingreso_personal extends JFrame{
+class ventana_ingreso_personal extends JDialog{
+
     private static final int alineacion = 350;
-    public ventana_ingreso_personal(Component component){
+    private Empleado empleado;
+    private String valores_combobox[] = {Empleado.GERENTE,Empleado.ADMINISTRADOR,Empleado.COCINERO,Empleado.MESERO};
+
+
+    public ventana_ingreso_personal(JFrame padre,Component component){
+        
+        super(padre,true);
         setTitle("Ingreso de personal a la base de datos");
         setSize(1000,700);
         setLocationRelativeTo(component);
-        setVisible(true);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        
-
-        add(panel());
         setResizable(false);
         
+        
+        add(panel());
+        
+           
     }
 
     private JPanel panel(){
@@ -120,9 +130,11 @@ class ventana_ingreso_personal extends JFrame{
         p_gerente.add(ingresar_tipo);
         
         
-        String valores_combobox[] = {Empleado.GERENTE,Empleado.ADMINISTRADOR,Empleado.COCINERO,Empleado.MESERO};
+        
         JComboBox<String> tipo = new JComboBox<String>(valores_combobox);
         tipo.setBounds(alineacion, ingresar_tipo.getY()+20, 120, 20);
+        
+        
         p_gerente.add(tipo);
         
         //Para ingresar el nombre del empleado
@@ -199,9 +211,36 @@ class ventana_ingreso_personal extends JFrame{
                 JOptionPane.showMessageDialog(this, error[0]+ error[1]+ error[2]+ error[3] + error[4], "Error en Ingreso", JOptionPane.ERROR_MESSAGE, null);
 
             }
+            else{
+                String valor_auxiliar = valores_combobox[tipo.getSelectedIndex()];
+                
+                
+                switch (valor_auxiliar){
+                    case Empleado.GERENTE: 
+                        empleado = new Gerente(nombre_usuario.getText(),Long.parseLong(ingreso_documento.getText()),ingreso_nombre_usuario.getText(),ingreso_contraseña.getText());
+                        break;
+                    case Empleado.ADMINISTRADOR:
+                        empleado = new Administrativo(nombre_usuario.getText(),Long.parseLong(ingreso_documento.getText()),ingreso_nombre_usuario.getText(),ingreso_contraseña.getText());
+                        break;
+                    case Empleado.COCINERO:
+                        new Cocinero(nombre_usuario.getText(),Long.parseLong(ingreso_documento.getText()),ingreso_nombre_usuario.getText(),ingreso_contraseña.getText());
+                        break;
+                    case Empleado.MESERO:
+                        new Mesero(nombre_usuario.getText(),Long.parseLong(ingreso_documento.getText()),ingreso_nombre_usuario.getText(),ingreso_contraseña.getText());
+                        break;
+                }
+
+                Escribir_empleados escribir = new Escribir_empleados(empleado);
+                //Encerrar en try catch
+                JOptionPane.showMessageDialog(this, "Has ingresado correctamente el siguiente empleado:\n" + ingreso_nombre.getText() + "\n" + ingreso_documento.getText() + "\n" + ingreso_nombre_usuario.getText() + "\n" + ingreso_contraseña.getText(), "Ingreso exitoso", JOptionPane.INFORMATION_MESSAGE, null);
+                
+                setVisible(false);
+                
+            }
+
         });
         
-        // Agregar los botones xd y demas para el gerente y asi mismo el resto de cuestiones xd;
+        
         p_gerente.add(ingresar);
         return p_gerente;
     }
@@ -218,4 +257,6 @@ class ventana_ingreso_personal extends JFrame{
         text.setBounds(x, y, ancho, largo);
         return text;
     }
+
+    
 }
