@@ -23,7 +23,6 @@ public class Leer_empleados {
             while(be.hasNextLine()){
                 String datos_empleado = be.nextLine();
                 String aux[] = datos_empleado.split(";"); //Obtenemos un arreglo de Strings donde tenemos por separado cada tipo de dato
-
                 switch(aux[2]){
                     case "Gerente": em = new Gerente(aux[1],Long.parseLong(aux[0]), aux[3], aux[4]); break;
                     case "Administrativo": em = new Administrativo(aux[1],Long.parseLong(aux[0]), aux[3], aux[4]); break;

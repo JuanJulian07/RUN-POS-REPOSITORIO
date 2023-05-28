@@ -27,6 +27,8 @@ public class Interface_ingreso extends JFrame{
         
         setVisible(true);
         
+        setIconImage(new ImageIcon("src\\Recursos_fotograficos\\icono_principal.jpg").getImage());
+        
         
     }
 
@@ -37,11 +39,11 @@ public class Interface_ingreso extends JFrame{
         panel.setLayout(null);
         panel.setSize(getWidth(), getHeight());
         
-        
-
+        //Texto para el ingreso del nombre de usuario
         JLabel inUsuario = new JLabel();
         inUsuario.setText("Ingrese su nombre de Usuario");
         inUsuario.setBounds(getWidth()/2 - 100, 30, 200, 20);
+        inUsuario.setForeground(new Color(255,195,0));
 
         panel.add(inUsuario);
 
@@ -53,7 +55,7 @@ public class Interface_ingreso extends JFrame{
         JLabel inContra = new JLabel();
         inContra.setText("Ingrese tu contraseña");
         inContra.setBounds(getWidth()/2-100, 100, 200, 20);
-        
+        inContra.setForeground(new Color(255,195,0));
 
         panel.add(inContra);
 
@@ -92,11 +94,12 @@ public class Interface_ingreso extends JFrame{
 
         panel.add(ingreso);
 
-        /*ImageIcon im = new ImageIcon("Recursos_fotograficos\\imagen1.jpg");
+        //Imagen de fondo
+        ImageIcon im = new ImageIcon("src\\Recursos_fotograficos\\icono_principal.jpg");
         ImageIcon im2 = new ImageIcon(im.getImage().getScaledInstance(getWidth(), getHeight(), 1));
         JLabel imagen_fondo = new JLabel(im2);
-        imagen_fondo.setBounds(0, 0, getWidth(), getHeight());
-        panel.add(imagen_fondo);*/
+        imagen_fondo.setBounds(0, 0, getWidth(), getHeight()-30);
+        panel.add(imagen_fondo);
         
     }
 

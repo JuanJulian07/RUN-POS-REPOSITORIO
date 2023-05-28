@@ -31,6 +31,7 @@ public class Interface_Gerente extends JFrame{
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         add(panel());
+        setIconImage(new ImageIcon("src\\Recursos_fotograficos\\icono_principal.jpg").getImage());
         setVisible(true);
 
     }
