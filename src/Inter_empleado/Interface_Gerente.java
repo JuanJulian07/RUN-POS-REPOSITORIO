@@ -82,7 +82,9 @@ public class Interface_Gerente extends JFrame{
                 ventana_ingreso = null;
             }
             if(num_selection == 1){
-                System.out.println("mod");
+                ventana_modificacion_personal ventana_mod = new ventana_modificacion_personal(this, null);
+                ventana_mod.setVisible(true);
+                ventana_mod = null;
             }
             if(num_selection == 2){
                 System.out.println("eliminar");
@@ -98,7 +100,18 @@ public class Interface_Gerente extends JFrame{
 }
 
 class ventana_modificacion_personal extends JDialog{
+    private static final int ALINEACION = 350;
+    private String usuario;
+    private String contraseña;
+    private long documento;
 
+    public ventana_modificacion_personal(JFrame padre, Component componente){
+        super(padre, true);
+        setTitle("Cambiar usuario y contraseña");
+        setResizable(false);
+        setSize(500, 500);
+        setLocationRelativeTo(componente);
+    }
 }
 
 //Calse especifica para el apartado de ingresar empleados nuevos
