@@ -71,7 +71,7 @@ public class Interface_Gerente extends JFrame{
         bie.setSelected(false);
         bie.addActionListener(accion -> {
             int num_selection;
-            String opciones[] = {"Ingresar personas", "Modificar personas"};
+            String opciones[] = {"Ingresar Empleados", "Modificar Empleados", "Eliminar Empleados"};
 
 
             num_selection = JOptionPane.showOptionDialog(this, "Selecciona la opcion que deceas realizar", "Ingreso o cambio de empleados", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opciones, 0);
@@ -81,6 +81,13 @@ public class Interface_Gerente extends JFrame{
                 ventana_ingreso.setVisible(true);
                 ventana_ingreso = null;
             }
+            if(num_selection == 1){
+                System.out.println("mod");
+            }
+            if(num_selection == 2){
+                System.out.println("eliminar");
+            }
+            
             
         });
 
@@ -88,6 +95,10 @@ public class Interface_Gerente extends JFrame{
     }
 
     
+}
+
+class ventana_modificacion_personal extends JDialog{
+
 }
 
 //Calse especifica para el apartado de ingresar empleados nuevos

@@ -32,6 +32,7 @@ public abstract class Empleado {
     //Metodo a implementar
     abstract public int tipo_inter_grafica();
 
+    //Metodos para obtener la informacion del empleado
     public String get_nombre(){
         return nombre;
     }
@@ -50,5 +51,27 @@ public abstract class Empleado {
 
     public String get_contraseña(){
         return contraseña;
+    }
+
+    //Metodos para setear la informacion del empleado
+
+    public void set_nombre(String nombre){
+        this.nombre = nombre;
+    }
+
+    public void set_documento(long documento){
+        numero_documento = documento;
+    }
+
+    public void set_tipo_empleado(String tipo){
+        tipo_empleado = tipo;
+    }
+
+    public void set_usuario(String usuario){
+        nombre_usuario = usuario;
+    }
+
+    public void set_contraseña(String contraseña){
+        this.contraseña = contraseña;
     }
 }
