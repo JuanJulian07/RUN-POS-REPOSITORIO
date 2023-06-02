@@ -91,6 +91,46 @@ public class Leer_empleados {
         }
     }
 
+    //Esto es para leer un empleado con el documento de identidad
+    public Leer_empleados(Long documento){
+        try{
+            Scanner be = new Scanner(new File(dir));
+            be.nextLine();
+
+            while(be.hasNextLine()){
+                String datos_empleado = be.nextLine();
+                String aux[] = datos_empleado.split(";"); //Obtenemos un arreglo de Strings donde tenemos por separado cada tipo de dato
+
+                Empleado emaux = null;
+
+                if(documento == Long.parseLong(aux[0])){
+
+                
+                    switch(aux[2]){
+                        case "Gerente": emaux = new Gerente(aux[1],Long.parseLong(aux[0]), aux[3], aux[4]); break;
+                        case "Administrativo": emaux = new Administrativo(aux[1],Long.parseLong(aux[0]), aux[3], aux[4]); break;
+                        case "Cocinero": emaux = new Cocinero(aux[1],Long.parseLong(aux[0]), aux[3], aux[4]); break;
+                        case "Mesero": emaux = new Mesero(aux[1],Long.parseLong(aux[0]), aux[3], aux[4]); break;
+                    }
+                    em = emaux;
+                    break;
+                }
+                else{
+                    NullPointerException no_encontrado = new NullPointerException("No fue posible encontrar al empleado de id: " + documento);
+                    throw no_encontrado;
+                }
+                
+            }
+            be.close();
+
+        }
+        catch(IOException exepcion){
+            
+            JOptionPane.showMessageDialog(null, "No encontramos el archivo Base_empleados.csv en la direccion " + dir, "Error Base de datos Empleado", JOptionPane.ERROR_MESSAGE,null);
+            System.exit(0);
+        }
+    }
+
     //Este metodo nos reestablece la variable booleana acceso
     private boolean is_empleado(String bsusuario, String bscontra, String usuario, String contra){
 

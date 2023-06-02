@@ -2,6 +2,8 @@ package Inter_empleado;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.*;
 import Empleados.Empleado;
@@ -62,12 +64,12 @@ public class Interface_ingreso extends JFrame{
        
         JPasswordField contra_usuario = new JPasswordField();
         contra_usuario.setBounds(getWidth()/2 -100,120, 200, 20);
+        
 
         panel.add(contra_usuario);
 
         JButton ingreso = new JButton("Ingresar");
         ingreso.setBounds(getWidth()/2-100, 160, 100,20);
-
         
         ingreso.setSelected(false);
         

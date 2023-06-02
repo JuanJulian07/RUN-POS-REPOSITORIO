@@ -5,6 +5,7 @@ import java.awt.*;
 import javax.swing.*;
 import Empleados.*;
 import Leer_Bases_de_datos.Escribir_empleados;
+import Leer_Bases_de_datos.Leer_empleados;
 
 
 
@@ -14,6 +15,7 @@ public class Interface_Gerente extends JFrame{
     private static final int pixel_label = 460;
     private static final int pixel_buton = 100;
     private Empleado empleado = null;
+    private Empleado empleado_aux = null;
     private static final Dimension DIMENSION_DEFECTO = new Dimension(1000,700);
     
     //Constructor de la ventana principal de gerente
@@ -71,7 +73,7 @@ public class Interface_Gerente extends JFrame{
         bie.setSelected(false);
         bie.addActionListener(accion -> {
             int num_selection;
-            String opciones[] = {"Ingresar Empleados", "Modificar Empleados", "Eliminar Empleados"};
+            String opciones[] = {"Ingresar Empleado", "Modificar datos empleado", "Eliminar Empleado"};
 
 
             num_selection = JOptionPane.showOptionDialog(this, "Selecciona la opcion que deceas realizar", "Ingreso o cambio de empleados", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opciones, 0);
@@ -82,7 +84,32 @@ public class Interface_Gerente extends JFrame{
                 ventana_ingreso = null;
             }
             if(num_selection == 1){
-                ventana_modificacion_personal ventana_mod = new ventana_modificacion_personal(this, null);
+                long documento_aux = 0;
+                boolean value = true;
+                while(value){
+                    try{
+                        
+                        documento_aux = Long.parseLong(JOptionPane.showInputDialog(this,"Ingresa el documento del empleado a modificar", "Modificar empleado", JOptionPane.INFORMATION_MESSAGE));
+                        Leer_empleados leer = new Leer_empleados(documento_aux);
+                        empleado_aux = leer.get_empleado();
+                        leer = null;
+                    }
+                    catch(NumberFormatException e){
+                        JOptionPane.showMessageDialog(this, "El dato que ingresaste no es un numero","Error tipo de dato", JOptionPane.ERROR_MESSAGE);
+                    }
+                    catch(NullPointerException e){
+                        JOptionPane.showMessageDialog(this, e.getMessage(), "Error Busqueda", JOptionPane.ERROR_MESSAGE);
+                    }
+                    
+                    
+                    if(documento_aux > 0){
+                        break;
+                    }
+                    
+                }
+                
+                
+                ventana_modificacion_personal ventana_mod = new ventana_modificacion_personal(this,empleado_aux, null);
                 ventana_mod.setVisible(true);
                 ventana_mod = null;
             }
@@ -98,19 +125,48 @@ public class Interface_Gerente extends JFrame{
 
     
 }
-
+//Calse para modifica los datos del usuario
 class ventana_modificacion_personal extends JDialog{
     private static final int ALINEACION = 350;
     private String usuario;
     private String contraseña;
     private long documento;
+    private String nombre;
+    private String tipo;
 
-    public ventana_modificacion_personal(JFrame padre, Component componente){
+    public ventana_modificacion_personal(JFrame padre, Empleado empleado, Component componente){
         super(padre, true);
-        setTitle("Cambiar usuario y contraseña");
+        
+        setTitle("Por favor modifica los datos de tu empleado");
         setResizable(false);
-        setSize(500, 500);
+        setSize(padre.getWidth(), padre.getHeight());
         setLocationRelativeTo(componente);
+
+        add(panel());
+    }
+
+    public JPanel panel(){
+        JPanel panel = new JPanel(null);
+        panel.setSize(this.getSize());
+
+        
+
+        return panel;
+    }
+
+    //Metodo para genera un label generico
+    private JLabel label(String texto, int x, int y, int ancho, int largo){
+        JLabel l = new JLabel(texto);
+        l.setFont(new Font("arial", Font.BOLD,14));
+        l.setBounds(x,y,ancho,largo);
+        return l; 
+    }
+
+    //Metodo para leer texto genericos
+    private JTextField in_text(int x, int y, int ancho, int largo){
+        JTextField text = new JTextField();
+        text.setBounds(x, y, ancho, largo);
+        return text;
     }
 }
 
