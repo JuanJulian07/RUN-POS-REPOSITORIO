@@ -75,8 +75,8 @@ public class Interface_ingreso extends JFrame{
         ingreso.setSelected(false);
         
         
-        ingreso.addKeyListener(accion_teclado(ingreso));
-        contra_usuario.addKeyListener(accion_teclado(ingreso));
+        ingreso.addKeyListener(Adaptador.accion_teclado(ingreso));
+        contra_usuario.addKeyListener(Adaptador.accion_teclado(ingreso));
 
         ingreso.addActionListener(accion -> {
             usuario = nombre_usuario.getText();
@@ -118,14 +118,5 @@ public class Interface_ingreso extends JFrame{
         return user;
     }
     
-    private KeyAdapter accion_teclado (JButton boton){
-        return new KeyAdapter() {
-            public void keyPressed (KeyEvent e){
-                if(e.getExtendedKeyCode() == 10){
-                    boton.doClick();
-                }
-            }
-        };
-        
-    }
+    
 }

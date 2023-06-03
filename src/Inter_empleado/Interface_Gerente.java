@@ -1,12 +1,11 @@
 package Inter_empleado;
 import java.awt.*;
-
+import java.awt.event.KeyEvent;
 
 import javax.swing.*;
 import Empleados.*;
 import Leer_Bases_de_datos.Escribir_empleados;
 import Leer_Bases_de_datos.Leer_empleados;
-
 
 
 
@@ -131,7 +130,7 @@ public class Interface_Gerente extends JFrame{
 }
 //Calse para modifica los datos del usuario
 class ventana_modificacion_personal extends JDialog{
-    private static final int ALINEACION = 400;
+    private static final int ALINEACION = 100;
     private Empleado empleado;
     private String usuario;
     private String contraseña;
@@ -144,7 +143,7 @@ class ventana_modificacion_personal extends JDialog{
         this.empleado = empleado;
         setTitle("Por favor modifica los datos de tu empleado");
         setResizable(false);
-        setSize(padre.getWidth(), padre.getHeight());
+            setSize(500, 500);
         setLocationRelativeTo(componente);
 
         add(panel());
@@ -155,20 +154,34 @@ class ventana_modificacion_personal extends JDialog{
         panel.setSize(this.getSize());
 
         JLabel prin = new JLabel("Por favor cambie los datos del empleado");
-        prin.setBounds(0, 10, 1000, 40);
+        prin.setBounds(0, 10, getWidth(), 40);
         prin.setFont(new Font("times new roman",1,20));
         prin.setHorizontalAlignment(prin.CENTER);
         panel.add(prin);
         
         //Cambio del nombre
-        JLabel lnombre = label("Nombre del empleado", ALINEACION, 70,200,20);
-        panel.add(lnombre);
+        JLabel lusuario = label("Cambiar usuario", ALINEACION, prin.getY()+60,200,20);
+        panel.add(lusuario);
         
-        JTextField nombre = in_text(ALINEACION,lnombre.getY()+20,350,20);
-        nombre.setText(empleado.get_nombre());
-        panel.add(nombre);
+        JTextField usuario = in_text(ALINEACION,lusuario.getY()+20,250,20);
+        usuario.setText(empleado.get_usuario());
+        usuario.selectAll();
+        panel.add(usuario);
+
+        //Cambio de contraseña
+        JLabel lcontraseña = label("Cambiar contraseña", ALINEACION, usuario.getY()+30,200,20);
+        panel.add(lcontraseña);
+        
+        JTextField contraseña = in_text(ALINEACION,lcontraseña.getY()+20,250,20);
+        contraseña.setText(empleado.get_usuario());
+        contraseña.selectAll();
+        panel.add(contraseña);
 
 
+
+        JButton boton = new JButton("Cambiar");
+        boton.setBounds(ALINEACION, contraseña.getY()+40, 100, 20);
+        panel.add(boton);
 
         return panel;
     }
@@ -374,3 +387,6 @@ class ventana_ingreso_personal extends JDialog{
 
     
 }
+
+
+    
