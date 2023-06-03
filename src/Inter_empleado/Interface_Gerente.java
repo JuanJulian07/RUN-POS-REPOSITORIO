@@ -143,7 +143,7 @@ class ventana_modificacion_personal extends JDialog{
         this.empleado = empleado;
         setTitle("Por favor modifica los datos de tu empleado");
         setResizable(false);
-            setSize(500, 500);
+        setSize(500, 400);
         setLocationRelativeTo(componente);
 
         add(panel());
@@ -153,14 +153,20 @@ class ventana_modificacion_personal extends JDialog{
         JPanel panel = new JPanel(null);
         panel.setSize(this.getSize());
 
-        JLabel prin = new JLabel("Por favor cambie los datos del empleado");
-        prin.setBounds(0, 10, getWidth(), 40);
+        JLabel prin = new JLabel("Por favor cambie los datos del empleado:");
+        prin.setBounds(0, 10, getWidth(), 20);
         prin.setFont(new Font("times new roman",1,20));
         prin.setHorizontalAlignment(prin.CENTER);
         panel.add(prin);
+
+        JLabel prin2 = new JLabel(empleado.get_nombre());
+        prin2.setBounds(0, prin.getY()+25, getWidth(), 20);
+        prin2.setFont(new Font("times new roman",1,20));
+        prin2.setHorizontalAlignment(prin2.CENTER);
+        panel.add(prin2);
         
         //Cambio del nombre
-        JLabel lusuario = label("Cambiar usuario", ALINEACION, prin.getY()+60,200,20);
+        JLabel lusuario = label("Cambiar usuario", ALINEACION, prin2.getY()+50,200,20);
         panel.add(lusuario);
         
         JTextField usuario = in_text(ALINEACION,lusuario.getY()+20,250,20);
@@ -177,12 +183,18 @@ class ventana_modificacion_personal extends JDialog{
         contraseña.selectAll();
         panel.add(contraseña);
 
-
-
+        //Agregacion del boton y sus acciones
         JButton boton = new JButton("Cambiar");
         boton.setBounds(ALINEACION, contraseña.getY()+40, 100, 20);
         panel.add(boton);
 
+        boton.addKeyListener(Adaptador.accion_teclado(boton));
+        contraseña.addKeyListener(Adaptador.accion_teclado(boton));
+        boton.addActionListener(accion -> {
+            empleado.set_contraseña(contraseña.getText());
+            empleado.set_usuario(usuario.getText());
+            
+        });
         return panel;
     }
 
@@ -202,6 +214,8 @@ class ventana_modificacion_personal extends JDialog{
     }
 }
 
+
+
 //Calse especifica para el apartado de ingresar empleados nuevos
 class ventana_ingreso_personal extends JDialog{
 
@@ -217,10 +231,8 @@ class ventana_ingreso_personal extends JDialog{
         setLocationRelativeTo(component);
         setResizable(false);
         
-        
         add(panel());
         
-           
     }
 
     private JPanel panel(){
@@ -278,6 +290,10 @@ class ventana_ingreso_personal extends JDialog{
 
         JButton ingresar = new JButton("Ingresar");
         ingresar.setBounds(alineacion, ingreso_contraseña.getY()+40, 100, 20);
+        
+        //Escuchadores del boton
+        ingresar.addKeyListener(Adaptador.accion_teclado(ingresar));
+        ingreso_contraseña.addKeyListener(Adaptador.accion_teclado(ingresar));
         ingresar.addActionListener(accoin -> {
 
             //En este apartado revisamos que todos los campos esten llenos correctamente
@@ -384,9 +400,4 @@ class ventana_ingreso_personal extends JDialog{
         text.setBounds(x, y, ancho, largo);
         return text;
     }
-
-    
 }
-
-
-    
