@@ -89,10 +89,18 @@ public class Interface_Gerente extends JFrame{
                 while(value){
                     try{
                         
-                        documento_aux = Long.parseLong(JOptionPane.showInputDialog(this,"Ingresa el documento del empleado a modificar", "Modificar empleado", JOptionPane.INFORMATION_MESSAGE));
+                        String auxiliar = JOptionPane.showInputDialog(this,"Ingresa el documento del empleado a modificar", "Modificar empleado", JOptionPane.INFORMATION_MESSAGE);
+
+                        //implementar un condicional para evitar el erro
+                        if(auxiliar == null){
+                            value = false;
+                            break;
+                        }
+                        documento_aux = Long.parseLong(auxiliar);
                         Leer_empleados leer = new Leer_empleados(documento_aux);
                         empleado_aux = leer.get_empleado();
                         leer = null;
+                        break;
                     }
                     catch(NumberFormatException e){
                         JOptionPane.showMessageDialog(this, "El dato que ingresaste no es un numero","Error tipo de dato", JOptionPane.ERROR_MESSAGE);
@@ -100,18 +108,14 @@ public class Interface_Gerente extends JFrame{
                     catch(NullPointerException e){
                         JOptionPane.showMessageDialog(this, e.getMessage(), "Error Busqueda", JOptionPane.ERROR_MESSAGE);
                     }
-                    
-                    
-                    if(documento_aux > 0){
-                        break;
-                    }
-                    
                 }
                 
+                if(value){
+                    ventana_modificacion_personal ventana_mod = new ventana_modificacion_personal(this,empleado_aux, null);
+                    ventana_mod.setVisible(true);
+                    ventana_mod = null;
+                }
                 
-                ventana_modificacion_personal ventana_mod = new ventana_modificacion_personal(this,empleado_aux, null);
-                ventana_mod.setVisible(true);
-                ventana_mod = null;
             }
             if(num_selection == 2){
                 System.out.println("eliminar");
@@ -127,7 +131,8 @@ public class Interface_Gerente extends JFrame{
 }
 //Calse para modifica los datos del usuario
 class ventana_modificacion_personal extends JDialog{
-    private static final int ALINEACION = 350;
+    private static final int ALINEACION = 400;
+    private Empleado empleado;
     private String usuario;
     private String contraseña;
     private long documento;
@@ -136,7 +141,7 @@ class ventana_modificacion_personal extends JDialog{
 
     public ventana_modificacion_personal(JFrame padre, Empleado empleado, Component componente){
         super(padre, true);
-        
+        this.empleado = empleado;
         setTitle("Por favor modifica los datos de tu empleado");
         setResizable(false);
         setSize(padre.getWidth(), padre.getHeight());
@@ -149,7 +154,21 @@ class ventana_modificacion_personal extends JDialog{
         JPanel panel = new JPanel(null);
         panel.setSize(this.getSize());
 
+        JLabel prin = new JLabel("Por favor cambie los datos del empleado");
+        prin.setBounds(0, 10, 1000, 40);
+        prin.setFont(new Font("times new roman",1,20));
+        prin.setHorizontalAlignment(prin.CENTER);
+        panel.add(prin);
         
+        //Cambio del nombre
+        JLabel lnombre = label("Nombre del empleado", ALINEACION, 70,200,20);
+        panel.add(lnombre);
+        
+        JTextField nombre = in_text(ALINEACION,lnombre.getY()+20,350,20);
+        nombre.setText(empleado.get_nombre());
+        panel.add(nombre);
+
+
 
         return panel;
     }
@@ -312,7 +331,7 @@ class ventana_ingreso_personal extends JDialog{
                 }
                 //Aqui verificamos que realmente es un nuevo empleado
                 try{
-                    Escribir_empleados escribir = new Escribir_empleados(empleado);
+                    Escribir_empleados escribir = new Escribir_empleados(empleado,Escribir_empleados.ADD_EMPLEADO);
                     //Si no presenta un throw quiere decir que el empleado se ingreso correctamente a la base de datos y cerrara la ventana JDialog
                     JOptionPane.showMessageDialog(this, "Has ingresado correctamente el siguiente empleado:\n" + ingreso_nombre.getText() + "\n" + ingreso_documento.getText() + "\n" + ingreso_nombre_usuario.getText() + "\n" + ingreso_contraseña.getText(), "Ingreso exitoso", JOptionPane.INFORMATION_MESSAGE, null);
                 

@@ -2,6 +2,7 @@ package Inter_empleado;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -73,6 +74,10 @@ public class Interface_ingreso extends JFrame{
         
         ingreso.setSelected(false);
         
+        
+        ingreso.addKeyListener(accion_teclado(ingreso));
+        contra_usuario.addKeyListener(accion_teclado(ingreso));
+
         ingreso.addActionListener(accion -> {
             usuario = nombre_usuario.getText();
             contra = new String(contra_usuario.getPassword());
@@ -105,6 +110,7 @@ public class Interface_ingreso extends JFrame{
         
     }
 
+    
     public Empleado get_empleado(){
         if(user == null){
             return null;
@@ -112,4 +118,14 @@ public class Interface_ingreso extends JFrame{
         return user;
     }
     
+    private KeyAdapter accion_teclado (JButton boton){
+        return new KeyAdapter() {
+            public void keyPressed (KeyEvent e){
+                if(e.getExtendedKeyCode() == 10){
+                    boton.doClick();
+                }
+            }
+        };
+        
+    }
 }

@@ -113,6 +113,7 @@ public class Leer_empleados {
                         case "Mesero": emaux = new Mesero(aux[1],Long.parseLong(aux[0]), aux[3], aux[4]); break;
                     }
                     em = emaux;
+                    acceso2 = true;
                     break;
                 }
                 else{
