@@ -90,8 +90,8 @@ public class Interface_Gerente extends JFrame{
                         
                         String auxiliar = JOptionPane.showInputDialog(this,"Ingresa el documento del empleado a modificar", "Modificar empleado", JOptionPane.INFORMATION_MESSAGE);
 
-                        //implementar un condicional para evitar el erro
-                        if(auxiliar == null){
+                        
+                        if(auxiliar == null){//Esto es para evitar errores cuando se cierre la ventana con la x
                             value = false;
                             break;
                         }
@@ -132,11 +132,6 @@ public class Interface_Gerente extends JFrame{
 class ventana_modificacion_personal extends JDialog{
     private static final int ALINEACION = 100;
     private Empleado empleado;
-    private String usuario;
-    private String contraseña;
-    private long documento;
-    private String nombre;
-    private String tipo;
 
     public ventana_modificacion_personal(JFrame padre, Empleado empleado, Component componente){
         super(padre, true);
@@ -191,8 +186,49 @@ class ventana_modificacion_personal extends JDialog{
         boton.addKeyListener(Adaptador.accion_teclado(boton));
         contraseña.addKeyListener(Adaptador.accion_teclado(boton));
         boton.addActionListener(accion -> {
-            empleado.set_contraseña(contraseña.getText());
-            empleado.set_usuario(usuario.getText());
+            
+            String error[] = {"",""};
+            boolean error_aux = true;
+            if(usuario.getText().equals("")){
+                error[0] = "Debes rellenar el campo del usuario\n";
+                error_aux = false;
+            }
+            if(contraseña.getText().equals("")){
+                error[1] = "Debes rellenar el campo contraseña";
+                error_aux = false;
+            }
+            if(error_aux == false){
+                JOptionPane.showMessageDialog(this, error[0]+error[1], "Error en el cambio de usuario y contraseña", JOptionPane.ERROR_MESSAGE, null);
+                usuario.setText(empleado.get_usuario());
+                usuario.selectAll();
+                contraseña.setText(empleado.get_contraseña());
+                contraseña.selectAll();
+            }
+            else{
+                if(usuario.getText().equals(empleado.get_usuario())){
+                    empleado.set_contraseña(contraseña.getText());
+                    //Implementar funcion cambir usuario y contraseña
+                    JOptionPane.showMessageDialog(this, "La contraseña ha sido acutalizada exitosamente", "Cambio exitoso", JOptionPane.INFORMATION_MESSAGE, null);
+                    setVisible(false);
+                }
+                else{
+                    Leer_empleados leer = new Leer_empleados(usuario.getText());
+                    if(leer.get_acceso()){
+                        empleado.set_contraseña(contraseña.getText());
+                        empleado.set_usuario(usuario.getText());
+                        //Implementar funcion cambiar usuario y contraseña
+                        JOptionPane.showMessageDialog(this, "El Usuario y la contraseña han sido acutalizados exitosamente", "Cambio exitoso", JOptionPane.INFORMATION_MESSAGE, null);
+                        setVisible(false);
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(this, "El usuario que ingresaste, ya esta \nregistrado en la base de datos", "Error usuarios repetidos", JOptionPane.INFORMATION_MESSAGE, null);
+                    }
+                    leer = null;
+                }
+                
+                
+            }
+            
             
         });
         return panel;
@@ -375,12 +411,8 @@ class ventana_ingreso_personal extends JDialog{
                     ingreso_nombre_usuario.setText("");
                     ingreso_contraseña.setText("");
                 }
-                
-                
             }
-
         });
-        
         
         p_gerente.add(ingresar);
         return p_gerente;

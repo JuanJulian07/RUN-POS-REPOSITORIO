@@ -13,7 +13,35 @@ public class Leer_empleados {
     private boolean acceso = false; //Sirve para verificar si podemos obtener acceso
     private boolean acceso2 = false; //Para que nos retorne un usuario encontrado
 
-    //Este constructor busque si hay un empleado registrado con el numero de identificacion
+    //Constructor para ver si ya existe un suario
+    public Leer_empleados(String usuario){
+
+        try{
+            Scanner be = new Scanner(new File(dir));
+            be.nextLine();
+
+            while(be.hasNextLine()){
+                String datos_empleado = be.nextLine();
+                String aux[] = datos_empleado.split(";");
+
+                if(usuario.equals(aux[3])){
+                    acceso = false;
+                    break;
+                }
+                else{
+                    acceso = true;
+                }
+            }
+
+            be.close();
+        }
+        catch(IOException e){
+            JOptionPane.showMessageDialog(null, "No encontramos el archivo Base_empleados.csv en la direccion " + dir, "Error Base de datos Empleado", JOptionPane.ERROR_MESSAGE,null);
+            System.exit(0);
+        }
+    }
+
+    //Este constructor busqua si hay un empleado registrado con el numero de identificacion y con el usuario
     public Leer_empleados(long documento, String nombre_usuario){
 
         try{
@@ -116,13 +144,14 @@ public class Leer_empleados {
                     acceso2 = true;
                     break;
                 }
-                else{
-                    NullPointerException no_encontrado = new NullPointerException("No fue posible encontrar al empleado de id: " + documento);
-                    throw no_encontrado;
-                }
                 
             }
             be.close();
+            if(acceso2 == false){
+                
+                NullPointerException no_encontrado = new NullPointerException("No fue posible encontrar al empleado de id: " + documento);
+                    throw no_encontrado;
+            }
 
         }
         catch(IOException exepcion){
