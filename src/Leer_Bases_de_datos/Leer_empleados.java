@@ -12,7 +12,38 @@ public class Leer_empleados {
     private String dir = new String("src\\Bases_de_datos\\Base_empleados.csv"); //Esta es la direccion por defecto del archivo de la base de datos
     private boolean acceso = false; //Sirve para verificar si podemos obtener acceso
     private boolean acceso2 = false; //Para que nos retorne un usuario encontrado
+    private ArrayList<Empleado> empleados; //Para retornar todos los empleados en el archivo
 
+    //Constructor para leer todos los empleados y guardarlos en un array list
+    public Leer_empleados(){
+        try{
+            empleados = new ArrayList<Empleado>();
+            Scanner be = new Scanner(new File(dir));
+            be.nextLine();
+            while(be.hasNextLine()){
+                Empleado em_aux = null;
+
+                String datos_empleado = be.nextLine();
+                String aux[] = datos_empleado.split(";");
+
+                switch(aux[2]){
+                    case "Gerente": em_aux = new Gerente(aux[1],Long.parseLong(aux[0]), aux[3], aux[4]); break;
+                    case "Administrativo": em_aux = new Administrativo(aux[1],Long.parseLong(aux[0]), aux[3], aux[4]); break;
+                    case "Cocinero": em_aux = new Cocinero(aux[1],Long.parseLong(aux[0]), aux[3], aux[4]); break;
+                    case "Mesero": em_aux = new Mesero(aux[1],Long.parseLong(aux[0]), aux[3], aux[4]); break;
+                    
+                }
+                em = em_aux;
+                empleados.add(em);
+                
+            }
+
+        }
+        catch(IOException e){
+            JOptionPane.showMessageDialog(null, "No encontramos el archivo Base_empleados.csv en la direccion " + dir, "Error Base de datos Empleado", JOptionPane.ERROR_MESSAGE,null);
+            System.exit(0);
+        }
+    }
     //Constructor para ver si ya existe un suario
     public Leer_empleados(String usuario){
 
@@ -191,6 +222,10 @@ public class Leer_empleados {
 
     public String get_dir(){
         return dir;
+    }
+
+    public ArrayList<Empleado> get_empleados(){
+        return empleados;
     }
 
 
