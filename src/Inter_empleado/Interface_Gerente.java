@@ -21,7 +21,7 @@ public class Interface_Gerente extends JFrame{
     public Interface_Gerente(Empleado empleado){
         super("Gerente");
         this.empleado = empleado;
-        
+        setResizable(false);
         
         ventana();
         
@@ -59,8 +59,14 @@ public class Interface_Gerente extends JFrame{
 
         p_gerente.add(boton_bie()); //Esta funcion es la encargada del boton
         
-        // Agregar los botones xd y demas para el gerente y asi mismo el resto de cuestiones xd;
+        // Esta es la imagen que sale en la parte del gerente
 
+        ImageIcon imagen = new ImageIcon("src\\Recursos_fotograficos\\icono.jpg");
+        imagen = new ImageIcon(imagen.getImage().getScaledInstance(150, 150, 1));
+        JLabel im = new JLabel(imagen);
+        im.setBounds(p_gerente.getWidth()-167, p_gerente.getHeight()-189, 150, 150);
+        
+        p_gerente.add(im);
         return p_gerente;
     }
 
@@ -117,12 +123,44 @@ public class Interface_Gerente extends JFrame{
                 
             }
             if(num_selection == 2){
-                System.out.println("eliminar");
+                //La idea es que en este campo elemine al empleado al cual se le ingrese el numero de documento
+                long documento_aux = 0;
+                boolean value = true;
+
+                while(value){
+                    try{
+                        
+                        String auxiliar = JOptionPane.showInputDialog(this,"Ingresa el documento del empleado a eliminar", "Eliminar empleado", JOptionPane.INFORMATION_MESSAGE);
+
+                        
+                        if(auxiliar == null){//Esto es para evitar errores cuando se cierre la ventana con la x
+                            value = false;
+                            break;
+                        }
+                        documento_aux = Long.parseLong(auxiliar);
+                        Leer_empleados leer = new Leer_empleados(documento_aux);
+                        empleado_aux = leer.get_empleado();
+                        leer = null;
+                        break;
+                    }
+                    catch(NumberFormatException e){
+                        JOptionPane.showMessageDialog(this, "El dato que ingresaste no es un numero","Error tipo de dato", JOptionPane.ERROR_MESSAGE);
+                    }
+                    catch(NullPointerException e){
+                        JOptionPane.showMessageDialog(this, e.getMessage(), "Error Busqueda", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+                
+                if(value){
+                    Escribir_empleados escribir = new Escribir_empleados(empleado_aux, Escribir_empleados.REM_EMPLEADO);
+                    JOptionPane.showMessageDialog(this, "El empleado:\n\nDocumento: " + empleado_aux.get_num_documento() + "\nNombre: " + empleado_aux.get_nombre() + "\n\n\tEliminado Satisfacotriamente", "Eliminacion Satisfactoria", JOptionPane.INFORMATION_MESSAGE, null);
+                    escribir = null;
+                }
+                
             }
             
             
         });
-
         return bie;
     }
 

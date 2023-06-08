@@ -50,7 +50,22 @@ public class Escribir_empleados {
                 }
             }
 
-            guardar_empleados();            
+            guardar_empleados();
+            break;
+        
+        case 2:
+            leer = new Leer_empleados();
+            dir = leer.get_dir();
+            empleados = leer.get_empleados();
+        
+            for(int i = 0; i < empleados.size(); i++){
+                if(empleados.get(i).get_num_documento() == empleado.get_num_documento()){
+                    empleados.remove(i);
+                    
+                }
+            }
+            guardar_empleados();
+            break;
         }
         leer = null;
     }
