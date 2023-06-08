@@ -40,6 +40,7 @@ public class Escribir_empleados {
         
         case 1:
             leer = new Leer_empleados();
+            dir = leer.get_dir();
             empleados = leer.get_empleados();
             
             for(int i = 0; i < empleados.size(); i++){
@@ -48,19 +49,33 @@ public class Escribir_empleados {
                     empleados.add(empleado);
                 }
             }
-            //Implementar metodo de guardado
+
+            guardar_empleados();            
         }
         leer = null;
     }
-
+    private void guardar_empleados(){
+        try{
+            PrintWriter guardar = new PrintWriter(new FileWriter(dir,false));
+            guardar.print("Documento;Nombre;Tipo de Empleado;Usuario;Contraseña");
+            
+            for(Empleado em: empleados){
+                guardar.print(em);
+            }
+            guardar.close();
+            
+            
+        }
+        catch(IOException e){
+            JOptionPane.showMessageDialog(null, "No encontramos el archivo Base_empleados.csv en la direccion " + dir, "Error Base de datos Empleado", JOptionPane.ERROR_MESSAGE,null);
+            System.exit(0);
+        }
+    }
     private void guardar_empleado(){
         try{
             PrintWriter guardar = new PrintWriter(new FileWriter(dir,true));
-            guardar.print("\n" + empleado.get_num_documento() + ";");
-            guardar.print(empleado.get_nombre()+ ";");
-            guardar.print(empleado.get_tipo_empleado()+ ";");
-            guardar.print(empleado.get_usuario()+ ";");
-            guardar.print(empleado.get_contraseña());
+
+            guardar.print(empleado);
 
             guardar.close();
         }

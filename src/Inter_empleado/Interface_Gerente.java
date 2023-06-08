@@ -207,8 +207,11 @@ class ventana_modificacion_personal extends JDialog{
             else{
                 if(usuario.getText().equals(empleado.get_usuario())){
                     empleado.set_contraseña(contraseña.getText());
+                    
                     //Implementar funcion cambir usuario y contraseña
                     Escribir_empleados escribir = new Escribir_empleados(empleado, Escribir_empleados.SOB_EMPLEADO);
+                    escribir = null;
+                    
 
                     JOptionPane.showMessageDialog(this, "La contraseña ha sido acutalizada exitosamente", "Cambio exitoso", JOptionPane.INFORMATION_MESSAGE, null);
                     setVisible(false);
@@ -218,7 +221,11 @@ class ventana_modificacion_personal extends JDialog{
                     if(leer.get_acceso()){
                         empleado.set_contraseña(contraseña.getText());
                         empleado.set_usuario(usuario.getText());
-                        //Implementar funcion cambiar usuario y contraseña
+
+                        //Este objetto de por si modifica a los empleados
+                        Escribir_empleados escribir = new Escribir_empleados(empleado, Escribir_empleados.SOB_EMPLEADO);
+                        escribir = null;
+
                         JOptionPane.showMessageDialog(this, "El Usuario y la contraseña han sido acutalizados exitosamente", "Cambio exitoso", JOptionPane.INFORMATION_MESSAGE, null);
                         setVisible(false);
                     }

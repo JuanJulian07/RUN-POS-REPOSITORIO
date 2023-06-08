@@ -74,4 +74,9 @@ public abstract class Empleado {
     public void set_contraseña(String contraseña){
         this.contraseña = contraseña;
     }
+
+    //Metodo para ver los empleados
+    public String toString(){
+        return("\n"+get_num_documento() + ";" + get_nombre() + ";" + get_tipo_empleado() +";" + get_usuario() + ";" + get_contraseña());
+    }
 }
