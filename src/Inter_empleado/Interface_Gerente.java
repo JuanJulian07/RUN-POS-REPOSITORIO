@@ -517,9 +517,8 @@ class ver_base_empleados extends JDialog{
     }
     private JPanel panel(){
         JPanel panel = new JPanel(null);
-        JLabel h = new JLabel("hijos de puta");
-        h.setBounds(10, 10, 600, 20);
-        panel.add(h);
+        JTable BDEmpleados = new JTable(null, getComponentListeners());
         return panel;
+        
     }
 }
