@@ -1,6 +1,7 @@
 package Inter_empleado;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.security.cert.PKIXCertPathBuilderResult;
 
 import javax.swing.*;
 import Empleados.*;
@@ -59,6 +60,13 @@ public class Interface_Gerente extends JFrame{
 
         p_gerente.add(boton_bie()); //Esta funcion es la encargada del boton
         
+        //parte dos, es para visualizar la base de datos empleados
+        JLabel mostar_empleadosBD = new JLabel("02. Visualisacion de empleados en base de datos");
+        mostar_empleadosBD.setFont(new Font("arial", Font.BOLD, 14));
+        mostar_empleadosBD.setBounds(20, ingresar_empleado.getY()+40, pixel_label, 20);
+        p_gerente.add(mostar_empleadosBD);
+
+        p_gerente.add(boton_mbd(mostar_empleadosBD.getY()));
         // Esta es la imagen que sale en la parte del gerente
 
         ImageIcon imagen = new ImageIcon("src\\Recursos_fotograficos\\icono.jpg");
@@ -83,12 +91,12 @@ public class Interface_Gerente extends JFrame{
 
             num_selection = JOptionPane.showOptionDialog(this, "Selecciona la opcion que deceas realizar", "Ingreso o cambio de empleados", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opciones, 0);
 
-            if(num_selection == 0){
-                ventana_ingreso_personal ventana_ingreso = new ventana_ingreso_personal(this,null);
+            if(num_selection == 0){//En este apartado es par aingresar un nuevo empleado
+                ventana_ingreso_personal ventana_ingreso = new ventana_ingreso_personal(this,null);//Nos envia a una ventana de dialogo para ingresar a un empleado
                 ventana_ingreso.setVisible(true);
                 ventana_ingreso = null;
             }
-            if(num_selection == 1){
+            if(num_selection == 1){//En este apartado es para modificar los empleados, entonces primero lo buscamos con el numero de documento
                 long documento_aux = 0;
                 boolean value = true;
                 while(value){
@@ -116,6 +124,7 @@ public class Interface_Gerente extends JFrame{
                 }
                 
                 if(value){
+                    //Nos envia a una ventana de dialogo para modificar el usuario y contraseña del empleado encontrado
                     ventana_modificacion_personal ventana_mod = new ventana_modificacion_personal(this,empleado_aux, null);
                     ventana_mod.setVisible(true);
                     ventana_mod = null;
@@ -123,7 +132,7 @@ public class Interface_Gerente extends JFrame{
                 
             }
             if(num_selection == 2){
-                //La idea es que en este campo elemine al empleado al cual se le ingrese el numero de documento
+                //En este apartado eliminamos a los empleados con solo ingresar el numero de documento
                 long documento_aux = 0;
                 boolean value = true;
 
@@ -164,8 +173,26 @@ public class Interface_Gerente extends JFrame{
         return bie;
     }
 
+    //Este es el metodo para el boton que va a mostrar la base de datos de los empleados
+    private JButton boton_mbd(int y_boton){
+        JButton boton = new JButton("ver Info");
+        boton.setBounds(600, y_boton, pixel_buton, 20);
+
+        boton.addKeyListener(Adaptador.accion_teclado(boton));
+        boton.addActionListener(accion -> {
+
+            ver_base_empleados ver = new ver_base_empleados(this, null);
+            ver.setVisible(true);
+            ver = null;
+        
+        });
+
+        return boton;
+        
+    }
     
 }
+
 //Calse para modifica los datos del usuario
 class ventana_modificacion_personal extends JDialog{
     private static final int ALINEACION = 100;
@@ -296,9 +323,6 @@ class ventana_modificacion_personal extends JDialog{
         return text;
     }
 }
-
-
-
 //Calse especifica para el apartado de ingresar empleados nuevos
 class ventana_ingreso_personal extends JDialog{
 
@@ -478,5 +502,24 @@ class ventana_ingreso_personal extends JDialog{
         JTextField text = new JTextField();
         text.setBounds(x, y, ancho, largo);
         return text;
+    }
+}
+
+//Clase para visualizar la base de datos empleado
+class ver_base_empleados extends JDialog{
+
+    public ver_base_empleados (JFrame padre, Component componente){
+        super(padre, true);
+        setSize(padre.getWidth(),padre.getHeight());
+        setLocationRelativeTo(componente);
+        setTitle("Base de Datos Empleados");
+        add(panel());
+    }
+    private JPanel panel(){
+        JPanel panel = new JPanel(null);
+        JLabel h = new JLabel("hijos de puta");
+        h.setBounds(10, 10, 600, 20);
+        panel.add(h);
+        return panel;
     }
 }
