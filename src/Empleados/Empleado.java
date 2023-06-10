@@ -79,4 +79,15 @@ public abstract class Empleado {
     public String toString(){
         return("\n"+get_num_documento() + ";" + get_nombre() + ";" + get_tipo_empleado() +";" + get_usuario() + ";" + get_contraseña());
     }
+    //Metodo que retorna un arreglo de strings con los datos del empleado
+    public String[] datos_empleado(){
+        String[] datos = new String[5];
+        datos[0] = new String(""+numero_documento);
+        datos[1] = nombre;
+        datos[2] = tipo_empleado;
+        datos[3] = nombre_usuario;
+        datos[4] = contraseña;
+
+        return datos;
+    }
 }

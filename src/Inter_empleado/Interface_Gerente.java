@@ -2,6 +2,7 @@ package Inter_empleado;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.security.cert.PKIXCertPathBuilderResult;
+import java.util.ArrayList;
 
 import javax.swing.*;
 import Empleados.*;
@@ -507,18 +508,45 @@ class ventana_ingreso_personal extends JDialog{
 
 //Clase para visualizar la base de datos empleado
 class ver_base_empleados extends JDialog{
+    private static final String[] ENCABEZADO = {"N_documento","Nombre","Tipo","Usuario","Contraseña"};
+    private String[][] empleados_tab;
+    private JFrame padre;
 
     public ver_base_empleados (JFrame padre, Component componente){
+        
         super(padre, true);
-        setSize(padre.getWidth(),padre.getHeight());
-        setLocationRelativeTo(componente);
+        setLocationRelativeTo(null);
+        this.padre = padre;
+        
         setTitle("Base de Datos Empleados");
+        setResizable(false);
         add(panel());
+        
+        pack();
+        setLocation(padre.getX()+padre.getWidth()/2-this.getWidth()/2,padre.getY()+(padre.getHeight()-this.getHeight())/2);
     }
     private JPanel panel(){
-        JPanel panel = new JPanel(null);
-        JTable BDEmpleados = new JTable(null, getComponentListeners());
-        return panel;
+        JPanel panel = new JPanel();
+        //Agregando tabla para visualizar a los empleados
+        ini_empleados_tab();
+        JTable BDEmpleados = new JTable(empleados_tab,ENCABEZADO);
+        BDEmpleados.setEnabled(false);
+        //Pendiente mostrar mejor el contenido de las columnas
         
+        JScrollPane scrollpane  = new JScrollPane(BDEmpleados);
+        panel.add(scrollpane);
+        return panel;
+
+        
+    }
+    private void ini_empleados_tab(){
+        Leer_empleados leer = new Leer_empleados();
+        ArrayList<Empleado> arrem = leer.get_empleados();
+
+        empleados_tab = new String[arrem.size()][];
+
+        for(int i = 0; i < arrem.size(); i++){
+            empleados_tab[i] = arrem.get(i).datos_empleado();
+        }
     }
 }
