@@ -30,6 +30,20 @@ public class Menu {
         return presio;
     }
 
+    public String[] get_arreglo_menu(){
+        String[] arrMenu = new String[4];
+        arrMenu[0]= ""+menu;
+        arrMenu[1]= nombre;
+        arrMenu[2]= descripcion;
+        arrMenu[3]= ""+presio;
+        return arrMenu;
+    }
+
+    public String get_formatio_bd(){
+        return ("\n" + menu + ";" + nombre + ";" + descripcion + ";" + ""+ presio);
+    }
+
+
     public String Set_des_aux(){
         return descripcion_auxiliar;
     }
@@ -41,4 +55,6 @@ public class Menu {
     public String toString(){
         return (menu + " " + nombre + " " + descripcion + " " + descripcion_auxiliar + " " + presio);
     }
+
+    
 }

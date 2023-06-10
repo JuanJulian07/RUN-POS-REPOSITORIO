@@ -1,20 +1,20 @@
 package Inter_empleado;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.security.cert.PKIXCertPathBuilderResult;
 import java.util.ArrayList;
 
 import javax.swing.*;
 import Empleados.*;
 import Leer_Bases_de_datos.Escribir_empleados;
+import Leer_Bases_de_datos.Leer_Menu;
 import Leer_Bases_de_datos.Leer_empleados;
+import Menu.Menu;
 
 
 
 public class Interface_Gerente extends JFrame{
     
     private static final int pixel_label = 460;
-    private static final int pixel_buton = 100;
+    private static final int pixel_buton = 150;
     private Empleado empleado = null;
     private Empleado empleado_aux = null;
     private static final Dimension DIMENSION_DEFECTO = new Dimension(1000,700);
@@ -68,6 +68,14 @@ public class Interface_Gerente extends JFrame{
         p_gerente.add(mostar_empleadosBD);
 
         p_gerente.add(boton_mbd(mostar_empleadosBD.getY()));
+
+        //Esta parte es para modificar el menu/ visualizarlo
+        JLabel modificar_menu = new JLabel("03. Modificacion y visualizaicon del menu");
+        modificar_menu.setBounds(20, mostar_empleadosBD.getY()+40, pixel_label, 20);
+        modificar_menu.setFont(new Font("arial",Font.BOLD,14));
+
+        p_gerente.add(modificar_menu);
+        p_gerente.add(boton_menu(modificar_menu.getY()));
         // Esta es la imagen que sale en la parte del gerente
 
         ImageIcon imagen = new ImageIcon("src\\Recursos_fotograficos\\icono.jpg");
@@ -192,6 +200,28 @@ public class Interface_Gerente extends JFrame{
         
     }
     
+    //Este es el metodo para el boton que va a mostrar y modificar la base de datos menu
+    private JButton boton_menu(int y_boton){
+        JButton boton = new JButton("Ver/modificar");
+        boton.setBounds(600, y_boton, pixel_buton,20);
+        boton.addKeyListener(Adaptador.accion_teclado(boton));
+        boton.addActionListener(accion -> {
+            String[] opciones = {"Ver menu","Modificar Menu"};
+            int opcion;
+            opcion = JOptionPane.showOptionDialog(this, "Seleccione una opcion", "Modificar o visulaizar menu", 1, 1, null, opciones, null);
+            if(opcion == 0){
+                Visulaizar_modificar_menu visualizar = new Visulaizar_modificar_menu(this, false);
+                visualizar.setVisible(true);
+                visualizar = null;
+            }
+            if(opcion == 1){
+                Visulaizar_modificar_menu visualizar = new Visulaizar_modificar_menu(this, true);
+                visualizar.setVisible(true);
+                visualizar = null;
+            }
+        });
+        return boton;
+    }
 }
 
 //Calse para modifica los datos del usuario
@@ -547,6 +577,52 @@ class ver_base_empleados extends JDialog{
 
         for(int i = 0; i < arrem.size(); i++){
             empleados_tab[i] = arrem.get(i).datos_empleado();
+        }
+    }
+}
+
+class Visulaizar_modificar_menu extends JDialog{
+    private String[][] menu_convertido;
+    private String[] encabezado_menu = {"Item","Tipo de plato","Descripcion", "Presio"};
+    public Visulaizar_modificar_menu(JFrame padre, boolean editable){
+        super(padre, true);
+        
+        extraer_tabla();
+        setResizable(false);
+        
+        if(editable){
+            setTitle("Modifiacion menu");
+            //add(panel_mod());
+        }
+        else{
+            setTitle("Visualizacion menu");
+            add(panel_vis());
+            
+        }
+        setLocationRelativeTo(null);
+        pack();
+    }
+
+    private JPanel panel_mod(){
+        JPanel panel = new JPanel();
+        return panel;
+    }
+    private JPanel panel_vis(){
+        JPanel panel = new JPanel();
+        JTable tabla = new JTable(menu_convertido, encabezado_menu);
+        JScrollPane pscroll = new JScrollPane(tabla);
+        panel.add(pscroll);
+        return panel;
+    }
+
+
+    private void extraer_tabla(){
+        Leer_Menu leer = new Leer_Menu();
+        ArrayList<Menu> menu = leer.get_menu_listado();
+        menu_convertido = new String [menu.size()][];
+        
+        for(int i = 0; i < menu.size(); i++){
+            menu_convertido[i] = menu.get(i).get_arreglo_menu();
         }
     }
 }
