@@ -35,7 +35,7 @@ public class Menu {
         arrMenu[0]= ""+menu;
         arrMenu[1]= nombre;
         arrMenu[2]= descripcion;
-        arrMenu[3]= ""+presio;
+        arrMenu[3]= "$"+presio;
         return arrMenu;
     }
 
