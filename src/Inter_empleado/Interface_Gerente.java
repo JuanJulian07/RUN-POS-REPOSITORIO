@@ -3,6 +3,8 @@ import java.awt.*;
 import java.util.ArrayList;
 
 import javax.swing.*;
+import javax.swing.table.TableColumnModel;
+
 import Empleados.*;
 import Leer_Bases_de_datos.Escribir_empleados;
 import Leer_Bases_de_datos.Leer_Menu;
@@ -560,7 +562,15 @@ class ver_base_empleados extends JDialog{
         //Agregando tabla para visualizar a los empleados
         ini_empleados_tab();
         JTable BDEmpleados = new JTable(empleados_tab,ENCABEZADO);
+        BDEmpleados.setPreferredScrollableViewportSize(new Dimension(800,500));
         BDEmpleados.setEnabled(false);
+        BDEmpleados.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        TableColumnModel model = BDEmpleados.getColumnModel();
+        model.getColumn(0).setPreferredWidth(100);
+        model.getColumn(1).setPreferredWidth(300);
+        model.getColumn(2).setPreferredWidth(100);
+        model.getColumn(3).setPreferredWidth(150);
+        model.getColumn(4).setPreferredWidth(150);
         //Pendiente mostrar mejor el contenido de las columnas
         
         JScrollPane scrollpane  = new JScrollPane(BDEmpleados);
@@ -587,19 +597,19 @@ class Visulaizar_modificar_menu extends JDialog{
     public Visulaizar_modificar_menu(JFrame padre, boolean editable){
         super(padre, true);
         
-        extraer_tabla();
+        extraer_tabla(editable);
         setResizable(false);
         
         if(editable){
             setTitle("Modifiacion menu");
-            //add(panel_mod());
+            add(panel_mod());
         }
         else{
             setTitle("Visualizacion menu");
             add(panel_vis());
             
         }
-        setLocationRelativeTo(null);
+        setLocation(padre.getLocationOnScreen());
         pack();
     }
 
@@ -610,19 +620,33 @@ class Visulaizar_modificar_menu extends JDialog{
     private JPanel panel_vis(){
         JPanel panel = new JPanel();
         JTable tabla = new JTable(menu_convertido, encabezado_menu);
+        
+        tabla.setPreferredScrollableViewportSize(new Dimension(900,500));
+        tabla.setEnabled(false);
+        tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        TableColumnModel modelo = tabla.getColumnModel();
+        modelo.getColumn(0).setPreferredWidth(30);
+        modelo.getColumn(1).setPreferredWidth(150);
+        modelo.getColumn(2).setPreferredWidth(560);
+        modelo.getColumn(3).setPreferredWidth(160);
+        
         JScrollPane pscroll = new JScrollPane(tabla);
         panel.add(pscroll);
         return panel;
     }
 
 
-    private void extraer_tabla(){
+    private void extraer_tabla(boolean ver_editar){
         Leer_Menu leer = new Leer_Menu();
         ArrayList<Menu> menu = leer.get_menu_listado();
         menu_convertido = new String [menu.size()][];
         
         for(int i = 0; i < menu.size(); i++){
             menu_convertido[i] = menu.get(i).get_arreglo_menu();
+            if(!ver_editar)
+                menu_convertido[i][3] = "$" + menu_convertido[i][3];
+            
+
         }
     }
 }
