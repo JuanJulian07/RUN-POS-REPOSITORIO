@@ -3,6 +3,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 import Empleados.*;
@@ -615,6 +616,28 @@ class Visulaizar_modificar_menu extends JDialog{
 
     private JPanel panel_mod(){
         JPanel panel = new JPanel();
+        JTable tabla = new JTable(menu_convertido, encabezado_menu);
+        
+        DefaultTableModel m = new DefaultTableModel(menu_convertido, encabezado_menu);
+        tabla.setModel(m);
+
+        tabla.setPreferredScrollableViewportSize(new Dimension(900,500));
+        tabla.setEnabled(true);
+        tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+        
+        TableColumnModel modelo = tabla.getColumnModel();
+        modelo.getColumn(0).setPreferredWidth(30);
+        modelo.getColumn(1).setPreferredWidth(150);
+        modelo.getColumn(2).setPreferredWidth(560);
+        modelo.getColumn(3).setPreferredWidth(160);
+        
+        JScrollPane pscroll = new JScrollPane(tabla);
+        panel.add(pscroll);
+        
+        JButton boton = new JButton("press");
+        boton.setLocation(950, 250);
+        panel.add(boton);
         return panel;
     }
     private JPanel panel_vis(){
@@ -624,11 +647,14 @@ class Visulaizar_modificar_menu extends JDialog{
         tabla.setPreferredScrollableViewportSize(new Dimension(900,500));
         tabla.setEnabled(false);
         tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        
+
         TableColumnModel modelo = tabla.getColumnModel();
         modelo.getColumn(0).setPreferredWidth(30);
         modelo.getColumn(1).setPreferredWidth(150);
         modelo.getColumn(2).setPreferredWidth(560);
         modelo.getColumn(3).setPreferredWidth(160);
+        
         
         JScrollPane pscroll = new JScrollPane(tabla);
         panel.add(pscroll);
