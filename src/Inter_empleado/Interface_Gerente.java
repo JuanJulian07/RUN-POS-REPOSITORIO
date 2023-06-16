@@ -1,5 +1,6 @@
 package Inter_empleado;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -615,29 +616,60 @@ class Visulaizar_modificar_menu extends JDialog{
     }
 
     private JPanel panel_mod(){
-        JPanel panel = new JPanel();
+        JPanel panel = new JPanel(new BorderLayout());
+        JPanel panel2 = new JPanel(new GridLayout(1, 2));
         JTable tabla = new JTable(menu_convertido, encabezado_menu);
-        
-        DefaultTableModel m = new DefaultTableModel(menu_convertido, encabezado_menu);
+        //ESTABLECEMOS UN MODELO EL CUAL NOS DEJA AGREGAR COLUMNAS Y HACER CIERTAS MODIFICACIONES A LA TABLA
+        DefaultTableModel m = new DefaultTableModel(menu_convertido, encabezado_menu){
+            @Override
+            public boolean isCellEditable(int row, int column){
+                return column !=0;
+            }
+        };
+        //dEFINIMOS EL TAMAÑO DEL PANEL
+        panel.setSize(900, 600);
+        //ESTABLECEMOS UN MODELO PARA EDITAR MAS FACIL LA TABLA
         tabla.setModel(m);
 
         tabla.setPreferredScrollableViewportSize(new Dimension(900,500));
         tabla.setEnabled(true);
         tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-
+        tabla.getTableHeader().setReorderingAllowed(false);
         
         TableColumnModel modelo = tabla.getColumnModel();
         modelo.getColumn(0).setPreferredWidth(30);
         modelo.getColumn(1).setPreferredWidth(150);
         modelo.getColumn(2).setPreferredWidth(560);
-        modelo.getColumn(3).setPreferredWidth(160);
+        modelo.getColumn(3).setPreferredWidth(145);
+        modelo.getColumn(0).setResizable(false);
         
+        //Creamos un panel donde se puede hacer scroll por si la tabla es demasiado grande xd
         JScrollPane pscroll = new JScrollPane(tabla);
-        panel.add(pscroll);
+        panel.add(pscroll,BorderLayout.CENTER);
         
-        JButton boton = new JButton("press");
-        boton.setLocation(950, 250);
-        panel.add(boton);
+        
+        //Este boton se encarga de agregar filas
+        JButton add_colum = new JButton("Agregar columnas");
+        add_colum.addKeyListener(Adaptador.accion_teclado(add_colum));
+        add_colum.addActionListener(accion ->{
+            int num = 0;
+            num = m.getRowCount()+1;
+            m.addRow(new Object[]{num,null,null,null});
+        });
+        //Este boton se encarga de verificar y guardar la info en la base de datos menu
+        JButton save = new JButton("Guardar");
+        save.addKeyListener(Adaptador.accion_teclado(save));
+        save.addActionListener(accion ->{
+            eliminar_campos_vacios(this, m);
+           //ver que todo este piola antes de guardar
+        });
+        
+        
+        
+        panel2.add(add_colum);
+        panel2.add(save);
+        panel.add(panel2, BorderLayout.SOUTH);
+        
         return panel;
     }
     private JPanel panel_vis(){
@@ -674,5 +706,46 @@ class Visulaizar_modificar_menu extends JDialog{
             
 
         }
+    }
+    private void eliminar_campos_vacios(JDialog padre,DefaultTableModel tabla){
+        ArrayList<Integer> casos_especiales = new ArrayList<Integer>();
+        int dato;
+        boolean band = true;
+        //Esto es para eliminar las fias
+        for(int i = 0; i < tabla.getRowCount(); i++){
+            if((tabla.getValueAt(i, 1) == null)&&(tabla.getValueAt(i, 2) == null)&&(tabla.getValueAt(i, 3) == null)){
+                tabla.removeRow(i);
+                i--;
+            }
+            else if(tabla.getValueAt(i, 1) == null){
+                casos_especiales.add(i+1);
+                band = false;
+            }
+            else if(tabla.getValueAt(i, 2)== null){
+                casos_especiales.add(i+1);
+                band = false;
+            } 
+            else if(tabla.getValueAt(i, 3)== null){
+                casos_especiales.add(i+1);
+                band = false;
+            }
+        }
+
+        for(int i = 0; i < tabla.getRowCount(); i++){
+            tabla.setValueAt(i+1, i, 0);
+        }
+        
+        if(!band){
+            dato = JOptionPane.showConfirmDialog(padre, "Tienes los campos "+ casos_especiales+", Incompleto\nDeceas eliminarlo para proceder a guardar?", getTitle(), JOptionPane.OK_CANCEL_OPTION);
+                if(dato == 0){
+                    for(int i = 0; i < casos_especiales.size(); i++){
+                        tabla.removeRow(casos_especiales.get(i)-1);
+                        
+                    }
+                }
+                
+        }
+        
+        
     }
 }
