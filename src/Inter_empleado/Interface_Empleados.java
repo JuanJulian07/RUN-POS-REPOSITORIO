@@ -1694,7 +1694,7 @@ public class Interface_Empleados extends javax.swing.JFrame {
     }                                    
 
     private void infoMeserosMouseMoved(java.awt.event.MouseEvent evt) {                                       
-        infoMeseros.setToolTipText("*ACCEDER INFORMACION DE MESEROS");
+        infoMeseros.setToolTipText("*ACCEDER SECTOR GERENCIAL");
     }                                      
 
     private void verEstadisticasMouseMoved(java.awt.event.MouseEvent evt) {                                           
@@ -1826,8 +1826,9 @@ public class Interface_Empleados extends javax.swing.JFrame {
     }                                         
 
     private void infoMeserosActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        
-        Interface_Infomesero meserosin =new Interface_Infomesero(empleado);
+        Interface_Gerente gerente = new Interface_Gerente(empleado);
+
+        //Interface_Infomesero meserosin =new Interface_Infomesero(empleado);
         this.dispose();
     }                                           
 
