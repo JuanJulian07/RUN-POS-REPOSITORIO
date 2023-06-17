@@ -678,7 +678,6 @@ class Visulaizar_modificar_menu extends JDialog{
             tabla.clearSelection();
             //En este apartado se eliminan las celdas vacias
             boolean aux = eliminar_campos_vacios(this, m);
-            System.out.println(aux);
             if(aux){
                 try{//Aqui se comprueba que los datos del presio sean correctos o mas bien validos
                     Escribir_menu escribir = new Escribir_menu(convertir_arreglo_menu(this, m));

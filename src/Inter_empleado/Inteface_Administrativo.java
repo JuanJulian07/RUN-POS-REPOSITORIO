@@ -1,5 +1,8 @@
 package Inter_empleado;
 import javax.swing.*;
+
+import org.netbeans.lib.awtextra.AbsoluteLayout;
+
 import java.awt.*;
 
 import Empleados.Empleado;
@@ -34,7 +37,7 @@ public class Inteface_Administrativo extends JFrame{
     }
     private JPanel panel(){
         JPanel panel = new JPanel();
-        panel.setSize(1000,700);
+        JPanel panel2 = new JPanel(null);
         panel.setLayout(new BorderLayout());
 
         //Mensaje de bienvenida al usuario gerente
@@ -45,7 +48,16 @@ public class Inteface_Administrativo extends JFrame{
         saludo.setHorizontalAlignment(saludo.CENTER);
         panel.add(saludo,BorderLayout.NORTH);
 
-
+        panel2.setSize(1000, 600);
+        JLabel label1 = new JLabel("Hola hijos de puta");
+        label1.setBounds(50, 50, 300, 20);
+        panel2.add(label1);
+        ImageIcon imagen = new ImageIcon("src\\Recursos_fotograficos\\icono.jpg");
+        imagen = new ImageIcon(imagen.getImage().getScaledInstance(150, 150, 1));
+        JLabel im = new JLabel(imagen);
+        im.setBounds(panel2.getWidth()-167, panel2.getHeight()-110, 150, 150);
+        panel2.add(im);
+        panel.add(panel2, BorderLayout.CENTER);
         return panel;
     }
 }
