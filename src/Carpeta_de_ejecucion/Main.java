@@ -39,6 +39,10 @@ public class Main {
         }
         if(empleado instanceof Administrativo){
             Interface_Empleados admin = new Interface_Empleados(empleado);
+            admin.infoMeseros.setEnabled(false);
+            admin.verCocina.setEnabled(false);
+            admin.verMenu.setEnabled(false);
+            
         }
         if(empleado instanceof Cocinero){
             Interface_Empleados cocinero = new Interface_Empleados(empleado);

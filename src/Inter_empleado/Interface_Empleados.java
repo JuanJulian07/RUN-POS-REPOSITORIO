@@ -1,6 +1,6 @@
 package Inter_empleado;
 
-
+import Inter_empleado.*;
 import java.awt.Image;
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
@@ -171,7 +171,7 @@ public class Interface_Empleados extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> tiposBebidas;
     public javax.swing.JButton verCocina;
     public javax.swing.JButton verEstadisticas;
-    private javax.swing.JButton verMenu;
+    public javax.swing.JButton verMenu;
     public  Empleado empleado=null;
     public Interface_Empleados(Empleado empleado){
 
@@ -181,13 +181,14 @@ public class Interface_Empleados extends javax.swing.JFrame {
         Pedido.setLocationRelativeTo(null);
         Cocina.setLocationRelativeTo(null);
         Factura.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
         setVisible(true);
         this.empleado=empleado;
         setIconImage(new ImageIcon("src\\Recursos_fotograficos\\icono_principal.jpg").getImage());
         //ESCRITURA DE PARRAFO EN UN LABEL
         fac.setText("<html><p>RESTAURANTE RUN POS </p><p>Bogotá, Colombia</p><p>Teléfono: -------</p></html>");
         horario.setText("<html><p>Lunes a Sábado 9:00 a.m a 9:00 p.m </p><p> Domingos y Festivos 10:00 a.m a 8:00 p.m</p></html>");
-
+        
       
     }
     
@@ -1809,9 +1810,8 @@ public class Interface_Empleados extends javax.swing.JFrame {
     }                                          
 
     private void verEstadisticasActionPerformed(java.awt.event.ActionEvent evt) {                                                
-        Estadisticas.setVisible(true);
-         Estadisticas.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        Estadisticas.setLocationRelativeTo(null);
+        Inteface_Administrativo administrativo = new Inteface_Administrativo(empleado);
+        this.dispose();
     }                                               
 
     private void verCocinaActionPerformed(java.awt.event.ActionEvent evt) {                                          
