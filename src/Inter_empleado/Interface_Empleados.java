@@ -183,7 +183,7 @@ public class Interface_Empleados extends javax.swing.JFrame {
         Factura.setLocationRelativeTo(null);
         setVisible(true);
         this.empleado=empleado;
-
+        setIconImage(new ImageIcon("src\\Recursos_fotograficos\\icono_principal.jpg").getImage());
         //ESCRITURA DE PARRAFO EN UN LABEL
         fac.setText("<html><p>RESTAURANTE RUN POS </p><p>Bogotá, Colombia</p><p>Teléfono: -------</p></html>");
         horario.setText("<html><p>Lunes a Sábado 9:00 a.m a 9:00 p.m </p><p> Domingos y Festivos 10:00 a.m a 8:00 p.m</p></html>");

@@ -1,6 +1,5 @@
 package Inter_empleado;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -596,7 +595,7 @@ class ver_base_empleados extends JDialog{
 
 class Visulaizar_modificar_menu extends JDialog{
     private String[][] menu_convertido;
-    private String[] encabezado_menu = {"Item","Tipo de plato","Descripcion", "Presio"};
+    private String[] encabezado_menu = {"Item","Tipo de plato","Tipo","Descripcion", "Presio"};
     public Visulaizar_modificar_menu(JFrame padre, boolean editable){
         super(padre, true);
         
@@ -620,6 +619,13 @@ class Visulaizar_modificar_menu extends JDialog{
         JPanel panel = new JPanel(new BorderLayout());
         JPanel panel2 = new JPanel(new GridLayout(1, 2));
         JTable tabla = new JTable(menu_convertido, encabezado_menu);
+        JComboBox<String> seleccion = new JComboBox<String>();
+        seleccion.addItem(Menu.ESPECIAL);
+        seleccion.addItem(Menu.EJECUTIVO);
+        seleccion.addItem(Menu.CORRIENTE);
+        seleccion.addItem(Menu.POSTRES);
+        seleccion.addItem(Menu.BEBIDAS);
+
         //ESTABLECEMOS UN MODELO EL CUAL NOS DEJA AGREGAR COLUMNAS Y HACER CIERTAS MODIFICACIONES A LA TABLA
         DefaultTableModel m = new DefaultTableModel(menu_convertido, encabezado_menu){
             @Override
@@ -628,11 +634,11 @@ class Visulaizar_modificar_menu extends JDialog{
             }
         };
         //dEFINIMOS EL TAMAÑO DEL PANEL
-        panel.setSize(900, 600);
+        panel.setSize(1000, 600);
         //ESTABLECEMOS UN MODELO PARA EDITAR MAS FACIL LA TABLA
         tabla.setModel(m);
 
-        tabla.setPreferredScrollableViewportSize(new Dimension(900,500));
+        tabla.setPreferredScrollableViewportSize(new Dimension(1000,500));
         tabla.setEnabled(true);
         tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tabla.getTableHeader().setReorderingAllowed(false);
@@ -640,10 +646,13 @@ class Visulaizar_modificar_menu extends JDialog{
         TableColumnModel modelo = tabla.getColumnModel();
         modelo.getColumn(0).setPreferredWidth(30);
         modelo.getColumn(1).setPreferredWidth(150);
-        modelo.getColumn(2).setPreferredWidth(560);
-        modelo.getColumn(3).setPreferredWidth(145);
+        modelo.getColumn(2).setPreferredWidth(100);
+        modelo.getColumn(3).setPreferredWidth(560);
+        modelo.getColumn(4).setPreferredWidth(160);
         modelo.getColumn(0).setResizable(false);
         
+        tabla.getColumnModel().getColumn(2).setCellRenderer(tabla.getDefaultRenderer(String.class));
+        tabla.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(seleccion));
         
         //Creamos un panel donde se puede hacer scroll por si la tabla es demasiado grande xd
         JScrollPane pscroll = new JScrollPane(tabla);
@@ -656,7 +665,7 @@ class Visulaizar_modificar_menu extends JDialog{
         add_colum.addActionListener(accion ->{
             int num = 0;
             num = m.getRowCount()+1;
-            m.addRow(new Object[]{num,null,null,null});
+            m.addRow(new Object[]{num,null,null,null,null});
         });
         //Este boton se encarga de verificar y guardar la info en la base de datos menu
         JButton save = new JButton("Guardar");
@@ -699,7 +708,7 @@ class Visulaizar_modificar_menu extends JDialog{
         JPanel panel = new JPanel();
         JTable tabla = new JTable(menu_convertido, encabezado_menu);
         
-        tabla.setPreferredScrollableViewportSize(new Dimension(900,500));
+        tabla.setPreferredScrollableViewportSize(new Dimension(1000,500));
         tabla.setEnabled(false);
         tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         
@@ -707,8 +716,9 @@ class Visulaizar_modificar_menu extends JDialog{
         TableColumnModel modelo = tabla.getColumnModel();
         modelo.getColumn(0).setPreferredWidth(30);
         modelo.getColumn(1).setPreferredWidth(150);
-        modelo.getColumn(2).setPreferredWidth(560);
-        modelo.getColumn(3).setPreferredWidth(160);
+        modelo.getColumn(2).setPreferredWidth(100);
+        modelo.getColumn(3).setPreferredWidth(560);
+        modelo.getColumn(4).setPreferredWidth(160);
         
         
         JScrollPane pscroll = new JScrollPane(tabla);
@@ -736,7 +746,7 @@ class Visulaizar_modificar_menu extends JDialog{
         boolean band = true;
         //Esto es para eliminar las fias
         for(int i = 0; i < tabla.getRowCount(); i++){
-            if((tabla.getValueAt(i, 1) == null)&&(tabla.getValueAt(i, 2) == null)&&(tabla.getValueAt(i, 3) == null)){
+            if((tabla.getValueAt(i, 1) == null)&&(tabla.getValueAt(i, 2) == null)&&(tabla.getValueAt(i, 3) == null)&&(tabla.getValueAt(i, 4)==null)){
                 tabla.removeRow(i);
                 i--;
             }
@@ -749,6 +759,10 @@ class Visulaizar_modificar_menu extends JDialog{
                 band = false;
             } 
             else if(tabla.getValueAt(i, 3)== null){
+                casos_especiales.add(i+1);
+                band = false;
+            }
+            else if(tabla.getValueAt(i, 4)== null){
                 casos_especiales.add(i+1);
                 band = false;
             }
@@ -792,6 +806,7 @@ class Visulaizar_modificar_menu extends JDialog{
         boolean band = true;
         int item = 0;
         String nombre = "";
+        String tipo = "";
         String descripcion = "";
         long presio = 0;
 
@@ -800,9 +815,10 @@ class Visulaizar_modificar_menu extends JDialog{
             try{
                 item = (Integer)tabla.getValueAt(i, 0);
                 nombre = (String) tabla.getValueAt(i, 1);
-                descripcion = (String) tabla.getValueAt(i, 2);
-                presio = Long.parseLong((String) tabla.getValueAt(i, 3));
-                menu.add(new Menu(item,nombre, descripcion, presio));
+                tipo = (String) tabla.getValueAt(i, 2);
+                descripcion = (String) tabla.getValueAt(i, 3);
+                presio = Long.parseLong((String) tabla.getValueAt(i, 4));
+                menu.add(new Menu(item,nombre,tipo, descripcion, presio));
             }
             catch(NumberFormatException e){
                 errores.add((i+1));

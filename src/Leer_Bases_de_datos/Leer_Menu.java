@@ -21,7 +21,7 @@ public class Leer_Menu {
                 
                 auxiliar = leer.nextLine();
                 dividido = auxiliar.split(";");
-                Menu m = new Menu(Integer.parseInt(dividido[0]),dividido[1],dividido[2],Long.parseLong(dividido[3]));
+                Menu m = new Menu(Integer.parseInt(dividido[0]),dividido[1],dividido[2],dividido[3],Long.parseLong(dividido[4]));
                 menu.add(m);
 
             }

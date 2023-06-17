@@ -1,5 +1,6 @@
-Item;Tipo de plato;Descripcion;Presio
-1;Arroz con pollo;Arroz con verduras y pollo, papas a la francesa ensalada basica;15000
-2;Bandeja paisa;Bandeja con frijoles, carne molida, arroz, platano en tajada, aguacate y huevo;15000
-3;Sancocho de Gallina;Consome de gallina, con papa, platano, yuca y una presa de pollo;10000
-4;Churasco;Carne de res o cerdo en salsa agridulce, con arroz, ensaada y papas a la francesa;20000
+Item;Tipo de plato;Tipo;Descripcion;Presio
+1;Arroz con pollo;Especial;Arroz con verduras y pollo, papas a la francesa ensalada basica;15000
+2;Bandeja paisa;Ejecutivo;Bandeja con frijoles, carne molida, arroz, platano en tajada, aguacate y huevo;15000
+3;Sancocho de Gallina;Corriente;Consome de gallina, con papa, platano, yuca y una presa de pollo;10000
+4;Cocacola 250;Bebida;Bebida azucarada burbujeante;1000
+5;Banana Split;Especial;Helado con frutas y combiacion especial de bananas;5000
