@@ -9,6 +9,7 @@ import javax.swing.table.TableColumnModel;
 
 import Empleados.*;
 import Leer_Bases_de_datos.Escribir_empleados;
+import Leer_Bases_de_datos.Escribir_menu;
 import Leer_Bases_de_datos.Leer_Menu;
 import Leer_Bases_de_datos.Leer_empleados;
 import Menu.Menu;
@@ -643,9 +644,10 @@ class Visulaizar_modificar_menu extends JDialog{
         modelo.getColumn(3).setPreferredWidth(145);
         modelo.getColumn(0).setResizable(false);
         
+        
         //Creamos un panel donde se puede hacer scroll por si la tabla es demasiado grande xd
         JScrollPane pscroll = new JScrollPane(tabla);
-        panel.add(pscroll,BorderLayout.CENTER);
+        
         
         
         //Este boton se encarga de agregar filas
@@ -660,14 +662,35 @@ class Visulaizar_modificar_menu extends JDialog{
         JButton save = new JButton("Guardar");
         save.addKeyListener(Adaptador.accion_teclado(save));
         save.addActionListener(accion ->{
-            eliminar_campos_vacios(this, m);
+            //Esto es por si hay celdas en modificacion al momento de pulsar el boton
+            if(tabla.isEditing()){
+                tabla.getCellEditor().stopCellEditing();
+            }
+            tabla.clearSelection();
+            //En este apartado se eliminan las celdas vacias
+            boolean aux = eliminar_campos_vacios(this, m);
+            System.out.println(aux);
+            if(aux){
+                try{//Aqui se comprueba que los datos del presio sean correctos o mas bien validos
+                    Escribir_menu escribir = new Escribir_menu(convertir_arreglo_menu(this, m));
+                    escribir = null;
+                    JOptionPane.showMessageDialog(this, "Menu Guardado Exitosamente", "El menu se ha guardado de forma exitosa", JOptionPane.INFORMATION_MESSAGE, null);
+                    setVisible(false);
+                }
+                catch(NumberFormatException e){//Estado de prueba, pero la idea es que devuelva los datos que son
+                    JOptionPane.showMessageDialog(this, e.getMessage(), "Error con tipos de datos", JOptionPane.ERROR_MESSAGE, null);
+                }
+            }
+            
            //ver que todo este piola antes de guardar
         });
-        
+        tabla.addKeyListener(Adaptador.accion_teclado_tablas_guardar(save));
+        tabla.addKeyListener(Adaptador.accion_teclado_tablas(add_colum));
         
         
         panel2.add(add_colum);
         panel2.add(save);
+        panel.add(pscroll,BorderLayout.CENTER);
         panel.add(panel2, BorderLayout.SOUTH);
         
         return panel;
@@ -707,7 +730,7 @@ class Visulaizar_modificar_menu extends JDialog{
 
         }
     }
-    private void eliminar_campos_vacios(JDialog padre,DefaultTableModel tabla){
+    private boolean eliminar_campos_vacios(JDialog padre,DefaultTableModel tabla){
         ArrayList<Integer> casos_especiales = new ArrayList<Integer>();
         int dato;
         boolean band = true;
@@ -736,16 +759,64 @@ class Visulaizar_modificar_menu extends JDialog{
         }
         
         if(!band){
-            dato = JOptionPane.showConfirmDialog(padre, "Tienes los campos "+ casos_especiales+", Incompleto\nDeceas eliminarlo para proceder a guardar?", getTitle(), JOptionPane.OK_CANCEL_OPTION);
+            dato = JOptionPane.showConfirmDialog(padre, "Tienes los campos "+ casos_especiales+", Incompleto\nDeceas eliminarlo para proceder a guardar?", "Campos Incompletos", JOptionPane.OK_CANCEL_OPTION);
                 if(dato == 0){
+                    //revisar este apartado
                     for(int i = 0; i < casos_especiales.size(); i++){
-                        tabla.removeRow(casos_especiales.get(i)-1);
+                        tabla.removeRow(casos_especiales.get(i)-1-i);
                         
                     }
+                    for(int i = 0; i < tabla.getRowCount(); i++){
+                        tabla.setValueAt(i+1, i, 0);
+                    }
+                    
+                }
+                else{
+                    
+                    return false;
                 }
                 
         }
+            
         
+        
+        casos_especiales.clear();
+        casos_especiales = null;
+        return true;
+    }
+
+    private ArrayList<Menu> convertir_arreglo_menu(JDialog padre, DefaultTableModel tabla){
+        ArrayList<Menu> menu = new ArrayList<Menu>();
+        ArrayList<Integer> errores = new ArrayList<Integer>();
+        
+        boolean band = true;
+        int item = 0;
+        String nombre = "";
+        String descripcion = "";
+        long presio = 0;
+
+        for(int i = 0; i < tabla.getRowCount(); i++){
+            
+            try{
+                item = (Integer)tabla.getValueAt(i, 0);
+                nombre = (String) tabla.getValueAt(i, 1);
+                descripcion = (String) tabla.getValueAt(i, 2);
+                presio = Long.parseLong((String) tabla.getValueAt(i, 3));
+                menu.add(new Menu(item,nombre, descripcion, presio));
+            }
+            catch(NumberFormatException e){
+                errores.add((i+1));
+                band = false;
+            }
+            
+        }
+        if(band){
+            return menu;
+        }
+        else{
+            NumberFormatException error = new NumberFormatException("El presio de las filas\n"+ errores.toString() + "\nSon incorrectos");
+            throw error;
+        }
         
     }
 }

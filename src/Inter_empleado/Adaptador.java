@@ -17,5 +17,24 @@ public class Adaptador {
             }
         };
     }
+    public static KeyAdapter accion_teclado_tablas (JButton boton){
+        return new KeyAdapter() {
+            public void keyPressed (KeyEvent e){
+                if(e.getExtendedKeyCode() == KeyEvent.VK_PLUS){
+                    boton.doClick();
+                }
+            }
+        };
+    }
+    public static KeyAdapter accion_teclado_tablas_guardar (JButton boton){
+        return new KeyAdapter() {
+            public void keyPressed (KeyEvent e){
+                if(e.getExtendedKeyCode() == KeyEvent.VK_F7){
+
+                    boton.doClick();
+                }
+            }
+        };
+    }
     
 }
