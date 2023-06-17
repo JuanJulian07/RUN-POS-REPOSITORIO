@@ -7,6 +7,7 @@ public class Menu {
     public static final String CORRIENTE = "Corriente";
     public static final String POSTRES = "Postres";
     public static final String BEBIDAS = "Bebidas";
+    public static final String PIZZAS = "Pizzas";
 
     private int menu;
     private String nombre;

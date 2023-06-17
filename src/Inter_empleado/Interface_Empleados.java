@@ -1700,7 +1700,7 @@ public class Interface_Empleados extends javax.swing.JFrame {
     }                                      
 
     private void verEstadisticasMouseMoved(java.awt.event.MouseEvent evt) {                                           
-        verEstadisticas.setToolTipText("*VER ESTADISTICAS");
+        verEstadisticas.setToolTipText("*ACCEDER SECTOR ADMINISTRATIVO");
     }                                          
 
     private void pagosMouseMoved(java.awt.event.MouseEvent evt) {                                 
@@ -1812,6 +1812,7 @@ public class Interface_Empleados extends javax.swing.JFrame {
     private void verEstadisticasActionPerformed(java.awt.event.ActionEvent evt) {                                                
         Inteface_Administrativo administrativo = new Inteface_Administrativo(empleado);
         this.dispose();
+        
     }                                               
 
     private void verCocinaActionPerformed(java.awt.event.ActionEvent evt) {                                          

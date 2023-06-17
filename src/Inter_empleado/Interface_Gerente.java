@@ -625,6 +625,7 @@ class Visulaizar_modificar_menu extends JDialog{
         seleccion.addItem(Menu.CORRIENTE);
         seleccion.addItem(Menu.POSTRES);
         seleccion.addItem(Menu.BEBIDAS);
+        seleccion.addItem(Menu.PIZZAS);
 
         //ESTABLECEMOS UN MODELO EL CUAL NOS DEJA AGREGAR COLUMNAS Y HACER CIERTAS MODIFICACIONES A LA TABLA
         DefaultTableModel m = new DefaultTableModel(menu_convertido, encabezado_menu){
