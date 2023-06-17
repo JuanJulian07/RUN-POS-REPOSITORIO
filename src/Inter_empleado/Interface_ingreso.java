@@ -32,7 +32,7 @@ public class Interface_ingreso extends JFrame{
         
         setVisible(false);
         
-        setIconImage(new ImageIcon("src\\Recursos_fotograficos\\icono_principal.jpg").getImage());
+        setIconImage(new ImageIcon("RUN-POS-REPOSITORIO-main\\src\\Recursos_fotograficos\\icono_principal.jpg").getImage());
         
         
     }
@@ -47,7 +47,7 @@ public class Interface_ingreso extends JFrame{
         
         setVisible(tf);
         
-        setIconImage(new ImageIcon("src\\Recursos_fotograficos\\icono_principal.jpg").getImage());
+        setIconImage(new ImageIcon("RUN-POS-REPOSITORIO-main\\src\\Recursos_fotograficos\\icono_principal.jpg").getImage());
         
         
     }
