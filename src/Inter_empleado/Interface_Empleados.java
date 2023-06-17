@@ -1,6 +1,7 @@
 package Inter_empleado;
 
 
+import java.awt.Image;
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
 import java.io.*;
@@ -191,7 +192,7 @@ public class Interface_Empleados extends javax.swing.JFrame {
     }
     
     private void initComponents() {
-
+        ImageIcon im;
         Menu = new javax.swing.JFrame();
         jPanel2 = new javax.swing.JPanel();
         imgSexi = new javax.swing.JLabel();
@@ -1602,8 +1603,8 @@ public class Interface_Empleados extends javax.swing.JFrame {
             }
         });
         jPanel1.add(verEstadisticas, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 150, 140));
-
-        infoMeseros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/anillo.png"))); // NOI18N
+        im = new ImageIcon(getClass().getResource("/Recursos_fotograficos/imagen_gerencial.jpeg"));
+        infoMeseros.setIcon(new javax.swing.ImageIcon(im.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH))); // NOI18N
         infoMeseros.setContentAreaFilled(false);
         infoMeseros.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         infoMeseros.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
