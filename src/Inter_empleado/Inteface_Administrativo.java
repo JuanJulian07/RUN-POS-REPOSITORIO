@@ -52,12 +52,35 @@ public class Inteface_Administrativo extends JFrame{
         JLabel label1 = new JLabel("Hola hijos de puta");
         label1.setBounds(50, 50, 300, 20);
         panel2.add(label1);
+
+        JLabel ingresar_empleado = new JLabel("01. Ver pedidos para facturar");
+        ingresar_empleado.setFont(new Font("arial", Font.BOLD,14));
+        ingresar_empleado.setBounds(20,60,pixel_label,20);
+        panel2.add(ingresar_empleado);
+
+        panel2.add(boton); //Esta funcion es la encargada del boton
+        
+        //parte dos, es para visualizar la base de datos empleados
+        JLabel mostar_empleadosBD = new JLabel("02. Visualisacion de empleados en base de datos");
+        mostar_empleadosBD.setFont(new Font("arial", Font.BOLD, 14));
+        mostar_empleadosBD.setBounds(20, ingresar_empleado.getY()+40, pixel_label, 20);
+        panel2.add(mostar_empleadosBD);
+
+        panel2.add(boton_mbd(mostar_empleadosBD.getY()));
+
+        //Esta parte es para modificar el menu/ visualizarlo
+        JLabel modificar_menu = new JLabel("03. Modificacion y visualizaicon del menu");
+        modificar_menu.setBounds(20, mostar_empleadosBD.getY()+40, pixel_label, 20);
+        modificar_menu.setFont(new Font("arial",Font.BOLD,14));
+        panel2.add(modificar_menu);
+
         ImageIcon imagen = new ImageIcon("src\\Recursos_fotograficos\\icono.jpg");
         imagen = new ImageIcon(imagen.getImage().getScaledInstance(150, 150, 1));
         JLabel im = new JLabel(imagen);
         im.setBounds(panel2.getWidth()-167, panel2.getHeight()-110, 150, 150);
         panel2.add(im);
         panel.add(panel2, BorderLayout.CENTER);
+        
         return panel;
     }
 }
