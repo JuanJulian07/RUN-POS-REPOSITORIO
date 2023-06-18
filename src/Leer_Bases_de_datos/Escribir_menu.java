@@ -11,7 +11,7 @@ public class Escribir_menu {
         //Esto solo se encargara de guardar la base de datos y listo xd
         try{
             PrintWriter escribir = new PrintWriter(new FileWriter(dir, false));
-            escribir.print("Item;Tipo de plato;Tipo;Descripcion;Presio");
+            escribir.print("Item;Tipo de plato;Tipo;Descripcion;Precio");
             for(Menu aux : menu){
                 escribir.print(aux.get_formatio_bd());
             }

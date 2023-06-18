@@ -69,7 +69,7 @@ public class Factura {
         this.total = total;
     }
 
-    
+}
 
     
     

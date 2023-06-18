@@ -659,7 +659,7 @@ class Visulaizar_modificar_menu extends JDialog{
         
         
         //Este boton se encarga de agregar filas
-        JButton add_colum = new JButton("Agregar columnas");
+        JButton add_colum = new JButton("Agregar filas");
         add_colum.addKeyListener(Adaptador.accion_teclado(add_colum));
         add_colum.addActionListener(accion ->{
             int num = 0;
@@ -751,7 +751,7 @@ class Visulaizar_modificar_menu extends JDialog{
                 casos_especiales.add(i+1);
                 band = false;
             }
-            else if(tabla.getValueAt(i, 2)== null){
+            else if(tabla.getValueAt(i, 2)== null){//Revisión por filas de espacios vacíos
                 casos_especiales.add(i+1);
                 band = false;
             } 
@@ -827,7 +827,7 @@ class Visulaizar_modificar_menu extends JDialog{
             return menu;
         }
         else{
-            NumberFormatException error = new NumberFormatException("El presio de las filas\n"+ errores.toString() + "\nSon incorrectos");
+            NumberFormatException error = new NumberFormatException("El precio de las filas\n"+ errores.toString() + "\nSon incorrectos");
             throw error;
         }
         
