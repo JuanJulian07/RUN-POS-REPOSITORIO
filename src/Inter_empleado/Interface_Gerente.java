@@ -174,9 +174,9 @@ public class Interface_Gerente extends JFrame{
                 }
                 
                 if(value){
-                    Escribir_empleados escribir = new Escribir_empleados(empleado_aux, Escribir_empleados.REM_EMPLEADO);
+                    new Escribir_empleados(empleado_aux, Escribir_empleados.REM_EMPLEADO);
                     JOptionPane.showMessageDialog(this, "El empleado:\n\nDocumento: " + empleado_aux.get_num_documento() + "\nNombre: " + empleado_aux.get_nombre() + "\n\n\tEliminado Satisfacotriamente", "Eliminacion Satisfactoria", JOptionPane.INFORMATION_MESSAGE, null);
-                    escribir = null;
+                    
                 }
                 
             }
@@ -309,8 +309,7 @@ class ventana_modificacion_personal extends JDialog{
                     empleado.set_contraseña(contraseña.getText());
                     
                     //Implementar funcion cambir usuario y contraseña
-                    Escribir_empleados escribir = new Escribir_empleados(empleado, Escribir_empleados.SOB_EMPLEADO);
-                    escribir = null;
+                    new Escribir_empleados(empleado, Escribir_empleados.SOB_EMPLEADO);
                     
 
                     JOptionPane.showMessageDialog(this, "La contraseña ha sido acutalizada exitosamente", "Cambio exitoso", JOptionPane.INFORMATION_MESSAGE, null);
@@ -323,8 +322,8 @@ class ventana_modificacion_personal extends JDialog{
                         empleado.set_usuario(usuario.getText());
 
                         //Este objetto de por si modifica a los empleados
-                        Escribir_empleados escribir = new Escribir_empleados(empleado, Escribir_empleados.SOB_EMPLEADO);
-                        escribir = null;
+                        new Escribir_empleados(empleado, Escribir_empleados.SOB_EMPLEADO);
+                        
 
                         JOptionPane.showMessageDialog(this, "El Usuario y la contraseña han sido acutalizados exitosamente", "Cambio exitoso", JOptionPane.INFORMATION_MESSAGE, null);
                         setVisible(false);
@@ -502,7 +501,7 @@ class ventana_ingreso_personal extends JDialog{
                 }
                 //Aqui verificamos que realmente es un nuevo empleado
                 try{
-                    Escribir_empleados escribir = new Escribir_empleados(empleado,Escribir_empleados.ADD_EMPLEADO);
+                    new Escribir_empleados(empleado,Escribir_empleados.ADD_EMPLEADO);
                     //Si no presenta un throw quiere decir que el empleado se ingreso correctamente a la base de datos y cerrara la ventana JDialog
                     JOptionPane.showMessageDialog(this, "Has ingresado correctamente el siguiente empleado:\n" + ingreso_nombre.getText() + "\n" + ingreso_documento.getText() + "\n" + ingreso_nombre_usuario.getText() + "\n" + ingreso_contraseña.getText(), "Ingreso exitoso", JOptionPane.INFORMATION_MESSAGE, null);
                 
@@ -544,13 +543,12 @@ class ventana_ingreso_personal extends JDialog{
 class ver_base_empleados extends JDialog{
     private static final String[] ENCABEZADO = {"N_documento","Nombre","Tipo","Usuario","Contraseña"};
     private String[][] empleados_tab;
-    private JFrame padre;
+    
 
     public ver_base_empleados (JFrame padre, Component componente){
         
         super(padre, true);
         setLocationRelativeTo(null);
-        this.padre = padre;
         
         setTitle("Base de Datos Empleados");
         setResizable(false);
@@ -681,8 +679,7 @@ class Visulaizar_modificar_menu extends JDialog{
             boolean aux = eliminar_campos_vacios(this, m);
             if(aux){
                 try{//Aqui se comprueba que los datos del presio sean correctos o mas bien validos
-                    Escribir_menu escribir = new Escribir_menu(convertir_arreglo_menu(this, m));
-                    escribir = null;
+                    new Escribir_menu(convertir_arreglo_menu(this, m));
                     JOptionPane.showMessageDialog(this, "Menu Guardado Exitosamente", "El menu se ha guardado de forma exitosa", JOptionPane.INFORMATION_MESSAGE, null);
                     setVisible(false);
                 }
