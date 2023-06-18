@@ -1,14 +1,14 @@
 package Bases_de_datos.Mesas;
 import java.util.*;
 import java.io.*;
-
+// nuevo commmit
 public class intento{
     public static void main(String[] args) {
         for(int i = 0; i < 20; i++){
             try{
                  PrintWriter archiivo = new PrintWriter(new FileWriter("src\\Bases_de_datos\\Mesas\\Mesa"+(i+1)+".csv",false));
-                 archiivo.print("Item;Descripcion auxiliar;mesa;false;false");
-                 archiivo.print("\nDefault description;"+(i+1));
+                 archiivo.print("Item;Cantidad;Descripcion auxiliar;"+(i+1)+";false;false");
+                 //archiivo.print("\nDefault description;"+(i+1));
 
                 archiivo.close();
             }
