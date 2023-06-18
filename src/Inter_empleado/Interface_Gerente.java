@@ -652,8 +652,8 @@ class Visulaizar_modificar_menu extends JDialog{
         modelo.getColumn(4).setPreferredWidth(160);
         modelo.getColumn(0).setResizable(false);
         
-        tabla.getColumnModel().getColumn(2).setCellRenderer(tabla.getDefaultRenderer(String.class));
-        tabla.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(seleccion));
+        modelo.getColumn(2).setCellRenderer(tabla.getDefaultRenderer(String.class));
+        modelo.getColumn(2).setCellEditor(new DefaultCellEditor(seleccion));
         
         //Creamos un panel donde se puede hacer scroll por si la tabla es demasiado grande xd
         JScrollPane pscroll = new JScrollPane(tabla);

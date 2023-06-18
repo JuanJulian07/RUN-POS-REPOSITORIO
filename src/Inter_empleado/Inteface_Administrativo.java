@@ -71,17 +71,15 @@ public class Inteface_Administrativo extends JFrame{
         facturar.setForeground(Color.WHITE);
         facturar.setBounds(x_boton, 50, 200, 100);
         facturar.setBackground(COLOR_BOTON);
-        facturar.setFocusPainted(false);
-
+        
 
         
-        //parte dos, es para visualizar la base de datos empleados
+        //Esta parte es para visualizar la base de datos empleados
         JButton visualizar = new JButton("Visualizar pedidos");
         visualizar.setFont(new Font("arial", Font.BOLD, 14));
         visualizar.setForeground(Color.WHITE);
         visualizar.setBounds(x_boton, facturar.getY()+120, 200, 100);//130
         visualizar.setBackground(COLOR_BOTON);
-        visualizar.setFocusPainted(false);
 
         //Esta parte es para modificar el menu/ visualizarlo
         JButton eliminar = new JButton("Eliminar Pedidos");
@@ -89,14 +87,53 @@ public class Inteface_Administrativo extends JFrame{
         eliminar.setForeground(Color.WHITE);
         eliminar.setBounds(x_boton, visualizar.getY()+120, 200, 100);
         eliminar.setBackground(COLOR_BOTON);
-        eliminar.setFocusPainted(false);
         
+        //En esta parte establecemos que al presionar enter el boton seleccionado se presiona
+        facturar.addKeyListener(Adaptador.accion_teclado(facturar));
+        visualizar.addKeyListener(Adaptador.accion_teclado(visualizar));
+        eliminar.addKeyListener(Adaptador.accion_teclado(eliminar));
 
+        //Escuchador de facturar
+        facturar.addActionListener(accion ->{
+           Facturar fac = new Facturar(this);
+           fac = null; 
+        });
+
+        //Escuchador de Ver_pedidos
+        visualizar.addActionListener(accion -> {
+            Ver_pedidos ver = new Ver_pedidos(this);
+        });
+
+        eliminar.addActionListener(accion -> {
+            Eliminar_pedidos eli = new Eliminar_pedidos(this);
+        });
         panel2.add(facturar);
         panel2.add(visualizar);
         panel2.add(eliminar);
         panel.add(panel2, BorderLayout.CENTER);
         
         return panel;
+    }
+
+    class Facturar extends JDialog{
+        public Facturar(JFrame padre){
+            super(padre, true);
+            setLocation(padre.getLocationOnScreen());
+            setVisible(true);
+        }
+    }
+    class Ver_pedidos extends JDialog{
+        public Ver_pedidos(JFrame padre){
+            super(padre, true);
+            setLocation(padre.getLocationOnScreen());
+            setVisible(true);
+        }
+    }
+    class Eliminar_pedidos extends JDialog{
+        public Eliminar_pedidos(JFrame padre){
+            super(padre, true);
+            setLocation(padre.getLocationOnScreen());
+            setVisible(true);
+        }
     }
 }
