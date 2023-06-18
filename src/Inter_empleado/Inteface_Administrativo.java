@@ -1,20 +1,22 @@
 package Inter_empleado;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 import Empleados.Empleado;
 
 
 public class Inteface_Administrativo extends JFrame{
 
-    private static final int pixel_label = 460;
-    private static final int pixel_buton = 150;
+    private static final int x_boton = 200;
     private Empleado empleado = null;
-    private Empleado empleado_aux = null;
-    private static final Dimension DIMENSION_DEFECTO = new Dimension(700,500);
+    private static final Dimension DIMENSION_DEFECTO = new Dimension(600,600);
+    private static final Color COLOR_BOTON = new Color(66, 66, 66);
     
     //Constructor de la ventana principal de gerente
     public Inteface_Administrativo(Empleado empleado){
@@ -36,8 +38,24 @@ public class Inteface_Administrativo extends JFrame{
         
     }
     private JPanel panel(){
-        JPanel panel = new JPanel(new BorderLayout());
-        JPanel panel2 = new JPanel(null);
+        JPanel panel = new JPanel(){
+            @Override
+            protected void paintComponent(Graphics g){
+                super.paintComponent(g);
+                
+                // Carga la imagen de fondo
+                ImageIcon im = new ImageIcon("src\\Recursos_fotograficos\\icono.jpg");
+                im = new ImageIcon(im.getImage().getScaledInstance(getWidth(), getHeight(),Image.SCALE_SMOOTH));
+                Image imagen_fondo = im.getImage();
+                g.drawImage(imagen_fondo, 0, 0, getWidth(), getHeight(), this);
+                
+            }
+        };
+        panel.setLayout(new BorderLayout());
+        JPanel panel2 = new JPanel();
+        panel2.setLayout(null);
+        
+        panel2.setBackground(new Color(0, 0, 0, Color.OPAQUE));
 
         //Mensaje de bienvenida al usuario gerente
 
@@ -47,33 +65,36 @@ public class Inteface_Administrativo extends JFrame{
         saludo.setHorizontalAlignment(saludo.CENTER);
         panel.add(saludo,BorderLayout.NORTH);
 
+        //Boton para facutar pedidos
+        JButton facturar = new JButton("Facturar pedidos");
+        facturar.setFont(new Font("arial", Font.BOLD,14));
+        facturar.setForeground(Color.WHITE);
+        facturar.setBounds(x_boton, 50, 200, 100);
+        facturar.setBackground(COLOR_BOTON);
+        facturar.setFocusPainted(false);
 
-        JButton ingresar_empleado = new JButton("01. FACTURAR PEDIDOS");
-        ingresar_empleado.setFont(new Font("arial", Font.BOLD,14));
-        ingresar_empleado.setBounds(250, 20, 200, 100);
-        panel2.add(ingresar_empleado);
 
         
         //parte dos, es para visualizar la base de datos empleados
-        JButton mostar_empleadosBD = new JButton("02. VISUALIZAR ESTADO PEDIDOS");
-        mostar_empleadosBD.setFont(new Font("arial", Font.BOLD, 14));
-        mostar_empleadosBD.setBounds(250, 130, 200, 100);
-        panel2.add(mostar_empleadosBD);
-
+        JButton visualizar = new JButton("Visualizar pedidos");
+        visualizar.setFont(new Font("arial", Font.BOLD, 14));
+        visualizar.setForeground(Color.WHITE);
+        visualizar.setBounds(x_boton, facturar.getY()+120, 200, 100);//130
+        visualizar.setBackground(COLOR_BOTON);
+        visualizar.setFocusPainted(false);
 
         //Esta parte es para modificar el menu/ visualizarlo
-        JButton modificar_menu = new JButton("03. Modificacion y visualizaicon del menu");
+        JButton eliminar = new JButton("Eliminar Pedidos");
+        eliminar.setFont(new Font("arial",Font.BOLD,14));
+        eliminar.setForeground(Color.WHITE);
+        eliminar.setBounds(x_boton, visualizar.getY()+120, 200, 100);
+        eliminar.setBackground(COLOR_BOTON);
+        eliminar.setFocusPainted(false);
         
-        modificar_menu.setFont(new Font("arial",Font.BOLD,14));
-        modificar_menu.setBounds(250, 240, 200, 100);
-        panel2.add(modificar_menu);
 
-        /* 
-        ImageIcon imagen = new ImageIcon("src\\Recursos_fotograficos\\icono.jpg");
-        imagen = new ImageIcon(imagen.getImage().getScaledInstance(150, 150, 1));
-        JLabel im = new JLabel(imagen);
-        im.setBounds(panel2.getWidth()-167, panel2.getHeight()-110, 150, 150);
-        panel2.add(im);*/
+        panel2.add(facturar);
+        panel2.add(visualizar);
+        panel2.add(eliminar);
         panel.add(panel2, BorderLayout.CENTER);
         
         return panel;
