@@ -14,7 +14,7 @@ public class Inteface_Administrativo extends JFrame{
     private static final int pixel_buton = 150;
     private Empleado empleado = null;
     private Empleado empleado_aux = null;
-    private static final Dimension DIMENSION_DEFECTO = new Dimension(1000,700);
+    private static final Dimension DIMENSION_DEFECTO = new Dimension(700,500);
     
     //Constructor de la ventana principal de gerente
     public Inteface_Administrativo(Empleado empleado){
@@ -33,12 +33,11 @@ public class Inteface_Administrativo extends JFrame{
         add(panel());
         setIconImage(new ImageIcon("src\\Recursos_fotograficos\\icono_principal.jpg").getImage());
         setVisible(true);
-
+        
     }
     private JPanel panel(){
-        JPanel panel = new JPanel();
+        JPanel panel = new JPanel(new BorderLayout());
         JPanel panel2 = new JPanel(null);
-        panel.setLayout(new BorderLayout());
 
         //Mensaje de bienvenida al usuario gerente
 
@@ -48,37 +47,33 @@ public class Inteface_Administrativo extends JFrame{
         saludo.setHorizontalAlignment(saludo.CENTER);
         panel.add(saludo,BorderLayout.NORTH);
 
-        panel2.setSize(1000, 600);
-        JLabel label1 = new JLabel("Hola hijos de puta");
-        label1.setBounds(50, 50, 300, 20);
-        panel2.add(label1);
 
-        JLabel ingresar_empleado = new JLabel("01. Ver pedidos para facturar");
+        JButton ingresar_empleado = new JButton("01. FACTURAR PEDIDOS");
         ingresar_empleado.setFont(new Font("arial", Font.BOLD,14));
-        ingresar_empleado.setBounds(20,60,pixel_label,20);
+        ingresar_empleado.setBounds(250, 20, 200, 100);
         panel2.add(ingresar_empleado);
 
-        panel2.add(boton); //Esta funcion es la encargada del boton
         
         //parte dos, es para visualizar la base de datos empleados
-        JLabel mostar_empleadosBD = new JLabel("02. Visualisacion de empleados en base de datos");
+        JButton mostar_empleadosBD = new JButton("02. VISUALIZAR ESTADO PEDIDOS");
         mostar_empleadosBD.setFont(new Font("arial", Font.BOLD, 14));
-        mostar_empleadosBD.setBounds(20, ingresar_empleado.getY()+40, pixel_label, 20);
+        mostar_empleadosBD.setBounds(250, 130, 200, 100);
         panel2.add(mostar_empleadosBD);
 
-        panel2.add(boton_mbd(mostar_empleadosBD.getY()));
 
         //Esta parte es para modificar el menu/ visualizarlo
-        JLabel modificar_menu = new JLabel("03. Modificacion y visualizaicon del menu");
-        modificar_menu.setBounds(20, mostar_empleadosBD.getY()+40, pixel_label, 20);
+        JButton modificar_menu = new JButton("03. Modificacion y visualizaicon del menu");
+        
         modificar_menu.setFont(new Font("arial",Font.BOLD,14));
+        modificar_menu.setBounds(250, 240, 200, 100);
         panel2.add(modificar_menu);
 
+        /* 
         ImageIcon imagen = new ImageIcon("src\\Recursos_fotograficos\\icono.jpg");
         imagen = new ImageIcon(imagen.getImage().getScaledInstance(150, 150, 1));
         JLabel im = new JLabel(imagen);
         im.setBounds(panel2.getWidth()-167, panel2.getHeight()-110, 150, 150);
-        panel2.add(im);
+        panel2.add(im);*/
         panel.add(panel2, BorderLayout.CENTER);
         
         return panel;
