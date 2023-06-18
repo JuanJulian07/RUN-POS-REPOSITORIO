@@ -350,7 +350,7 @@ public class Interface_Empleados extends javax.swing.JFrame {
         Menu.setMinimumSize(new java.awt.Dimension(850, 611));
         Menu.setResizable(false);
 
-        jPanel2Menu.setBackground(new java.awt.Color(19, 0, 0));
+        jPanel2Menu.setBackground(new java.awt.Color(0, 0, 0));
         jPanel2Menu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         ImgBebidas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/gaseosa.png"))); // NOI18N
@@ -475,8 +475,8 @@ public class Interface_Empleados extends javax.swing.JFrame {
         jPanel2Menu.add(popera, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 335, 130, -1));
 
         jLabel1.setBackground(new java.awt.Color(51, 0, 0));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/plantilla-de-menu-de-restaurante_23-2147535344.jpg"))); // NOI18N
-        jPanel2Menu.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, 0, 580, 570));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/MENÚRUNPOS.jpg"))); // NOI18N
+        jPanel2Menu.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 5, 580, 570));
 
         dblanca.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         //dblanca.setForeground(new java.awt.Color(255, 255, 255));
@@ -484,8 +484,8 @@ public class Interface_Empleados extends javax.swing.JFrame {
         dblanca.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel2Menu.add(dblanca, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 335, -1, -1));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/plantilla-de-menu-de-restaurante_23-2147535344.jpg"))); // NOI18N
-        jPanel2Menu.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 600, 570));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/MENÚRUNPOS.jpg"))); // NOI18N
+        jPanel2Menu.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(225, 5, 600, 570));
 
         javax.swing.GroupLayout MenuLayout = new javax.swing.GroupLayout(Menu.getContentPane());
         Menu.getContentPane().setLayout(MenuLayout);
