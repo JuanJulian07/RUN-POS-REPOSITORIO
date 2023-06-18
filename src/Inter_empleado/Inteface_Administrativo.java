@@ -1,13 +1,6 @@
 package Inter_empleado;
-import javax.imageio.ImageIO;
 import javax.swing.*;
-
-import org.netbeans.lib.awtextra.AbsoluteLayout;
-
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
-
 import Empleados.Empleado;
 
 
@@ -102,10 +95,12 @@ public class Inteface_Administrativo extends JFrame{
         //Escuchador de Ver_pedidos
         visualizar.addActionListener(accion -> {
             Ver_pedidos ver = new Ver_pedidos(this);
+            ver = null;
         });
 
         eliminar.addActionListener(accion -> {
             Eliminar_pedidos eli = new Eliminar_pedidos(this);
+            eli = null;
         });
         panel2.add(facturar);
         panel2.add(visualizar);
@@ -122,11 +117,23 @@ public class Inteface_Administrativo extends JFrame{
             setVisible(true);
         }
     }
+
+    // Esta es la clase que nos permite ver el estado de los pedidos
     class Ver_pedidos extends JDialog{
         public Ver_pedidos(JFrame padre){
             super(padre, true);
             setLocation(padre.getLocationOnScreen());
+            setResizable(false);
             setVisible(true);
+            add(panel_ver());
+            pack();
+            
+        }
+
+        private JPanel panel_ver(){
+            JPanel panel = new JPanel(new GridBagLayout());
+            
+            return panel;
         }
     }
     class Eliminar_pedidos extends JDialog{
