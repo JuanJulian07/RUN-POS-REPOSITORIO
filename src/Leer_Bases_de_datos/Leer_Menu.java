@@ -1,5 +1,7 @@
 package Leer_Bases_de_datos;
 import java.util.*;
+
+import Menu.Menu;
 import Menu.Menu;
 import java.io.*;
 import javax.swing.JOptionPane;
@@ -25,6 +27,7 @@ public class Leer_Menu {
                 menu.add(m);
 
             }
+            leer.close();
         }
         catch(IOException e){
             JOptionPane.showMessageDialog(null, "No pudimos encontrar la bases de datos en " + dir, "Base_menu not foud", JOptionPane.ERROR_MESSAGE);

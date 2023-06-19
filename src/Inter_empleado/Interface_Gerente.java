@@ -602,7 +602,7 @@ class ver_base_empleados extends JDialog{
 
 class Visulaizar_modificar_menu extends JDialog{
     private String[][] menu_convertido;
-    private String[] encabezado_menu = {"Item","Tipo de plato","Tipo","Descripcion", "Presio"};
+    private String[] encabezado_menu = {"Item","Tipo de plato","Tipo","Descripcion", "Precio"};
     public Visulaizar_modificar_menu(JFrame padre, boolean editable){
         super(padre, true);
         extraer_tabla(editable);
