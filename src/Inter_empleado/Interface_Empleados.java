@@ -403,15 +403,16 @@ public class Interface_Empleados extends javax.swing.JFrame {
 
         psici.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         //psici.setForeground(new java.awt.Color(255, 255, 255));
-        psici.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "pita : $ 2000", "pito : $ 2500", "pata : $ 3000" }));
+        psici.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "pita : $ 2000", "pito : $ 2500", "pata : $ 3000","pita : $ 2000", "pito : $ 2500", "pata : $ 3000", "pito : $ 2500", "pata : $ 3000", "pito : $ 2500", "pata : $ 3000", "pito : $ 2500", "pata : $ 3000" }));
         psici.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        psici.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel2Menu.add(psici, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 500, 130, -1));
 
         pgriega.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
        // pgriega.setForeground(new java.awt.Color(255, 255, 255));
         pgriega.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "greek1 : $ 2000", "greek2 : $ 2500", "Greek3 : $ 3000" }));
         pgriega.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pgriega.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        pgriega.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel2Menu.add(pgriega, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 170, 130, 20));
 
         brasilia.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -466,12 +467,14 @@ public class Interface_Empleados extends javax.swing.JFrame {
         //brasi.setForeground(new java.awt.Color(255, 255, 255));
         brasi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "popera1 : $ 2000", "popera2 : $ 2500", "popera3 : $ 3000" }));
         brasi.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        brasi.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel2Menu.add(brasi, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 170, -1, -1));
 
         popera.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
        // popera.setForeground(new java.awt.Color(255, 255, 255));
         popera.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "popera1 : $ 2000", "popera2 : $ 2500", "popera3 : $ 3000" }));
         popera.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        popera.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel2Menu.add(popera, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 335, 130, -1));
 
         jLabel1.setBackground(new java.awt.Color(51, 0, 0));
@@ -482,8 +485,10 @@ public class Interface_Empleados extends javax.swing.JFrame {
         //dblanca.setForeground(new java.awt.Color(255, 255, 255));
         dblanca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"popera1 : $ 2000", "popera2 : $ 2500", "popera3 : $ 3000"}));
         dblanca.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        dblanca.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        //dblanca.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel2Menu.add(dblanca, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 335, -1, -1));
-
+//numMesa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/MENÚRUNPOS.jpg"))); // NOI18N
         jPanel2Menu.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(225, 5, 600, 570));
 
@@ -1158,13 +1163,13 @@ public class Interface_Empleados extends javax.swing.JFrame {
         infoFact.setBounds(340, 290, 110, 30);
 
         fac.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        fac.setText("RESTAURANTE PITAKS");
+        fac.setText("RESTAURANTE RUN POS");
         jPanel10.add(fac);
         fac.setBounds(50, 10, 340, 80);
 
         jLabel38.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel38.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel38.setText("Teléfono: 30011111 - 31900000");
+        jLabel38.setText("Teléfono: 6014000");
         jPanel10.add(jLabel38);
         jLabel38.setBounds(50, 70, 200, 30);
 
@@ -1709,7 +1714,7 @@ public class Interface_Empleados extends javax.swing.JFrame {
 
 
     private void tiposBebidasActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        if (tiposBebidas.getSelectedIndex() == 0) {
+        if (tiposBebidas.getSelectedIndex() == 0) { // Cambiar imagenes en las bebidas
             String icon = "/Img/gaseosa.png";
             URL url = this.getClass().getResource(icon);
             ImageIcon icono = new ImageIcon(url);

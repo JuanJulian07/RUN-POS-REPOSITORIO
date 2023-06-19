@@ -9,23 +9,23 @@ public class Menu {
     public static final String BEBIDAS = "Bebidas";
     public static final String PIZZAS = "Pizzas";
 
-    private int menu;
+    private int Item;
     private String nombre;
     private String descripcion;
     private String tipo;
-    private long presio;
+    private long precio;
     private String descripcion_auxiliar = "";
 
-    public Menu(int menu, String nombre, String tipo,String descripcion, long presio){
-        this.menu = menu;
+    public Menu(int item, String nombre, String tipo,String descripcion, long precio){
+        this.Item = item;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.presio = presio;
+        this.precio = precio;
         this.tipo = tipo;
     }
 
     public int get_menu_num(){
-        return menu;
+        return Item;
     }
 
     public String get_nombre(){
@@ -36,24 +36,24 @@ public class Menu {
         return descripcion;
     }
 
-    public long get_presio(){
-        return presio;
+    public long get_precio(){
+        return precio;
     }
     public String get_tipo(){
         return tipo;
     }
     public String[] get_arreglo_menu(){
         String[] arrMenu = new String[5];
-        arrMenu[0] = ""+menu;
+        arrMenu[0] = ""+Item;
         arrMenu[1] = nombre;
         arrMenu[2] = tipo;
         arrMenu[3] = descripcion;
-        arrMenu[4] = ""+presio;
+        arrMenu[4] = ""+precio;
         return arrMenu;
     }
 
     public String get_formatio_bd(){
-        return ("\n" + menu + ";" + nombre + ";" + tipo + ";" + descripcion + ";" + ""+ presio);
+        return ("\n" + Item + ";" + nombre + ";" + tipo + ";" + descripcion + ";" + ""+ precio);
     }
 
 
@@ -66,7 +66,7 @@ public class Menu {
     }
 
     public String toString(){
-        return (menu + " " + nombre + " " + tipo + " " +descripcion + " " + descripcion_auxiliar + " " + presio);
+        return (Item + " " + nombre + " " + tipo + " " +descripcion + " " + descripcion_auxiliar + " " + precio);
     }
 
     
