@@ -66,7 +66,7 @@ public class Menu {
     }
 
     public String toString(){
-        return (Item + " " + nombre + " " + tipo + " " +descripcion + " " + descripcion_auxiliar + " " + precio);
+        return (nombre + ": " + precio);
     }
 
     

@@ -16,6 +16,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import Empleados.Empleado;
+import Menu.Filtrarplatos;
+import Menu.Menu;
 
 public class Interface_Empleados extends javax.swing.JFrame {
      File archivo;
@@ -32,15 +34,15 @@ public class Interface_Empleados extends javax.swing.JFrame {
     private javax.swing.JFrame StockIngredientes;
     private javax.swing.JLabel TOTALtot;
     private javax.swing.JComboBox<String> bebidaCant;
-    private javax.swing.JComboBox<String> brasi;
-    private javax.swing.JComboBox<String> brasilia;
+    private javax.swing.JComboBox<String> Pizzas;
+    private javax.swing.JComboBox<String> Postrecant;
     private javax.swing.JTextField cantProdNuevo;
     private javax.swing.JTextField cedulaCli;
     private javax.swing.JButton cocinar;
-    private javax.swing.JComboBox<String> damaBlanca;
+    private javax.swing.JComboBox<String> Pizzascant;
     private javax.swing.JTable datosTable;
     private javax.swing.JTable datosTable2;
-    private javax.swing.JComboBox<String> dblanca;
+    private javax.swing.JComboBox<String> Postres;
     private javax.swing.JButton doPedido;
     private javax.swing.JDialog emergente;
     private javax.swing.JLabel fac;
@@ -159,12 +161,12 @@ public class Interface_Empleados extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> numMeserito;
     private javax.swing.JComboBox<String> numMesero;
     private javax.swing.JButton pagos;
-    private javax.swing.JComboBox<String> pgriega;
-    private javax.swing.JComboBox<String> pitaGriega;
-    private javax.swing.JComboBox<String> pitaOpera;
-    private javax.swing.JComboBox<String> pitaSiciliana;
-    private javax.swing.JComboBox<String> popera;
-    private javax.swing.JComboBox<String> psici;
+    private javax.swing.JComboBox<String> Especial;
+    private javax.swing.JComboBox<String> Especialcant;
+    private javax.swing.JComboBox<String> Ejecutivocant;
+    private javax.swing.JComboBox<String> Corrientecant;
+    private javax.swing.JComboBox<String> Ejecutivo;
+    private javax.swing.JComboBox<String> Corriente;
     private javax.swing.JDialog resumenVentas;
     private javax.swing.JTextField telCli;
     private javax.swing.JComboBox<String> tiposBebidas;
@@ -203,19 +205,19 @@ public class Interface_Empleados extends javax.swing.JFrame {
         terminarorden = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        psici = new javax.swing.JComboBox<>();
-        pgriega = new javax.swing.JComboBox<>();
-        brasilia = new javax.swing.JComboBox<>();
-        pitaSiciliana = new javax.swing.JComboBox<>();
+        Corriente = new javax.swing.JComboBox<>();
+        Especial = new javax.swing.JComboBox<>();
+        Postrecant = new javax.swing.JComboBox<>();
+        Corrientecant = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        pitaGriega = new javax.swing.JComboBox<>();
-        pitaOpera = new javax.swing.JComboBox<>();
-        damaBlanca = new javax.swing.JComboBox<>();
+        Especialcant = new javax.swing.JComboBox<>();
+        Ejecutivocant = new javax.swing.JComboBox<>();
+        Pizzascant = new javax.swing.JComboBox<>();
         bebidaCant = new javax.swing.JComboBox<>();
-        brasi = new javax.swing.JComboBox<>();
-        popera = new javax.swing.JComboBox<>();
+        Pizzas = new javax.swing.JComboBox<>();
+        Ejecutivo = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        dblanca = new javax.swing.JComboBox<>();
+        Postres = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         StockIngredientes = new javax.swing.JFrame();
         jPanel4 = new javax.swing.JPanel();
@@ -345,9 +347,13 @@ public class Interface_Empleados extends javax.swing.JFrame {
         pagos = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
 
+
+
         Menu.setTitle("MENU RUN POS");
         Menu.setMinimumSize(new java.awt.Dimension(850, 611));
         Menu.setResizable(false);
+
+         Filtrarplatos init =new Filtrarplatos();
 
         jPanel2Menu.setBackground(new java.awt.Color(0, 0, 0));
         jPanel2Menu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -373,14 +379,16 @@ public class Interface_Empleados extends javax.swing.JFrame {
         jPanel2Menu.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 400, 120, 90));
 
         tiposBebidas.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        tiposBebidas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gaseosa Ligth : $ 2000", "Te Frío : $ 2500", "Agua Mineral : $ 3000" }));
+        tiposBebidas.setModel(new javax.swing.DefaultComboBoxModel<>());
         tiposBebidas.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         tiposBebidas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        tiposBebidas.addActionListener(new java.awt.event.ActionListener() {
+        for(Menu c: Filtrarplatos.bebidas){
+        tiposBebidas.addItem(c.toString());}
+        /*tiposBebidas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tiposBebidasActionPerformed(evt);
             }
-        });
+        });*/
         jPanel2Menu.add(tiposBebidas, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 500, -1, 20));
 
         terminarorden.setBackground(java.awt.Color.white);
@@ -400,57 +408,61 @@ public class Interface_Empleados extends javax.swing.JFrame {
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/pOpera.jpg"))); // NOI18N
         jPanel2Menu.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 235, 120, 90));
 
-        psici.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        Corriente.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         //psici.setForeground(new java.awt.Color(255, 255, 255));
-        psici.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "pita : $ 2000", "pito : $ 2500", "pata : $ 3000","pita : $ 2000", "pito : $ 2500", "pata : $ 3000", "pito : $ 2500", "pata : $ 3000", "pito : $ 2500", "pata : $ 3000", "pito : $ 2500", "pata : $ 3000" }));
-        psici.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        psici.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel2Menu.add(psici, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 500, 130, -1));
+        Corriente.setModel(new javax.swing.DefaultComboBoxModel<>());
+        Corriente.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        Corriente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        for(Menu c: Filtrarplatos.corriente){
+        Corriente.addItem(c.toString());}
+        jPanel2Menu.add(Corriente, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 500, 130, -1));
 
-        pgriega.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        Especial.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
        // pgriega.setForeground(new java.awt.Color(255, 255, 255));
-        pgriega.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "greek1 : $ 2000", "greek2 : $ 2500", "Greek3 : $ 3000" }));
-        pgriega.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pgriega.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel2Menu.add(pgriega, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 170, 130, 20));
+        Especial.setModel(new javax.swing.DefaultComboBoxModel<>());
+        Especial.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        Especial.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        for(Menu c: Filtrarplatos.especial){
+        Especial.addItem(c.toString());}
+        jPanel2Menu.add(Especial, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 170, 130, 20));
 
-        brasilia.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        brasilia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40" }));
-        brasilia.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel2Menu.add(brasilia, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 100, -1, 40));
+        Pizzascant.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        Pizzascant.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40" }));
+        Pizzascant.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel2Menu.add(Pizzascant, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 100, -1, 40));
 
-        pitaSiciliana.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        pitaSiciliana.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40" }));
-        pitaSiciliana.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel2Menu.add(pitaSiciliana, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 430, 40, 40));
+        Corrientecant.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        Corrientecant.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40" }));
+        Corrientecant.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel2Menu.add(Corrientecant, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 430, 40, 40));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/pgriega.jpg"))); // NOI18N
         jPanel2Menu.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 70, 120, 90));
 
-        pitaGriega.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
-        pitaGriega.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40" }));
-        pitaGriega.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        pitaGriega.addActionListener(new java.awt.event.ActionListener() {
+        Especialcant.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+        Especialcant.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40" }));
+        Especialcant.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Especialcant.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pitaGriegaActionPerformed(evt);
             }
         });
-        jPanel2Menu.add(pitaGriega, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, 40, 40));
+        jPanel2Menu.add(Especialcant, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, 40, 40));
 
-        pitaOpera.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        pitaOpera.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40" }));
-        pitaOpera.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel2Menu.add(pitaOpera, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 275, 40, 40));
+        Ejecutivocant.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        Ejecutivocant.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40" }));
+        Ejecutivocant.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel2Menu.add(Ejecutivocant, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 275, 40, 40));
 
-        damaBlanca.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        damaBlanca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40" }));
-        damaBlanca.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        damaBlanca.addActionListener(new java.awt.event.ActionListener() {
+        Postrecant.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        Postrecant.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40" }));
+        Postrecant.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Postrecant.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 damaBlancaActionPerformed(evt);
             }
         });
-        jPanel2Menu.add(damaBlanca, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 275, 40, 40));
+        jPanel2Menu.add(Postrecant, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 275, 40, 40));
 
         bebidaCant.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         bebidaCant.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40" }));
@@ -462,31 +474,37 @@ public class Interface_Empleados extends javax.swing.JFrame {
         });
         jPanel2Menu.add(bebidaCant, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 430, 40, 40));
 
-        brasi.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        Pizzas.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         //brasi.setForeground(new java.awt.Color(255, 255, 255));
-        brasi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "popera1 : $ 2000", "popera2 : $ 2500", "popera3 : $ 3000" }));
-        brasi.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        brasi.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel2Menu.add(brasi, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 170, -1, -1));
+        Pizzas.setModel(new javax.swing.DefaultComboBoxModel<>());
+        Pizzas.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        Pizzas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        for(Menu c: Filtrarplatos.pizzas){
+        Pizzas.addItem(c.toString());}
+        jPanel2Menu.add(Pizzas, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 170, -1, -1));
 
-        popera.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        Ejecutivo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
        // popera.setForeground(new java.awt.Color(255, 255, 255));
-        popera.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "popera1 : $ 2000", "popera2 : $ 2500", "popera3 : $ 3000" }));
-        popera.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        popera.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel2Menu.add(popera, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 335, 130, -1));
+        Ejecutivo.setModel(new javax.swing.DefaultComboBoxModel<>());
+        Ejecutivo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        Ejecutivo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        for(Menu c: Filtrarplatos.ejecutivo){
+        Ejecutivo.addItem(c.toString());}
+        jPanel2Menu.add(Ejecutivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 335, 130, -1));
 
         jLabel1.setBackground(new java.awt.Color(51, 0, 0));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/MENÚRUNPOS.jpg"))); // NOI18N
         jPanel2Menu.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 5, 580, 570));
 
-        dblanca.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        Postres.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         //dblanca.setForeground(new java.awt.Color(255, 255, 255));
-        dblanca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"popera1 : $ 2000", "popera2 : $ 2500", "popera3 : $ 3000"}));
-        dblanca.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        dblanca.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Postres.setModel(new javax.swing.DefaultComboBoxModel<>());
+        Postres.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        Postres.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        for(Menu c: Filtrarplatos.postres){
+        Postres.addItem(c.toString());}
         //dblanca.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel2Menu.add(dblanca, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 335, -1, -1));
+        jPanel2Menu.add(Postres, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 335, -1, -1));
 //numMesa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/MENÚRUNPOS.jpg"))); // NOI18N
         jPanel2Menu.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(225, 5, 600, 570));
@@ -1752,40 +1770,40 @@ public class Interface_Empleados extends javax.swing.JFrame {
 // Comprobar si es mayor que 0 para agregarlos a tabla de pedido
         DefaultTableModel model = (DefaultTableModel) datosTable.getModel();
 
-        if (pitaGriega.getSelectedIndex() > 0) {
-            String x =(String) (pgriega.getSelectedItem());
+        if (Especialcant.getSelectedIndex() > 0) {
+            String x =(String) (Especial.getSelectedItem());
             String[] y;
             y = x.split(":");
 
-            model.addRow(new Object[]{y[0], y[1], pitaGriega.getSelectedIndex()});
+            model.addRow(new Object[]{y[0], y[1], Especialcant.getSelectedIndex()});
         }
 
-        if (pitaSiciliana.getSelectedIndex() > 0) {
-            String x = (String)psici.getSelectedItem();
+        if (Corrientecant.getSelectedIndex() > 0) {
+            String x = (String)Corriente.getSelectedItem();
             String[] y;
             y = x.split(":");
-            model.addRow(new Object[]{y[0], y[1], pitaSiciliana.getSelectedIndex()});
+            model.addRow(new Object[]{y[0], y[1], Corrientecant.getSelectedIndex()});
         }
-        if (pitaOpera.getSelectedIndex() > 0) {
-            String x = (String)popera.getSelectedItem();
+        if (Ejecutivocant.getSelectedIndex() > 0) {
+            String x = (String)Ejecutivo.getSelectedItem();
             String[] y;
             y = x.split(":");
 
-            model.addRow(new Object[]{y[0], y[1], pitaOpera.getSelectedIndex()});
+            model.addRow(new Object[]{y[0], y[1], Ejecutivocant.getSelectedIndex()});
         }
-        if (brasilia.getSelectedIndex() > 0) {
-            String x =(String) brasi.getSelectedItem();
+        if (Pizzascant.getSelectedIndex() > 0) {
+            String x =(String) Pizzas.getSelectedItem();
             String[] y;
             y = x.split(":");
 
-            model.addRow(new Object[]{y[0], y[1], brasilia.getSelectedIndex()});
+            model.addRow(new Object[]{y[0], y[1], Pizzascant.getSelectedIndex()});
         }
-        if (damaBlanca.getSelectedIndex() > 0) {
-            String x =(String)dblanca.getSelectedItem();
+        if (Pizzascant.getSelectedIndex() > 0) {
+            String x =(String)Postres.getSelectedItem();
             String[] y;
             y = x.split(":");
 
-            model.addRow(new Object[]{y[0], y[1], damaBlanca.getSelectedIndex()});
+            model.addRow(new Object[]{y[0], y[1], Pizzascant.getSelectedIndex()});
 
         }
         if (bebidaCant.getSelectedIndex() > 0) {
@@ -1895,45 +1913,45 @@ public class Interface_Empleados extends javax.swing.JFrame {
         //LLENAMOS TABLA DE COCINA
         DefaultTableModel model2 = (DefaultTableModel) datosTable2.getModel();
 
-        if (pitaGriega.getSelectedIndex() > 0) {
-            String x =(String) pgriega.getSelectedItem();
+        if (Especialcant.getSelectedIndex() > 0) {
+            String x =(String) Especial.getSelectedItem();
             String[] y;
             y = x.split(":");
             if (numMesa.getSelectedIndex() > 0) {
-                model2.addRow(new Object[]{y[0], pitaGriega.getSelectedIndex(), numMesa.getSelectedIndex()});
+                model2.addRow(new Object[]{y[0], Especialcant.getSelectedIndex(), numMesa.getSelectedIndex()});
             }
         }
-        if (pitaSiciliana.getSelectedIndex() > 0) {
-            String x =(String) psici.getSelectedItem();
+        if (Corrientecant.getSelectedIndex() > 0) {
+            String x =(String) Corriente.getSelectedItem();
             String[] y;
             y = x.split(":");
             if (numMesa.getSelectedIndex() > 0) {
-                model2.addRow(new Object[]{y[0], pitaSiciliana.getSelectedIndex(), numMesa.getSelectedIndex()});
+                model2.addRow(new Object[]{y[0], Corrientecant.getSelectedIndex(), numMesa.getSelectedIndex()});
             }
 
         }
-        if (pitaOpera.getSelectedIndex() > 0) {
-            String x =(String)popera.getSelectedItem();
+        if (Ejecutivocant.getSelectedIndex() > 0) {
+            String x =(String)Ejecutivo.getSelectedItem();
             String[] y;
             y = x.split(":");
             if (numMesa.getSelectedIndex() > 0) {
-                model2.addRow(new Object[]{y[0], pitaOpera.getSelectedIndex(), numMesa.getSelectedIndex()});
+                model2.addRow(new Object[]{y[0], Ejecutivocant.getSelectedIndex(), numMesa.getSelectedIndex()});
             }
         }
-        if (brasilia.getSelectedIndex() > 0) {
-            String x =(String) brasi.getSelectedItem();
+        if (Pizzascant.getSelectedIndex() > 0) {
+            String x =(String) Pizzas.getSelectedItem();
             String[] y;
             y = x.split(":");
             if (numMesa.getSelectedIndex() >0) {
-                model2.addRow(new Object[]{y[0], brasilia.getSelectedIndex(), numMesa.getSelectedIndex()});
+                model2.addRow(new Object[]{y[0], Pizzascant.getSelectedIndex(), numMesa.getSelectedIndex()});
             }
         }
-        if (damaBlanca.getSelectedIndex() > 0) {
-            String x = (String) dblanca.getSelectedItem();
+        if (Pizzascant.getSelectedIndex() > 0) {
+            String x = (String) Postres.getSelectedItem();
             String[] y;
             y = x.split(":");
             if (numMesa.getSelectedIndex() >0) {
-                model2.addRow(new Object[]{y[0], damaBlanca.getSelectedIndex(), numMesa.getSelectedIndex()});
+                model2.addRow(new Object[]{y[0], Pizzascant.getSelectedIndex(), numMesa.getSelectedIndex()});
             }
     }                                        
         if (bebidaCant.getSelectedIndex() > 0) {
@@ -2069,11 +2087,11 @@ public class Interface_Empleados extends javax.swing.JFrame {
         numMeserito.setSelectedIndex(0);
         Menu.setVisible(true);
         Cocina.setVisible(false);
-        pitaGriega.setSelectedIndex(0);
-        pitaOpera.setSelectedIndex(0);
-        pitaSiciliana.setSelectedIndex(0);
-        brasilia.setSelectedIndex(0);
-        damaBlanca.setSelectedIndex(0);
+        Especialcant.setSelectedIndex(0);
+        Ejecutivocant.setSelectedIndex(0);
+        Corrientecant.setSelectedIndex(0);
+        Pizzascant.setSelectedIndex(0);
+        Pizzascant.setSelectedIndex(0);
         bebidaCant.setSelectedIndex(0);
 
 
@@ -2107,13 +2125,13 @@ public class Interface_Empleados extends javax.swing.JFrame {
         //FACTURA
         int contTotal = 0;
         int c1 = numMesa.getSelectedIndex(), c2 = Integer.parseInt(mesaFact.getText());
-        int cant6 = bebidaCant.getSelectedIndex(), cant = pitaGriega.getSelectedIndex(), cant5 = damaBlanca.getSelectedIndex();
-        int cant2 = pitaSiciliana.getSelectedIndex(), cant3 = pitaOpera.getSelectedIndex(), cant4 = brasilia.getSelectedIndex();
+        int cant6 = bebidaCant.getSelectedIndex(), cant = Especialcant.getSelectedIndex(), cant5 = Pizzascant.getSelectedIndex();
+        int cant2 = Corrientecant.getSelectedIndex(), cant3 = Ejecutivocant.getSelectedIndex(), cant4 = Pizzascant.getSelectedIndex();
 
         if (c1 == c2) {
             if (cant > 0) {
 
-                String x =(String)pgriega.getSelectedItem();
+                String x =(String)Especial.getSelectedItem();
                 String[] y;
                 y = x.split(":");
 
@@ -2137,7 +2155,7 @@ public class Interface_Empleados extends javax.swing.JFrame {
 
             if (cant2 > 0) {
 
-                String x = (String)psici.getSelectedItem();;
+                String x = (String)Corriente.getSelectedItem();;
                 String[] y;
                 y = x.split(":");
 
@@ -2159,7 +2177,7 @@ public class Interface_Empleados extends javax.swing.JFrame {
             }
 
             if (cant3 > 0) {
-                String x = (String)popera.getSelectedItem();;
+                String x = (String)Ejecutivo.getSelectedItem();;
                 String[] y;
                 y = x.split(":");
 
@@ -2182,7 +2200,7 @@ public class Interface_Empleados extends javax.swing.JFrame {
             }
 
             if (cant4 > 0) {
-                String x = (String)brasi.getSelectedItem();;
+                String x = (String)Pizzas.getSelectedItem();;
                 String[] y;
                 y = x.split(":");
 
@@ -2204,7 +2222,7 @@ public class Interface_Empleados extends javax.swing.JFrame {
             }
 
             if (cant5 > 0) {
-                String x = (String)dblanca.getSelectedItem();;
+                String x = (String)Postres.getSelectedItem();;
                 String[] y;
                 y = x.split(":");
 
@@ -2392,26 +2410,26 @@ public class Interface_Empleados extends javax.swing.JFrame {
         mejorPlato.setVisible(true);
         mejorPlato.setLocationRelativeTo(null);
 
-        if (pitaGriega.getSelectedIndex() > 0) {
-            contg = contg + pitaGriega.getSelectedIndex();
+        if (Especialcant.getSelectedIndex() > 0) {
+            contg = contg + Especialcant.getSelectedIndex();
             vector[0] = contg;
         }
 
-        if (pitaSiciliana.getSelectedIndex() > 0) {
-            conts = conts + pitaSiciliana.getSelectedIndex();
+        if (Corrientecant.getSelectedIndex() > 0) {
+            conts = conts + Corrientecant.getSelectedIndex();
             vector[1] = conts;
         }
-        if (pitaOpera.getSelectedIndex() > 0) {
-            conto = conto + pitaOpera.getSelectedIndex();
+        if (Ejecutivocant.getSelectedIndex() > 0) {
+            conto = conto + Ejecutivocant.getSelectedIndex();
             vector[2] = conto;
         }
 
-        if (damaBlanca.getSelectedIndex() > 0) {
-            contp1 = contp1 + damaBlanca.getSelectedIndex();
+        if (Pizzascant.getSelectedIndex() > 0) {
+            contp1 = contp1 + Pizzascant.getSelectedIndex();
             vector[3] = contp1;
         }
-        if (brasilia.getSelectedIndex() > 0) {
-            contp2 = contp2 + brasilia.getSelectedIndex();
+        if (Pizzascant.getSelectedIndex() > 0) {
+            contp2 = contp2 + Pizzascant.getSelectedIndex();
             vector[4] = contp2;
         }
 

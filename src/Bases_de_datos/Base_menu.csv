@@ -1,14 +1,23 @@
-Item;Tipo de plato;Tipo;Descripcion;Presio
+Item;Tipo de plato;Tipo;Descripcion;Precio
 1;Arroz con pollo;Especial;Arroz con verduras y pollo, papas a la francesa ensalada basica;15000
 2;Bandeja paisa;Ejecutivo;Bandeja con frijoles, carne molida, arroz, platano en tajada, aguacate y huevo;15000
 3;Sancocho de Gallina;Corriente;Consome de gallina, con papa, platano, yuca y una presa de pollo;10000
+<<<<<<< HEAD
+=======
+4;Cocacola 250;Especial;Bebida azucarada burbujeante;1000
+5;Banana Split;Especial;Helado con frutas y combiacion especial de bananas;5000
+>>>>>>> faab63f (Resolución de problema en el salto de linea y adición de lectura del los platos para sus jcombo correspondientes)
 4;Cocacola 250;Bebida;Bebida azucarada burbujeante;1000
 5;Banana Split;Especial;Helado con frutas y combiacion especial de bananas;5000
 6;Churrasco;Especial;Carne fina acompañada de papas y ensalada;20000
 7;Fetuccini Alfredo;Especial;Pasta plana con champiñones y bechamel;23000
 8;Sopa del chef;Corriente;Sopa del día;7000
 9;chuleta de cerdo;Ejecutivo;Filete acompañado de papas y ensalada;16000
-10;Tilapia ;Ejecutivo;Filete de tilapia apanado;16000
+10;Tilapia;Ejecutivo;Filete de tilapia apanado;16000
 11;Stracciatela;Postres;Pizza con nutela y banano;18000
 12;Panna Cotta;Postres;Crema italiana con almibar de mora;8800
+<<<<<<< HEAD
 13;Jugo de mora;Bebidas;Jugo de mora;5000
+=======
+13;Jugo de mora;Bebidas;Jugo de mora;5000
+>>>>>>> faab63f (Resolución de problema en el salto de linea y adición de lectura del los platos para sus jcombo correspondientes)
