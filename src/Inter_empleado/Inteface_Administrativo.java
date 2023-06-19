@@ -1,12 +1,11 @@
 package Inter_empleado;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
-
 import Empleados.Empleado;
 import Leer_Bases_de_datos.Leer_estado_mesas;
 import Menu.Estado_Mesa;
-
 
 public class Inteface_Administrativo extends JFrame{
 
@@ -115,87 +114,89 @@ public class Inteface_Administrativo extends JFrame{
         
         return panel;
     }
+    
+}
 
-    class Facturar extends JDialog{
-        public Facturar(JFrame padre){
-            super(padre, true);
-            setLocation(padre.getLocationOnScreen());
-            setVisible(true);
-        }
+//Esta clase nos pertmite facturar los pedidos realizados
+class Facturar extends JDialog{
+    public Facturar(JFrame padre){
+        super(padre, true);
+        setLocation(padre.getLocationOnScreen());
+        setVisible(true);
+    }
+}
+
+// Esta es la clase que nos permite ver el estado de los pedidos
+class Ver_pedidos extends JDialog{
+    public Ver_pedidos(JFrame padre){
+
+        super(padre, true);
+            
+        setTitle("Ver pedidos");
+        setPreferredSize(new Dimension(500,500));
+        setLocation(padre.getLocationOnScreen());
+        setResizable(true);
+        add(panel_ver_nombre());
+        pack();
+        padre.setVisible(false);
+        setVisible(true);
     }
 
-    // Esta es la clase que nos permite ver el estado de los pedidos
-    class Ver_pedidos extends JDialog{
-        public Ver_pedidos(JFrame padre){
-
-            super(padre, true);
-            
-            setTitle("Ver pedidos");
-            setPreferredSize(new Dimension(500,500));
-            setLocation(padre.getLocationOnScreen());
-            setResizable(true);
-            add(panel_ver_nombre());
-            pack();
-            padre.setVisible(false);
-            setVisible(true);
-        }
-
-        public JPanel panel_ver_nombre(){
-            JPanel panel = new JPanel(){
-                @Override
-                protected void paintComponent(Graphics g){
-                    super.paintComponent(g);
+    public JPanel panel_ver_nombre(){
+        JPanel panel = new JPanel(){
+            @Override
+            protected void paintComponent(Graphics g){
+                super.paintComponent(g);
                 
                     // Carga la imagen de fondo
-                    ImageIcon im = new ImageIcon("src\\Recursos_fotograficos\\icono.jpg");
-                    im = new ImageIcon(im.getImage().getScaledInstance(getWidth(), getHeight(),Image.SCALE_SMOOTH));
-                    Image imagen_fondo = im.getImage();
-                    g.drawImage(imagen_fondo, 0, 0, getWidth(), getHeight(), this);
+                ImageIcon im = new ImageIcon("src\\Recursos_fotograficos\\icono.jpg");
+                im = new ImageIcon(im.getImage().getScaledInstance(getWidth(), getHeight(),Image.SCALE_SMOOTH));
+                Image imagen_fondo = im.getImage();
+                g.drawImage(imagen_fondo, 0, 0, getWidth(), getHeight(), this);
                 
-                }
-            };
-            panel.setLayout(new FlowLayout(FlowLayout.CENTER));
-            JButton[] botones = botones();
+            }
+        };
+        panel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        JButton[] botones = botones();
              
-            if(botones != null){
-                    for(int i = 0 ; i < botones.length; i++){
-                    panel.add(botones[i]);
-                }
+        if(botones != null){
+                for(int i = 0 ; i < botones.length; i++){
+                panel.add(botones[i]);
             }
-            else{
-                panel.add(new JLabel("Actualmente no hay nada para mostrar"));
-            }
-            
-            return panel;
         }
-        
-        private JButton[] botones(){
-            //instanciamos las variables que vamos a utilizar
-            JButton[] botones = null;
-            ArrayList<Estado_Mesa> mesas;
-            
-            Leer_estado_mesas leer = new Leer_estado_mesas(Leer_estado_mesas.MESAS_ACTIVAS);
-            mesas = leer.get_mesas();
-            if(mesas.size()>0){
-                botones = new JButton[mesas.size()];
-                for(int i = 0; i < botones.length;i++){
-                    botones[i] = new JButton("Mesa"+mesas.get(i).get_num_mesa());
-                    botones[i].addKeyListener(Adaptador.accion_teclado(botones[i]));
-                    botones[i].setPreferredSize(new Dimension(100, 40));
-                    botones[i].setBackground(new Color(66, 66, 66));
-                    botones[i].setForeground(Color.WHITE);
-                    int num = i; 
-                    botones[i].addActionListener((accion) ->{
-                    
-                        new Tabla_mesas(this,mesas.get(num));
-                    });
-                }
-            }
-            
-            return botones;
+        else{
+            panel.add(new JLabel("Actualmente no hay nada para mostrar"));
         }
-        
+            
+        return panel;
     }
+        
+    private JButton[] botones(){
+        //instanciamos las variables que vamos a utilizar
+        JButton[] botones = null;
+        ArrayList<Estado_Mesa> mesas;
+            
+        Leer_estado_mesas leer = new Leer_estado_mesas(Leer_estado_mesas.MESAS_ACTIVAS);
+        mesas = leer.get_mesas();
+        if(mesas.size()>0){
+            botones = new JButton[mesas.size()];
+            for(int i = 0; i < botones.length;i++){
+                botones[i] = new JButton("Mesa"+mesas.get(i).get_num_mesa());
+                botones[i].addKeyListener(Adaptador.accion_teclado(botones[i]));
+                botones[i].setPreferredSize(new Dimension(100, 40));
+                botones[i].setBackground(new Color(66, 66, 66));
+                botones[i].setForeground(Color.WHITE);
+                int num = i; 
+                botones[i].addActionListener((accion) ->{
+                    
+                    new Tabla_mesas(this,mesas.get(num));
+                });
+            }
+        }
+            
+        return botones;
+    }
+    
     class Tabla_mesas extends JDialog{
         public Tabla_mesas(JDialog padre,Estado_Mesa mesa){
             super(padre, true);
@@ -205,17 +206,27 @@ public class Inteface_Administrativo extends JFrame{
             pack();
         }
         private JPanel paneltable(){
+            String[] cabeza_tabla = {"Producto","Cantidad"};
             JPanel panel = new JPanel();
+            DefaultTableModel modelo = new DefaultTableModel();
+            JTable tabla = new JTable(modelo);
+            JScrollPane scrollpane = new JScrollPane(tabla);
 
             return panel;
         }
-    }
-    class Eliminar_pedidos extends JDialog{
-        public Eliminar_pedidos(JFrame padre){
-            super(padre, true);
-            setLocation(padre.getLocationOnScreen());
-            setVisible(true);
+        private String[][] cargar_datos(){
+            String[][] datos = new String[10][];
+
+            return datos;
         }
     }
-    
+        
+}
+
+class Eliminar_pedidos extends JDialog{
+    public Eliminar_pedidos(JFrame padre){
+        super(padre, true);
+        setLocation(padre.getLocationOnScreen());
+        setVisible(true);
+    }
 }

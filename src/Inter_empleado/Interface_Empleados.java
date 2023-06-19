@@ -1,6 +1,5 @@
 package Inter_empleado;
 
-import Inter_empleado.*;
 import java.awt.Image;
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
