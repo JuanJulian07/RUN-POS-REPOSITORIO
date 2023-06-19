@@ -2,10 +2,6 @@ Item;Tipo de plato;Tipo;Descripcion;Presio
 1;Arroz con pollo;Especial;Arroz con verduras y pollo, papas a la francesa ensalada basica;15000
 2;Bandeja paisa;Ejecutivo;Bandeja con frijoles, carne molida, arroz, platano en tajada, aguacate y huevo;15000
 3;Sancocho de Gallina;Corriente;Consome de gallina, con papa, platano, yuca y una presa de pollo;10000
-<<<<<<< HEAD
-4;Cocacola 250;Especial;Bebida azucarada burbujeante;1000
-5;Banana Split;Especial;Helado con frutas y combiacion especial de bananas;5000
-=======
 4;Cocacola 250;Bebida;Bebida azucarada burbujeante;1000
 5;Banana Split;Especial;Helado con frutas y combiacion especial de bananas;5000
 6;Churrasco;Especial;Carne fina acompañada de papas y ensalada;20000
@@ -16,4 +12,3 @@ Item;Tipo de plato;Tipo;Descripcion;Presio
 11;Stracciatela;Postres;Pizza con nutela y banano;18000
 12;Panna Cotta;Postres;Crema italiana con almibar de mora;8800
 13;Jugo de mora;Bebidas;Jugo de mora;5000
->>>>>>> 5309d85 (cambio en menu de elección de platos a jcombo)
