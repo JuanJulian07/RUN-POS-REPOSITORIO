@@ -22,15 +22,14 @@ public class Interface_Gerente extends JFrame{
     private Empleado empleado = null;
     private Empleado empleado_aux = null;
     private static final Dimension DIMENSION_DEFECTO = new Dimension(1000,700);
-    
+    private JFrame padre;
     //Constructor de la ventana principal de gerente
-    public Interface_Gerente(Empleado empleado){
+    public Interface_Gerente(Empleado empleado, JFrame padre){
         super("Gerente");
         this.empleado = empleado;
+        this.padre = padre;
         setResizable(false);
-        
         ventana();
-        
     }
 
     private void ventana(){
@@ -80,8 +79,19 @@ public class Interface_Gerente extends JFrame{
 
         p_gerente.add(modificar_menu);
         p_gerente.add(boton_menu(modificar_menu.getY()));
-        // Esta es la imagen que sale en la parte del gerente
 
+        //Este apartado es para volver al sector anterior
+        JButton volver = new JButton(new ImageIcon(getClass().getResource("/Img/atras.png")));
+        volver.setBounds(10, 550, 100, 100);
+        volver.setOpaque(false);
+        volver.setContentAreaFilled(false);
+        volver.addActionListener(accion ->{
+            this.dispose();
+            padre.setVisible(true);
+        });
+        p_gerente.add(volver);
+
+        // Esta es la imagen que sale en la parte del gerente
         ImageIcon imagen = new ImageIcon("src\\Recursos_fotograficos\\icono.jpg");
         imagen = new ImageIcon(imagen.getImage().getScaledInstance(150, 150, 1));
         JLabel im = new JLabel(imagen);
@@ -100,7 +110,6 @@ public class Interface_Gerente extends JFrame{
         bie.addActionListener(accion -> {
             int num_selection;
             String opciones[] = {"Ingresar Empleado", "Modificar datos empleado", "Eliminar Empleado"};
-
 
             num_selection = JOptionPane.showOptionDialog(this, "Selecciona la opcion que deceas realizar", "Ingreso o cambio de empleados", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opciones, 0);
 
@@ -596,7 +605,6 @@ class Visulaizar_modificar_menu extends JDialog{
     private String[] encabezado_menu = {"Item","Tipo de plato","Tipo","Descripcion", "Presio"};
     public Visulaizar_modificar_menu(JFrame padre, boolean editable){
         super(padre, true);
-        
         extraer_tabla(editable);
         setResizable(false);
         
@@ -716,7 +724,6 @@ class Visulaizar_modificar_menu extends JDialog{
         modelo.getColumn(2).setPreferredWidth(100);
         modelo.getColumn(3).setPreferredWidth(560);
         modelo.getColumn(4).setPreferredWidth(160);
-        
         
         JScrollPane pscroll = new JScrollPane(tabla);
         panel.add(pscroll);

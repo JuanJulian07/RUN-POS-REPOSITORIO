@@ -8,16 +8,18 @@ import Leer_Bases_de_datos.Leer_estado_mesas;
 import Menu.Estado_Mesa;
 
 public class Inteface_Administrativo extends JFrame{
-
+    private JFrame padre;
     private static final int x_boton = 200;
     private Empleado empleado = null;
     private static final Dimension DIMENSION_DEFECTO = new Dimension(600,600);
     private static final Color COLOR_BOTON = new Color(66, 66, 66);
     
     //Constructor de la ventana principal de gerente
-    public Inteface_Administrativo(Empleado empleado){
+    public Inteface_Administrativo(Empleado empleado, JFrame padre){
         super("Administrativo");
         this.empleado = empleado;
+        this.padre = padre;
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(false);
         
         ventana();
@@ -50,8 +52,8 @@ public class Inteface_Administrativo extends JFrame{
         panel.setLayout(new BorderLayout());
         JPanel panel2 = new JPanel();
         panel2.setLayout(null);
+        panel2.setOpaque(false);
         
-        panel2.setBackground(new Color(0, 0, 0, Color.OPAQUE));
 
         //Mensaje de bienvenida al usuario gerente
 
@@ -84,6 +86,15 @@ public class Inteface_Administrativo extends JFrame{
         eliminar.setBounds(x_boton, visualizar.getY()+120, 200, 100);
         eliminar.setBackground(COLOR_BOTON);
         
+        JButton volver = new JButton(new ImageIcon(getClass().getResource("/Img/atras.png")));
+        volver.setBounds(10, 440, 80, 80);
+        volver.setContentAreaFilled(false);
+        volver.setOpaque(false);
+        volver.addActionListener(accion ->{
+            this.dispose();
+            padre.setVisible(true);
+        });
+
         //En esta parte establecemos que al presionar enter el boton seleccionado se presiona
         facturar.addKeyListener(Adaptador.accion_teclado(facturar));
         visualizar.addKeyListener(Adaptador.accion_teclado(visualizar));
@@ -92,6 +103,7 @@ public class Inteface_Administrativo extends JFrame{
         //Escuchador de facturar
         facturar.addActionListener(accion ->{
            Facturar fac = new Facturar(this);
+           setVisible(true);
            fac = null; 
         });
 
@@ -104,9 +116,12 @@ public class Inteface_Administrativo extends JFrame{
 
         eliminar.addActionListener(accion -> {
             Eliminar_pedidos eli = new Eliminar_pedidos(this);
-            
+            setVisible(true);
             eli = null;
         });
+        //Este apartado es para volver al sector anterior
+        
+        panel2.add(volver);
         panel2.add(facturar);
         panel2.add(visualizar);
         panel2.add(eliminar);
@@ -131,14 +146,14 @@ class Ver_pedidos extends JDialog{
     public Ver_pedidos(JFrame padre){
 
         super(padre, true);
-            
+        
         setTitle("Ver pedidos");
         setPreferredSize(new Dimension(500,500));
         setLocation(padre.getLocationOnScreen());
         setResizable(true);
         add(panel_ver_nombre());
         pack();
-        padre.setVisible(false);
+        //padre.setVisible(false);
         setVisible(true);
     }
 
@@ -199,25 +214,24 @@ class Ver_pedidos extends JDialog{
     
     class Tabla_mesas extends JDialog{
         public Tabla_mesas(JDialog padre,Estado_Mesa mesa){
-            super(padre, true);
-            setVisible(true);
+            super(padre, false);
+            setLocation(padre.getLocationOnScreen());
+            //setPreferredSize(new Dimension(400, 200));
             setResizable(false);
-            add(paneltable());
+            add(paneltable(mesa));
             pack();
+            setVisible(true);
         }
-        private JPanel paneltable(){
+        private JPanel paneltable(Estado_Mesa mesa){
             String[] cabeza_tabla = {"Producto","Cantidad"};
-            JPanel panel = new JPanel();
-            DefaultTableModel modelo = new DefaultTableModel();
+            String[][] contenido_mesa = Leer_estado_mesas.get_contenido_mesa(mesa.get_num_mesa());
+
+            JPanel panel = new JPanel(new BorderLayout());
+            DefaultTableModel modelo = new DefaultTableModel(contenido_mesa, cabeza_tabla);
             JTable tabla = new JTable(modelo);
             JScrollPane scrollpane = new JScrollPane(tabla);
-
+            panel.add(scrollpane,BorderLayout.CENTER);
             return panel;
-        }
-        private String[][] cargar_datos(){
-            String[][] datos = new String[10][];
-
-            return datos;
         }
     }
         

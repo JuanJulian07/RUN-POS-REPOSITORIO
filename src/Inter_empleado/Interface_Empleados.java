@@ -1814,7 +1814,7 @@ public class Interface_Empleados extends javax.swing.JFrame {
     }                                          
 
     private void verEstadisticasActionPerformed(java.awt.event.ActionEvent evt) {                                                
-        Inteface_Administrativo administrativo = new Inteface_Administrativo(empleado);
+        Inteface_Administrativo administrativo = new Inteface_Administrativo(empleado, this);
         this.dispose();
         
     }                                               
@@ -1832,8 +1832,7 @@ public class Interface_Empleados extends javax.swing.JFrame {
     }                                         
 
     private void infoMeserosActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        Interface_Gerente gerente = new Interface_Gerente(empleado);
-
+        Interface_Gerente gerente = new Interface_Gerente(empleado, this);
         //Interface_Infomesero meserosin =new Interface_Infomesero(empleado);
         this.dispose();
     }                                           

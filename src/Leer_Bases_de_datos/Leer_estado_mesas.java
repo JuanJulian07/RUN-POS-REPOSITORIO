@@ -59,4 +59,54 @@ public class Leer_estado_mesas {
             System.out.println("cagaste");
         }
     }
+    public static String[][] get_contenido_mesa(int num_mesa){
+        
+        String[][] contenido = null;
+        String [] contenido_aux = null;
+        ArrayList<String[]> aux = new ArrayList<String[]>();
+        try{
+            Scanner leer = new Scanner(new File("src\\Bases_de_datos\\Mesas\\Mesa"+num_mesa+".csv"));
+            leer.nextLine();
+            while(leer.hasNextLine()){
+                contenido_aux = leer.nextLine().split(";");
+                Valor valor = new Valor(Integer.parseInt(contenido_aux[0]), contenido_aux[1]);
+                aux.add(valor.get_valor());
+                
+            }
+            contenido_aux = null;
+        }
+        catch(IOException e){
+            System.out.println("NO se pudo encontrar el archivo mesa");
+        }
+
+        if(aux.size()>0){
+            contenido = new String[aux.size()][];
+
+            for(int i = 0; i < aux.size(); i++){
+                contenido[i] = aux.get(i);
+            }
+            aux.clear();
+            aux = null;
+        }
+
+        return contenido;
+    }
+
+    private static class Valor{
+        private String valor1;
+        private String valor2;
+
+        public Valor(int valor, String valor2){
+            Leer_Menu leer = new Leer_Menu();
+
+            this.valor1 = leer.get_menu_item(valor-1).get_nombre();
+            this.valor2 = valor2;
+        }
+
+        public String[] get_valor(){
+            String[] v = {valor1,valor2};
+            return v;
+        }
+
+    }
 }
