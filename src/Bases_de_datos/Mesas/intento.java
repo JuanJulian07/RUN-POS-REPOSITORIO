@@ -7,7 +7,7 @@ public class intento{
         for(int i = 0; i < 20; i++){
             try{
                  PrintWriter archiivo = new PrintWriter(new FileWriter("src\\Bases_de_datos\\Mesas\\Mesa"+(i+1)+".csv",false));
-                 archiivo.print("Item;Cantidad;Descripcion auxiliar;"+(i+1)+";true;false");
+                 archiivo.print("Item;Cantidad;Descripcion auxiliar;"+(i+1)+";false;false");
                  //archiivo.print("\nDefault description;"+(i+1));
 
                 archiivo.close();
