@@ -2,6 +2,7 @@ package Inter_empleado;
 import javax.swing.*;
 import java.awt.*;
 import Empleados.Empleado;
+import Leer_Bases_de_datos.Leer_estado_mesas;
 
 
 public class Inteface_Administrativo extends JFrame{
@@ -131,10 +132,12 @@ public class Inteface_Administrativo extends JFrame{
         }
 
         private JPanel panel_ver(){
-            JPanel panel = new JPanel(new GridBagLayout());
-            
+            JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+            Leer_estado_mesas leer = new Leer_estado_mesas(2);
+            System.out.println(leer.get_mesas());
             return panel;
         }
+         
     }
     class Eliminar_pedidos extends JDialog{
         public Eliminar_pedidos(JFrame padre){
