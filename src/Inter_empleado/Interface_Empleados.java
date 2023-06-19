@@ -174,6 +174,12 @@ public class Interface_Empleados extends javax.swing.JFrame {
     public javax.swing.JButton verEstadisticas;
     public javax.swing.JButton verMenu;
     public  Empleado empleado=null;
+    private javax.swing.JLabel Especiali;
+    private javax.swing.JLabel Ejecutiv;
+    private javax.swing.JLabel corrient;
+    private javax.swing.JLabel Pizz;
+    private javax.swing.JLabel Post;
+    private javax.swing.JLabel Bebid;
     public Interface_Empleados(Empleado empleado){
 
         initComponents();
@@ -346,7 +352,12 @@ public class Interface_Empleados extends javax.swing.JFrame {
         jButton12 = new javax.swing.JButton();
         pagos = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
-
+        Especiali= new javax.swing.JLabel();
+        Ejecutiv= new javax.swing.JLabel();
+        corrient= new javax.swing.JLabel();
+        Pizz= new javax.swing.JLabel();
+        Post= new javax.swing.JLabel();
+        Bebid= new javax.swing.JLabel();
 
 
         Menu.setTitle("MENU RUN POS");
@@ -447,6 +458,7 @@ public class Interface_Empleados extends javax.swing.JFrame {
                 pitaGriegaActionPerformed(evt);
             }
         });
+
         jPanel2Menu.add(Especialcant, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, 40, 40));
 
         Ejecutivocant.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -492,6 +504,43 @@ public class Interface_Empleados extends javax.swing.JFrame {
         Ejecutivo.addItem(c.toString());}
         jPanel2Menu.add(Ejecutivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 335, 130, -1));
 
+        Especiali.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        Especiali.setForeground(new java.awt.Color(255, 255, 255));
+        Especiali.setText(" ESPECIALES ");
+        Especiali.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel2Menu.add(Especiali, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 50, 130, 20));
+
+         Ejecutiv.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        Ejecutiv.setForeground(new java.awt.Color(255, 255, 255));
+        Ejecutiv.setText(" EJECUTIVOS ");
+        Ejecutiv.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel2Menu.add(Ejecutiv, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 210, 130, -1));
+
+         corrient.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        corrient.setForeground(new java.awt.Color(255, 255, 255));
+        corrient.setText(" CORRIENTES ");
+        corrient.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel2Menu.add(corrient, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 370, 130, -1));
+
+         Pizz.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        Pizz.setForeground(new java.awt.Color(255, 255, 255));
+        Pizz.setText(" PIZZAS ");
+        Pizz.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel2Menu.add(Pizz, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 50, -1, -1));
+
+         Post.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        Post.setForeground(new java.awt.Color(255, 255, 255));
+        Post.setText(" POSTRES ");
+        Post.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel2Menu.add(Post, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 210, -1, -1));
+
+         Bebid.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        Bebid.setForeground(new java.awt.Color(255, 255, 255));
+        Bebid.setText(" BEBIDAS ");
+        Bebid.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel2Menu.add(Bebid, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 370, -1, -1));
+
+
         jLabel1.setBackground(new java.awt.Color(51, 0, 0));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/MENÚRUNPOS.jpg"))); // NOI18N
         jPanel2Menu.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 5, 580, 570));
@@ -508,6 +557,9 @@ public class Interface_Empleados extends javax.swing.JFrame {
 //numMesa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/MENÚRUNPOS.jpg"))); // NOI18N
         jPanel2Menu.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(225, 5, 600, 570));
+
+
+
 
         javax.swing.GroupLayout MenuLayout = new javax.swing.GroupLayout(Menu.getContentPane());
         Menu.getContentPane().setLayout(MenuLayout);
