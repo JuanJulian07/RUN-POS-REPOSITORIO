@@ -754,19 +754,19 @@ class Visulaizar_modificar_menu extends JDialog{
                 tabla.removeRow(i);
                 i--;
             }
-            else if(tabla.getValueAt(i, 1) == null){
+            else if(tabla.getValueAt(i, 1) == null || tabla.getValueAt(i, 1).equals("")){
                 casos_especiales.add(i+1);
                 band = false;
             }
-            else if(tabla.getValueAt(i, 2)== null){//Revisión por filas de espacios vacíos
+            else if(tabla.getValueAt(i, 2)== null || tabla.getValueAt(i, 2).equals("")){//Revisión por filas de espacios vacíos
                 casos_especiales.add(i+1);
                 band = false;
             } 
-            else if(tabla.getValueAt(i, 3)== null){
+            else if(tabla.getValueAt(i, 3)== null ||tabla.getValueAt(i, 3).equals("")){
                 casos_especiales.add(i+1);
                 band = false;
             }
-            else if(tabla.getValueAt(i, 4)== null){
+            else if(tabla.getValueAt(i, 4)== null || tabla.getValueAt(i, 2).equals("")){
                 casos_especiales.add(i+1);
                 band = false;
             }
@@ -834,7 +834,7 @@ class Visulaizar_modificar_menu extends JDialog{
             return menu;
         }
         else{
-            NumberFormatException error = new NumberFormatException("El precio de las filas\n"+ errores.toString() + "\nSon incorrectos");
+            NumberFormatException error = new NumberFormatException("El precio de las filas\n"+ errores.toString() + "\nEstan en un formato incorrecto");
             throw error;
         }
         
