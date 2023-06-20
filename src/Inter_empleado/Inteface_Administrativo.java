@@ -325,6 +325,14 @@ class Tabla_mesas extends JDialog{
                 setVisible(false);
             });
 
+            JButton Añadir = new JButton("Añadir");
+            guardar.addActionListener(accion ->{
+                set_mesa(mesa, comentario.getText());
+                set_valores(tabla);
+                setVisible(false);
+            });
+
+
             panel.add(guardar,BorderLayout.SOUTH);
             return panel;
         }

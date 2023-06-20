@@ -1,5 +1,7 @@
 package Inter_empleado;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
@@ -9,13 +11,17 @@ import java.util.*;
 //import java.util.logging.Level;
 //import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
 import Factura.Factura;
+import Leer_Bases_de_datos.Leer_estado_mesas;
+
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import Empleados.Empleado;
+import Menu.Estado_Mesa;
 import Menu.Filtrarplatos;
 import Menu.Menu;
 
@@ -384,7 +390,7 @@ public class Interface_Empleados extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel2Menu.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 540, 190, 30));
+        jPanel2Menu.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 540, 190, 30));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/pSiciliana.jpg"))); // NOI18N
         jPanel2Menu.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 400, 120, 90));
@@ -402,16 +408,6 @@ public class Interface_Empleados extends javax.swing.JFrame {
         });*/
         jPanel2Menu.add(tiposBebidas, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 500, -1, 20));
 
-        terminarorden.setBackground(java.awt.Color.white);
-        terminarorden.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        terminarorden.setText("TERMINAR ORDEN");
-        terminarorden.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        terminarorden.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Añadirpedidosmenutable(evt);
-            }
-        });
-        jPanel2Menu.add(terminarorden, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 540, 160, 30));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/brasilia.png"))); // NOI18N
         jPanel2Menu.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 70, 120, 90));
@@ -426,7 +422,7 @@ public class Interface_Empleados extends javax.swing.JFrame {
         Corriente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         for(Menu c: Filtrarplatos.corriente){
         Corriente.addItem(c.toString());}
-        jPanel2Menu.add(Corriente, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 500, 130, -1));
+        jPanel2Menu.add(Corriente, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 500, 140, -1));
 
         Especial.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
        // pgriega.setForeground(new java.awt.Color(255, 255, 255));
@@ -435,7 +431,7 @@ public class Interface_Empleados extends javax.swing.JFrame {
         Especial.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         for(Menu c: Filtrarplatos.especial){
         Especial.addItem(c.toString());}
-        jPanel2Menu.add(Especial, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 170, 130, 20));
+        jPanel2Menu.add(Especial, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 170, 150, 30));
 
         Pizzascant.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         Pizzascant.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40" }));
@@ -551,11 +547,11 @@ public class Interface_Empleados extends javax.swing.JFrame {
         numMesa.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         numMesa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" }));
         numMesa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        numMesa.addActionListener(new java.awt.event.ActionListener() {
+        /*numMesa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 numMesaActionPerformed(evt);
             }
-        });
+        });*/
         jPanel2Menu.add(numMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 420, 100, -1));
 
         jButton3.setBackground(java.awt.Color.white);
@@ -566,13 +562,12 @@ public class Interface_Empleados extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt); //Antiguo llenar tabla de la cocina 
             }
         });
-        jPanel2Menu.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 460, 190, 30));
-// Mostrar Mesero (no se porque aún no aparece)
-         jLabel11.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jPanel2Menu.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 460, 190, 30));
+    /*  jLabel11.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("mesero:");
+        jLabel11.setText("mesero:"+empleado.toString());
         jLabel11.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel2Menu.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 350, 160, -1));
+        jPanel2Menu.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 350, 160, -1));*/
 
 
         jLabel1.setBackground(new java.awt.Color(51, 0, 0));
@@ -847,14 +842,58 @@ public class Interface_Empleados extends javax.swing.JFrame {
         );
 
         Pedido.setTitle("PEDIDOS");
-        Pedido.setMinimumSize(new java.awt.Dimension(840, 700));
-        Pedido.setModal(true);
+        Pedido.setMinimumSize(new java.awt.Dimension(700, 600));
+        Pedido.setModal(false);
         Pedido.setResizable(false);
 
         jPanel3.setBackground(new java.awt.Color(105, 92, 100));
         jPanel3.setForeground(new java.awt.Color(255, 255, 255));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+// tabla de pedidos
+datosTable.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        datosTable.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        datosTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
+            },
+            new String [] {
+                "ITEM","NOMBRE", "VALOR", "CANTIDAD"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class,java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false,false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(datosTable);
+
+        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, 400, 130));
+        Tabla_mesas c=null;
+        ArrayList<Estado_Mesa> mesas;
+        Leer_estado_mesas leer = new Leer_estado_mesas(0);
+        mesas = leer.get_mesas();
+        JButton botonetab = new JButton();
+                botonetab.addKeyListener(Adaptador.accion_teclado(botonetab));
+                botonetab.setPreferredSize(new Dimension(100, 40));
+                botonetab.setBackground(new Color(66, 66, 66));
+                botonetab.setForeground(Color.WHITE);
+                botonetab.addActionListener((accion) ->{
+                    botonetab.setText("Mesa"+mesas.get(Integer.parseInt((String)numMesa.getSelectedItem())-1).get_num_mesa());
+                    Tabla_mesas t = new Tabla_mesas(Pedido,mesas.get(Integer.parseInt((String)numMesa.getSelectedItem())-1),Tabla_mesas.MESERO);
+                    //c=t;
+                });
+        jPanel3.add(botonetab,new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 460, 100, 70));
+                //c.get_valores_mesa();
         
 
         jButton7.setForeground(new java.awt.Color(255, 255, 255));
@@ -868,58 +907,16 @@ public class Interface_Empleados extends javax.swing.JFrame {
         });
         jPanel3.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 70, 70));
 
-        datosTable.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-        datosTable.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        datosTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+        
+        //jScrollPane2.setViewportView(datosTable);
 
-            },
-            new String [] {
-                "NOMBRE", "VALOR", "CANTIDAD"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
+        //jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 230, 400, 230));
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane2.setViewportView(datosTable);
-
-        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 230, 400, 230));
-
-        jLabel11.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("Numero de mesero:");
-        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 120, 160, -1));
-
-        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/avatar3.jpg"))); // NOI18N
-        jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(-130, 0, 500, 570));
 
         jLabel23.setFont(new java.awt.Font("Times New Roman", 1, 48)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(255, 255, 255));
         jLabel23.setText("");
         jPanel3.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 40, 240, -1));
-
-        numMeserito.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        numMeserito.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "1", "2", "3", "4" }));
-        numMeserito.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        numMeserito.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numMeseritoActionPerformed(evt);
-            }
-        });
-        jPanel3.add(numMeserito, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 120, 100, -1));
-
         
 
         javax.swing.GroupLayout PedidoLayout = new javax.swing.GroupLayout(Pedido.getContentPane());
@@ -1010,14 +1007,14 @@ public class Interface_Empleados extends javax.swing.JFrame {
 
             },
             new String [] {
-                "NOMBRE", "CANTIDAD", "MESA"
+                "ITEM" ,"NOMBRE", "CANTIDAD", "MESA"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+                java.lang.String.class,java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false,false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1818,62 +1815,7 @@ public class Interface_Empleados extends javax.swing.JFrame {
         Pedido.setVisible(true);
         Pedido.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         Pedido.setLocationRelativeTo(null);
-    }                                        
-
-    private void Añadirpedidosmenutable(java.awt.event.ActionEvent evt) {                                         
-        //AÑADIMOS PLATOS PEDIDOS EN MENU A TABLA DE PEDIDO        
-// Comprobar si es mayor que 0 para agregarlos a tabla de pedido
-        DefaultTableModel model = (DefaultTableModel) datosTable.getModel();
-
-        if (Especialcant.getSelectedIndex() > 0) {
-            String x =(String) (Especial.getSelectedItem());
-            String[] y;
-            y = x.split(":");
-
-            model.addRow(new Object[]{y[0], y[1], Especialcant.getSelectedIndex()});
-        }
-
-        if (Corrientecant.getSelectedIndex() > 0) {
-            String x = (String)Corriente.getSelectedItem();
-            String[] y;
-            y = x.split(":");
-            model.addRow(new Object[]{y[0], y[1], Corrientecant.getSelectedIndex()});
-        }
-        if (Ejecutivocant.getSelectedIndex() > 0) {
-            String x = (String)Ejecutivo.getSelectedItem();
-            String[] y;
-            y = x.split(":");
-
-            model.addRow(new Object[]{y[0], y[1], Ejecutivocant.getSelectedIndex()});
-        }
-        if (Pizzascant.getSelectedIndex() > 0) {
-            String x =(String) Pizzas.getSelectedItem();
-            String[] y;
-            y = x.split(":");
-
-            model.addRow(new Object[]{y[0], y[1], Pizzascant.getSelectedIndex()});
-        }
-        if (Pizzascant.getSelectedIndex() > 0) {
-            String x =(String)Postres.getSelectedItem();
-            String[] y;
-            y = x.split(":");
-
-            model.addRow(new Object[]{y[0], y[1], Pizzascant.getSelectedIndex()});
-
-        }
-        if (bebidaCant.getSelectedIndex() > 0) {
-            String x = (String) tiposBebidas.getSelectedItem();
-            String[] y;
-            y = x.split(":");
-
-            model.addRow(new Object[]{y[0], y[1], bebidaCant.getSelectedIndex()});
-        }
-
-        Pedido.setVisible(true);
-        Pedido.setDefaultCloseOperation(DISPOSE_ON_CLOSE); // probar que pasa al hacer pedidos
-        Menu.dispose();
-
-    }                                        
+    }                                                                 
 
 
     private void damaBlancaActionPerformed(java.awt.event.ActionEvent evt) {                                           
@@ -1912,7 +1854,7 @@ public class Interface_Empleados extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         Pedido.setVisible(false);
-        this.setVisible(true);
+        Menu.setVisible(true);
     }                                        
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {                                         
@@ -1935,72 +1877,65 @@ public class Interface_Empleados extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No se han ingresado datos.");
         }
     }                                        
-                                       
-
-                      
-
-    private void numMeseritoActionPerformed(java.awt.event.ActionEvent evt) {                                            
-
-    }                                           
+                                                       
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
 
-        //LLENAMOS TABLA DE COCINA
-        DefaultTableModel model2 = (DefaultTableModel) datosTable2.getModel();
-
+        DefaultTableModel model = (DefaultTableModel) datosTable.getModel();
+        if(numMesa.getSelectedIndex()!=0){
         if (Especialcant.getSelectedIndex() > 0) {
-            String x =(String) Especial.getSelectedItem();
+            String x =(String) (Especial.getSelectedItem());
             String[] y;
             y = x.split(":");
-            if (numMesa.getSelectedIndex() > 0) {
-                model2.addRow(new Object[]{y[0], Especialcant.getSelectedIndex(), numMesa.getSelectedIndex()});
-            }
-        }
-        if (Corrientecant.getSelectedIndex() > 0) {
-            String x =(String) Corriente.getSelectedItem();
-            String[] y;
-            y = x.split(":");
-            if (numMesa.getSelectedIndex() > 0) {
-                model2.addRow(new Object[]{y[0], Corrientecant.getSelectedIndex(), numMesa.getSelectedIndex()});
-            }
 
+            model.addRow(new Object[]{y[0], y[1],y[2],Especialcant.getSelectedIndex()});
+        }
+
+        if (Corrientecant.getSelectedIndex() > 0) {
+            String x = (String)Corriente.getSelectedItem();
+            String[] y;
+            y = x.split(":");
+            model.addRow(new Object[]{y[0], y[1],y[2],Corrientecant.getSelectedIndex()});
         }
         if (Ejecutivocant.getSelectedIndex() > 0) {
-            String x =(String)Ejecutivo.getSelectedItem();
+            String x = (String)Ejecutivo.getSelectedItem();
             String[] y;
             y = x.split(":");
-            if (numMesa.getSelectedIndex() > 0) {
-                model2.addRow(new Object[]{y[0], Ejecutivocant.getSelectedIndex(), numMesa.getSelectedIndex()});
-            }
+
+            model.addRow(new Object[]{y[0], y[1],y[2],Ejecutivocant.getSelectedIndex()});
         }
         if (Pizzascant.getSelectedIndex() > 0) {
             String x =(String) Pizzas.getSelectedItem();
             String[] y;
             y = x.split(":");
-            if (numMesa.getSelectedIndex() >0) {
-                model2.addRow(new Object[]{y[0], Pizzascant.getSelectedIndex(), numMesa.getSelectedIndex()});
-            }
+
+            model.addRow(new Object[]{y[0], y[1],y[2], Pizzascant.getSelectedIndex()});
         }
         if (Pizzascant.getSelectedIndex() > 0) {
-            String x = (String) Postres.getSelectedItem();
+            String x =(String)Postres.getSelectedItem();
             String[] y;
             y = x.split(":");
-            if (numMesa.getSelectedIndex() >0) {
-                model2.addRow(new Object[]{y[0], Pizzascant.getSelectedIndex(), numMesa.getSelectedIndex()});
-            }
-    }                                        
+
+            model.addRow(new Object[]{y[0], y[1],y[2], Pizzascant.getSelectedIndex()});
+
+        }
         if (bebidaCant.getSelectedIndex() > 0) {
             String x = (String) tiposBebidas.getSelectedItem();
             String[] y;
             y = x.split(":");
-            if (numMesa.getSelectedIndex() >0) {
-                model2.addRow(new Object[]{y[0], bebidaCant.getSelectedIndex(), numMesa.getSelectedIndex()});
-            }
+
+            model.addRow(new Object[]{y[0], y[1],y[2], bebidaCant.getSelectedIndex()});
         }
 
-        Cocina.setVisible(true);
+        Pedido.setVisible(true);
+        Pedido.setDefaultCloseOperation(DISPOSE_ON_CLOSE); // probar que pasa al hacer pedidos
+        Menu.dispose();
+    
+    }else{
+         JOptionPane.showMessageDialog(this,"Seleccione un numero de mesa válido");
+         numMesa.setSelectedIndex(0);
+    }
 
-        Pedido.setVisible(false);
     }
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {                                     
@@ -2008,15 +1943,9 @@ public class Interface_Empleados extends javax.swing.JFrame {
 
     }                                    
 
-    private boolean numMesaActionPerformed(java.awt.event.ActionEvent evt) {                                        
-   if (numMesa.getSelectedIndex() !=0) { //verificar que se haya seleccionado una mesa 
-                return true;
-            }else{
-                JOptionPane.showMessageDialog(null, "SELECCIONE UN NUMERO DE MESA " + numMeserito.getSelectedIndex());
-                numMesa.setSelectedIndex(0);
-                return false;
-            }
-    }                                       
+  /*  private void numMesaActionPerformed(java.awt.event.ActionEvent evt) {                                        
+   
+    }    */                                   
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         StockIngredientes.setVisible(false);
