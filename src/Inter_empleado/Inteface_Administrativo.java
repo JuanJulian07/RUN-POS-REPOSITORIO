@@ -216,22 +216,59 @@ class Ver_pedidos extends JDialog{
         public Tabla_mesas(JDialog padre,Estado_Mesa mesa){
             super(padre, false);
             setLocation(padre.getLocationOnScreen());
-            //setPreferredSize(new Dimension(400, 200));
+            setPreferredSize(new Dimension(500, 300));
             setResizable(false);
             add(paneltable(mesa));
             pack();
             setVisible(true);
         }
         private JPanel paneltable(Estado_Mesa mesa){
-            String[] cabeza_tabla = {"Producto","Cantidad"};
+            String[] cabeza_tabla = {"item","Producto","Cantidad"};
             String[][] contenido_mesa = Leer_estado_mesas.get_contenido_mesa(mesa.get_num_mesa());
 
             JPanel panel = new JPanel(new BorderLayout());
-            DefaultTableModel modelo = new DefaultTableModel(contenido_mesa, cabeza_tabla);
+            JPanel panel2 = new JPanel(new GridLayout(2, 1));
+
+            //Pare de la tabla
+            DefaultTableModel modelo = new DefaultTableModel(contenido_mesa, cabeza_tabla){
+                //Esto es para que la tabla no sea editable
+                @Override
+                public boolean isCellEditable(int row, int column){
+                    return column != 0 && column !=1 && column != 2;
+                }
+            };
+            
             JTable tabla = new JTable(modelo);
+            tabla.getTableHeader().setReorderingAllowed(false);
+            tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+            
+            //Establecemos el tamaño
+            tabla.getColumnModel().getColumn(0).setPreferredWidth(45);
+            tabla.getColumnModel().getColumn(1).setPreferredWidth(350);
+            tabla.getColumnModel().getColumn(2).setPreferredWidth(70);
+            //Hacemos que no se pueda cambiar el tamaño
+            tabla.getColumnModel().getColumn(0).setResizable(false);
+            tabla.getColumnModel().getColumn(1).setResizable(false);
+            tabla.getColumnModel().getColumn(2).setResizable(false);
+            //Lo agregamos a un scrolpane
             JScrollPane scrollpane = new JScrollPane(tabla);
             panel.add(scrollpane,BorderLayout.CENTER);
+
+            //Parte del comentario
+            JLabel label = new JLabel(mesa.get_comentario());
+            label.setHorizontalAlignment(JLabel.CENTER);
+            panel.add(label,BorderLayout.NORTH);
+
+            //parte del estado de los meseros
+            JLabel label_mesero = new JLabel("El pedido ya fue atendido por el mesero");
+            JLabel label_cocinero = new JLabel(estado_cocinero(mesa.get_estado_cocinero()));
+            panel2.add(label_mesero);
+            panel2.add(label_cocinero);
+            panel.add(panel2,BorderLayout.SOUTH);
             return panel;
+        }
+        private String estado_cocinero(boolean estado){
+            return estado?"El pedido ya fue despachado por el cocinero":"El pedido sigue en preparacion";
         }
     }
         

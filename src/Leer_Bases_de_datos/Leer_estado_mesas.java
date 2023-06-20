@@ -47,7 +47,7 @@ public class Leer_estado_mesas {
                 
                 valor = leer.nextLine();
                 valores = valor.split(";");
-                mesas.add(new Estado_Mesa(i, Boolean.parseBoolean(valores[4]), Boolean.parseBoolean(valores[5])));
+                mesas.add(new Estado_Mesa(i,valores[2] ,Boolean.parseBoolean(valores[4]), Boolean.parseBoolean(valores[5])));
                 
                 valor = null;
                 valores = null;
@@ -93,18 +93,19 @@ public class Leer_estado_mesas {
     }
 
     private static class Valor{
+        private String item;
         private String valor1;
         private String valor2;
 
-        public Valor(int valor, String valor2){
+        public Valor(int item, String valor2){
             Leer_Menu leer = new Leer_Menu();
-
-            this.valor1 = leer.get_menu_item(valor-1).get_nombre();
+            this.item = ""+item;
+            this.valor1 = leer.get_menu_item(item-1).get_nombre();
             this.valor2 = valor2;
         }
 
         public String[] get_valor(){
-            String[] v = {valor1,valor2};
+            String[] v = {item,valor1,valor2};
             return v;
         }
 
