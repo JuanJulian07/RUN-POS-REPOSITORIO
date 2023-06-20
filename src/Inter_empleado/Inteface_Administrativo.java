@@ -204,7 +204,7 @@ class Ver_pedidos extends JDialog{
                 int num = i; 
                 botones[i].addActionListener((accion) ->{
                     
-                    new Tabla_mesas(this,mesas.get(num));
+                    Tabla_mesas t = new Tabla_mesas(this,mesas.get(num),Tabla_mesas.ADMIN);
                 });
             }
         }
@@ -215,16 +215,30 @@ class Ver_pedidos extends JDialog{
         
 }
 class Tabla_mesas extends JDialog{
-        public Tabla_mesas(JDialog padre,Estado_Mesa mesa){
-            super(padre, false);
+    public static final int MESERO = 1;
+    public static final int ADMIN = 0;
+    private Estado_Mesa mesa_mesero; 
+    private String[] valores_mesa_llenos;
+        public Tabla_mesas(JDialog padre,Estado_Mesa mesa,int opcion){
+            
+            super(padre);
+            switch (opcion){
+                case 0:
+                    setModal(false);
+                    add(paneltableadmin(mesa));
+                    break;
+                case 1:
+                    setModal(true);
+                    add(paneltablames(mesa));
+                    break;
+            }
             setLocation(padre.getLocationOnScreen());
             setPreferredSize(new Dimension(500, 300));
             setResizable(false);
-            add(paneltable(mesa));
             pack();
             setVisible(true);
         }
-        private JPanel paneltable(Estado_Mesa mesa){
+        private JPanel paneltableadmin(Estado_Mesa mesa){
             String[] cabeza_tabla = {"item","Producto","Cantidad"};
             String[][] contenido_mesa = Leer_estado_mesas.get_contenido_mesa(mesa.get_num_mesa());
 
@@ -268,6 +282,75 @@ class Tabla_mesas extends JDialog{
             panel2.add(label_cocinero);
             panel.add(panel2,BorderLayout.SOUTH);
             return panel;
+        }
+        private JPanel paneltablames(Estado_Mesa mesa){
+            String[] cabeza_tabla = {"item","Producto","Cantidad"};
+            String[][] contenido_mesa = Leer_estado_mesas.get_contenido_mesa(mesa.get_num_mesa());
+
+            JPanel panel = new JPanel(new BorderLayout());
+
+            //Pare de la tabla
+            DefaultTableModel modelo = new DefaultTableModel(contenido_mesa, cabeza_tabla){
+                //Esto es para que la tabla no sea editable
+                @Override
+                public boolean isCellEditable(int row, int column){
+                    return column != 0;
+                }
+            };
+            
+            JTable tabla = new JTable(modelo);
+            tabla.getTableHeader().setReorderingAllowed(false);
+            tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+            //Establecemos el tamaño
+            tabla.getColumnModel().getColumn(0).setPreferredWidth(45);
+            tabla.getColumnModel().getColumn(1).setPreferredWidth(350);
+            tabla.getColumnModel().getColumn(2).setPreferredWidth(70);
+            //Hacemos que no se pueda cambiar el tamaño
+            tabla.getColumnModel().getColumn(0).setResizable(false);
+            tabla.getColumnModel().getColumn(1).setResizable(false);
+            tabla.getColumnModel().getColumn(2).setResizable(false);
+            //Lo agregamos a un scrolpane
+            JScrollPane scrollpane = new JScrollPane(tabla);
+            panel.add(scrollpane,BorderLayout.CENTER);
+
+            //Parte del comentario
+            JTextField comentario = new JTextField(mesa.get_comentario());
+            panel.add(comentario,BorderLayout.NORTH);
+
+            //Parte para guardar la info
+            JButton guardar = new JButton("Guardar");
+            guardar.addActionListener(accion ->{
+                set_mesa(mesa, comentario.getText());
+                set_valores(tabla);
+                setVisible(false);
+            });
+
+            panel.add(guardar,BorderLayout.SOUTH);
+            return panel;
+        }
+        private void set_mesa(Estado_Mesa mesa, String comentario){
+            mesa.set_comentario(comentario);
+            mesa.set_estado_mesero(true);
+            this.mesa_mesero = mesa;
+        }
+        private void set_valores(JTable tabla){
+            //Inicializamos los valores de la columna
+            String[] valores_mesa = new String[tabla.getRowCount()];
+            
+            for(int i = 0; i < tabla.getRowCount(); i++){
+                
+                
+                valores_mesa[i] = (String)tabla.getValueAt(i, 0) + ";" +(String)tabla.getValueAt(i, 2);;
+                
+            }
+            
+            valores_mesa_llenos = valores_mesa;
+        }
+        public String[] get_valores_mesa(){
+            return valores_mesa_llenos;
+        }
+        public Estado_Mesa get_mesa(){
+            return mesa_mesero;
         }
         private String estado_cocinero(boolean estado){
             return estado?"El pedido ya fue despachado por el cocinero":"El pedido sigue en preparacion";
