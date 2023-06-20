@@ -540,6 +540,30 @@ public class Interface_Empleados extends javax.swing.JFrame {
         Bebid.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel2Menu.add(Bebid, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 370, -1, -1));
 
+// Adición de selccionador de numero de mesa al menú
+//
+        jLabel13.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("Numero de mesa: ");
+        jLabel13.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel2Menu.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 390, 160, -1));
+
+        numMesa.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        numMesa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" }));
+        numMesa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        numMesa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                numMesaActionPerformed(evt);
+            }
+        });
+        jPanel2Menu.add(numMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 420, 100, -1));
+// Mostrar Mesero (no se porque aún no aparece)
+         jLabel11.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("mesero:");
+        jLabel11.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel2Menu.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 350, 160, -1));
+
 
         jLabel1.setBackground(new java.awt.Color(51, 0, 0));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/MENÚRUNPOS.jpg"))); // NOI18N
@@ -557,7 +581,6 @@ public class Interface_Empleados extends javax.swing.JFrame {
 //numMesa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/MENÚRUNPOS.jpg"))); // NOI18N
         jPanel2Menu.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(225, 5, 600, 570));
-
 
 
 
@@ -791,15 +814,6 @@ public class Interface_Empleados extends javax.swing.JFrame {
         jPanel8.add(guardarInfo);
         guardarInfo.setBounds(120, 380, 120, 30);
 
-        generar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        generar.setText("Generar");
-        generar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                generarActionPerformed(evt);
-            }
-        });
-        jPanel8.add(generar);
-        generar.setBounds(190, 260, 120, 30);
 
         mesasAsign.setBackground(new java.awt.Color(255, 255, 255));
         mesasAsign.setForeground(new java.awt.Color(255, 255, 255));
@@ -823,7 +837,7 @@ public class Interface_Empleados extends javax.swing.JFrame {
         );
 
         Pedido.setTitle("PEDIDOS");
-        Pedido.setMinimumSize(new java.awt.Dimension(840, 580));
+        Pedido.setMinimumSize(new java.awt.Dimension(840, 700));
         Pedido.setModal(true);
         Pedido.setResizable(false);
 
@@ -831,20 +845,7 @@ public class Interface_Empleados extends javax.swing.JFrame {
         jPanel3.setForeground(new java.awt.Color(255, 255, 255));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel13.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("Numero de mesa: ");
-        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 158, 160, -1));
-
-        numMesa.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        numMesa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" }));
-        numMesa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        numMesa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numMesaActionPerformed(evt);
-            }
-        });
-        jPanel3.add(numMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 160, 100, -1));
+        
 
         jButton7.setForeground(new java.awt.Color(255, 255, 255));
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/atras.png"))); // NOI18N
@@ -1932,26 +1933,7 @@ public class Interface_Empleados extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No se han ingresado datos.");
         }
     }                                        
-
-    private void generarActionPerformed(java.awt.event.ActionEvent evt) {                                        
-        //ASIGNAMOS A CADA MESERO UN NUMERO DE MESAS
-        switch (numMesero.getSelectedIndex()) {
-            case 0:
-                mesasAsign.setText("Mesas 1 2 3 4 5");
-                break;
-            case 1:
-                mesasAsign.setText("Mesas 6 7 8 9 10");
-                break;
-            case 2:
-                mesasAsign.setText("Mesas 11 12 13 14 15");
-                break;
-            case 3:
-                mesasAsign.setText("Mesas 16 17 18 19 20");
-                break;
-            default:
-                break;
-        }
-    }                                       
+                                       
 
                       
 
@@ -2024,33 +2006,14 @@ public class Interface_Empleados extends javax.swing.JFrame {
 
     }                                    
 
-    private void numMesaActionPerformed(java.awt.event.ActionEvent evt) {                                        
-
-        //INDICE DE MESA SEGUN EL MESERIO COMBOBOX DE MESA
-        if (numMeserito.getSelectedIndex() == 1) {
-            if (numMesa.getSelectedIndex() > 5) {
-                JOptionPane.showMessageDialog(null, "Numero de mesa invalido para mesero " + numMeserito.getSelectedIndex());
+    private boolean numMesaActionPerformed(java.awt.event.ActionEvent evt) {                                        
+   if (numMesa.getSelectedIndex() !=0) { //verificar que se haya seleccionado una mesa 
+                return true;
+            }else{
+                JOptionPane.showMessageDialog(null, "SELECCIONE UN NUMERO DE MESA " + numMeserito.getSelectedIndex());
                 numMesa.setSelectedIndex(0);
+                return false;
             }
-
-        } else if (numMeserito.getSelectedIndex() == 2) {
-            if (numMesa.getSelectedIndex() > 11 || numMesa.getSelectedIndex() < 6) {
-                JOptionPane.showMessageDialog(null, "Numero de mesa invalido para mesero " + numMeserito.getSelectedIndex());
-                numMesa.setSelectedIndex(0);
-            }
-
-        } else if (numMeserito.getSelectedIndex() == 3) {
-            if (numMesa.getSelectedIndex() > 16 || numMesa.getSelectedIndex() < 11) {
-                JOptionPane.showMessageDialog(null, "Numero de mesa invalido para mesero " + numMeserito.getSelectedIndex());
-                numMesa.setSelectedIndex(0);
-
-            }
-        } else if (numMesa.getSelectedIndex() > 21 || numMesa.getSelectedIndex() < 15) {
-            JOptionPane.showMessageDialog(null, "Numero de mesa invalido para mesero " + numMeserito.getSelectedIndex());
-            numMesa.setSelectedIndex(0);
-        }
-
-
     }                                       
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {                                         

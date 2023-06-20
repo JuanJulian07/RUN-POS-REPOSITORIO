@@ -10,6 +10,7 @@ public class Leer_estado_mesas {
     public static final int TODOS = 0;
     public static final int MESAS_ACTIVAS = 1;
     public static final int MESAS_SATISFECHAS = 2;
+    //public static final int MESAS_INACTIVAS=3;
 
     public Leer_estado_mesas(int opcion){
         leer_guardar();
@@ -97,7 +98,7 @@ public class Leer_estado_mesas {
         private String valor1;
         private String valor2;
 
-        public Valor(int item, String valor2){
+        public Valor(int item, String valor2){//val 2 es la cantidad
             Leer_Menu leer = new Leer_Menu();
             this.item = ""+item;
             this.valor1 = leer.get_menu_item(item-1).get_nombre();
