@@ -4,6 +4,7 @@ Item;Tipo de plato;Tipo;Descripcion;Precio
 3;Sancocho de Gallina;Corriente;Consome de gallina, con papa, platano, yuca y una presa de pollo;10000
 4;Cocacola 250;Especial;Bebida azucarada burbujeante;1000
 5;Banana Split;Especial;Helado con frutas y combiacion especial de bananas;5000
+<<<<<<< HEAD
 6;Cocacola 250;Bebida;Bebida azucarada burbujeante;1000
 7;Banana Split;Especial;Helado con frutas y combiacion especial de bananas;5000
 8;Churrasco;Especial;Carne fina acompañada de papas y ensalada;20000
@@ -14,3 +15,15 @@ Item;Tipo de plato;Tipo;Descripcion;Precio
 13;Stracciatela;Postres;Pizza con nutela y banano;18000
 14;Panna Cotta;Postres;Crema italiana con almibar de mora;8800
 15;Jugo de mora;Bebidas;Jugo de mora;5000
+=======
+6;Churrasco;Especial;Carne fina acompañada de papas y ensalada;20000
+7;Fetuccini Alfredo;Especial;Pasta plana con champiñones y bechamel;23000
+8;Sopa del chef;Corriente;Sopa del día;7000
+9;chuleta de cerdo;Ejecutivo;Filete acompañado de papas y ensalada;16000
+10;Tilapia;Ejecutivo;Filete de tilapia apanado;16000
+11;Stracciatela;Postres;Pizza con nutela y banano;18000
+12;Panna Cotta;Postres;Crema italiana con almibar de mora;8800
+13;Jugo de mora;Bebidas;Jugo de mora;5000
+14;Pepperoni;Pizzas;pizza de pepperoni;22000
+15;4 quesos;Pizzas;pizza de queso azul, paipa, parmesano y boconccini;23000
+>>>>>>> 8dd9f61 (adición de dos ingredientes)
