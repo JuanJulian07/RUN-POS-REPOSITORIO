@@ -557,6 +557,16 @@ public class Interface_Empleados extends javax.swing.JFrame {
             }
         });
         jPanel2Menu.add(numMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 420, 100, -1));
+
+        jButton3.setBackground(java.awt.Color.white);
+        jButton3.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jButton3.setText("AÑADIR");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt); //Antiguo llenar tabla de la cocina 
+            }
+        });
+        jPanel2Menu.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 460, 190, 30));
 // Mostrar Mesero (no se porque aún no aparece)
          jLabel11.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
@@ -897,7 +907,7 @@ public class Interface_Empleados extends javax.swing.JFrame {
 
         jLabel23.setFont(new java.awt.Font("Times New Roman", 1, 48)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel23.setText("PITAKS ");
+        jLabel23.setText("");
         jPanel3.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 40, 240, -1));
 
         numMeserito.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -910,15 +920,7 @@ public class Interface_Empleados extends javax.swing.JFrame {
         });
         jPanel3.add(numMeserito, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 120, 100, -1));
 
-        jButton3.setBackground(java.awt.Color.white);
-        jButton3.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jButton3.setText("MANDAR A COCINAR");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 490, 190, 30));
+        
 
         javax.swing.GroupLayout PedidoLayout = new javax.swing.GroupLayout(Pedido.getContentPane());
         Pedido.getContentPane().setLayout(PedidoLayout);
