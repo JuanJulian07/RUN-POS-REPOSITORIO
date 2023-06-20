@@ -277,7 +277,11 @@ class Tabla_mesas extends JDialog{
 
             //parte del estado de los meseros
             JLabel label_mesero = new JLabel("El pedido ya fue atendido por el mesero");
-            JLabel label_cocinero = new JLabel(estado_cocinero(mesa.get_estado_cocinero()));
+            label_mesero.setOpaque(true);
+            label_mesero.setBackground(Color.green);
+            JLabel label_cocinero = new JLabel();
+            label_cocinero.setText(estado_cocinero(mesa.get_estado_cocinero(), label_cocinero));
+
             panel2.add(label_mesero);
             panel2.add(label_cocinero);
             panel.add(panel2,BorderLayout.SOUTH);
@@ -360,8 +364,16 @@ class Tabla_mesas extends JDialog{
         public Estado_Mesa get_mesa(){
             return mesa_mesero;
         }
-        private String estado_cocinero(boolean estado){
-            return estado?"El pedido ya fue despachado por el cocinero":"El pedido sigue en preparacion";
+        private String estado_cocinero(boolean estado, JLabel label){
+            label.setOpaque(true);
+            if(estado){
+                label.setBackground(Color.green);
+                return "El pedido ya fue despachado por el cocinero";
+            }
+            else{
+                label.setBackground(new Color(255, 195, 0));
+                return "El pedido sigue en preparacion";
+            }
         }
     }
     
