@@ -212,7 +212,9 @@ class Ver_pedidos extends JDialog{
         return botones;
     }
     
-    class Tabla_mesas extends JDialog{
+        
+}
+class Tabla_mesas extends JDialog{
         public Tabla_mesas(JDialog padre,Estado_Mesa mesa){
             super(padre, false);
             setLocation(padre.getLocationOnScreen());
@@ -271,8 +273,7 @@ class Ver_pedidos extends JDialog{
             return estado?"El pedido ya fue despachado por el cocinero":"El pedido sigue en preparacion";
         }
     }
-        
-}
+    
 
 class Eliminar_pedidos extends JDialog{
     public Eliminar_pedidos(JFrame padre){
