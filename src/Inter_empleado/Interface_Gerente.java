@@ -21,7 +21,7 @@ public class Interface_Gerente extends JFrame{
     private static final int pixel_buton = 150;
     private Empleado empleado = null;
     private Empleado empleado_aux = null;
-    private static final Dimension DIMENSION_DEFECTO = new Dimension(1000,700);
+    private static final Dimension DIMENSION_DEFECTO = new Dimension(900,420);
     private JFrame padre;
     //Constructor de la ventana principal de gerente
     public Interface_Gerente(Empleado empleado, JFrame padre){
@@ -82,7 +82,7 @@ public class Interface_Gerente extends JFrame{
 
         //Este apartado es para volver al sector anterior
         JButton volver = new JButton(new ImageIcon(getClass().getResource("/Img/atras.png")));
-        volver.setBounds(10, 550, 100, 100);
+        volver.setBounds(10, 230, 100, 100);
         volver.setOpaque(false);
         volver.setContentAreaFilled(false);
         volver.addActionListener(accion ->{
@@ -95,7 +95,7 @@ public class Interface_Gerente extends JFrame{
         ImageIcon imagen = new ImageIcon("src\\Recursos_fotograficos\\icono.jpg");
         imagen = new ImageIcon(imagen.getImage().getScaledInstance(150, 150, 1));
         JLabel im = new JLabel(imagen);
-        im.setBounds(p_gerente.getWidth()-167, p_gerente.getHeight()-189, 150, 150);
+        im.setBounds(p_gerente.getWidth()-295, p_gerente.getHeight()-500, 150, 150);
         
         p_gerente.add(im);
         return p_gerente;

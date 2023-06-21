@@ -818,7 +818,7 @@ public class Interface_Empleados extends javax.swing.JFrame {
         jPanel8.add(mesasAsign);
         mesasAsign.setBounds(40, 300, 270, 60);
 
-        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/JE_opt (3).jpg"))); // NOI18N
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_fotograficos/JE_opt (3).jpg"))); // NOI18N
         jPanel8.add(jLabel15);
         jLabel15.setBounds(0, 0, 550, 480);
 
@@ -1023,7 +1023,7 @@ public class Interface_Empleados extends javax.swing.JFrame {
         );
 
         Cocina.setTitle("COCINA");
-        Cocina.setMinimumSize(new java.awt.Dimension(928, 393));
+        Cocina.setMinimumSize(new java.awt.Dimension(728, 430));
         Cocina.setResizable(false);
 
         jPanel9.setBackground(new java.awt.Color(0, 0, 0));
@@ -1042,7 +1042,7 @@ public class Interface_Empleados extends javax.swing.JFrame {
         for(Estado_Mesa c: esmesas){
         Estadmesa.addItem(c.toString2());}
         jPanel9.add(Estadmesa);
-        Estadmesa.setBounds(500, 110, 230, 30);
+        Estadmesa.setBounds(380, 190, 230, 30);
 
                 JButton dispjdmesa= new JButton("Llamar");
                 dispjdmesa.addKeyListener(Adaptador.accion_teclado(dispjdmesa));
@@ -1070,20 +1070,20 @@ public class Interface_Empleados extends javax.swing.JFrame {
             
                 });
         jPanel9.add(cocinar);
-        cocinar.setBounds(480, 200, 230, 30);
+        cocinar.setBounds(380, 240, 230, 30);
 
+        jLabel28.setFont(new java.awt.Font("Times New Roman", 1, 35)); // NOI18N
+        jLabel28.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel28.setText("COCINA:");
+        jPanel9.add(jLabel28);
+        jLabel28.setBounds(120, 30, 300, 40);
 
         jLabel26.setBackground(new java.awt.Color(0, 0, 0));
         jLabel26.setForeground(new java.awt.Color(255, 255, 255));
         jLabel26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/kitchen2.jpg"))); // NOI18N
         jPanel9.add(jLabel26);
-        jLabel26.setBounds(343, 0, 590, 390);
+        jLabel26.setBounds(70, 0, 590, 390);
 
-        jLabel28.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel28.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel28.setText("PEDIDOS:");
-        jPanel9.add(jLabel28);
-        jLabel28.setBounds(90, 30, 100, 17);
 
         jButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/back (1).png"))); // NOI18N
         jButton15.setText("jButton15");
@@ -1428,7 +1428,7 @@ public class Interface_Empleados extends javax.swing.JFrame {
         jPanel14.add(jButton28);
         jButton28.setBounds(110, 300, 120, 40);
 
-        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/kitchen2.jpg"))); // NOI18N
+        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_fotograficos/kitchen2.jpg"))); // NOI18N
         jPanel14.add(jLabel20);
         jLabel20.setBounds(0, 0, 470, 390);
 
@@ -1557,7 +1557,7 @@ public class Interface_Empleados extends javax.swing.JFrame {
         jPanel1.add(doPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 40, 150, 140));
 
         verCocina.setForeground(new java.awt.Color(204, 204, 204));
-        verCocina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/cocinero.png"))); // NOI18N
+        verCocina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/cubiertos.png"))); // NOI18N
         verCocina.setBorderPainted(false);
         verCocina.setContentAreaFilled(false);
         verCocina.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -1613,7 +1613,7 @@ public class Interface_Empleados extends javax.swing.JFrame {
         });
         jPanel1.add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, 60, 50));
 
-        pagos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/dinero.png"))); // NOI18N
+        pagos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_fotograficos/dinero.png"))); // NOI18N
         pagos.setContentAreaFilled(false);
         pagos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pagos.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -1628,7 +1628,7 @@ public class Interface_Empleados extends javax.swing.JFrame {
         });
         jPanel1.add(pagos, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 190, 150, 140));
 
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/JE_opt (3).jpg"))); // NOI18N
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_fotograficos/JE_opt (3).jpg"))); // NOI18N
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 540, 420));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
