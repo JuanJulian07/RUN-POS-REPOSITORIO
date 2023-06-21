@@ -12,6 +12,7 @@ import java.util.*;
 //import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
 import Factura.Factura;
@@ -803,16 +804,6 @@ public class Interface_Empleados extends javax.swing.JFrame {
         jPanel8.add(numMesero);
         numMesero.setBounds(230, 180, 60, 20);
 
-        guardarInfo.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        guardarInfo.setText("Guardar");
-        guardarInfo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                guardarInfoActionPerformed(evt);
-            }
-        });
-        jPanel8.add(guardarInfo);
-        guardarInfo.setBounds(120, 380, 120, 30);
-
 
         mesasAsign.setBackground(new java.awt.Color(255, 255, 255));
         mesasAsign.setForeground(new java.awt.Color(255, 255, 255));
@@ -890,7 +881,7 @@ public class Interface_Empleados extends javax.swing.JFrame {
                 //c.get_valores_mesa();
         
                 JButton botoeliminarfila = new JButton("Eliminar");
-                 botoeliminarfila.addKeyListener(Adaptador.accion_teclado(botonetab));
+                 botoeliminarfila.addKeyListener(Adaptador.accion_teclado(botoeliminarfila));
                  botoeliminarfila.setPreferredSize(new Dimension(100, 40));
                  botoeliminarfila.setBackground(new Color(66, 66, 66));
                  botoeliminarfila.setForeground(Color.WHITE);
@@ -902,17 +893,17 @@ public class Interface_Empleados extends javax.swing.JFrame {
                 });
                 jPanel3.add(botoeliminarfila,new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 450, 100, 70));
 
-                JButton botongentabla = new JButton("Eliminar");
-                  botongentabla.addKeyListener(Adaptador.accion_teclado(botonetab));
+                JButton botongentabla = new JButton("MIX");
+                  botongentabla.addKeyListener(Adaptador.accion_teclado(botongentabla));
                   botongentabla.setPreferredSize(new Dimension(100, 40));
                   botongentabla.setBackground(new Color(66, 66, 66));
                   botongentabla.setForeground(Color.WHITE);
                   botongentabla.addActionListener((accion) ->{
-                    int fila = datosTable.getSelectedRow();
-                    DefaultTableModel model = (DefaultTableModel) datosTable.getModel();
-                    model.removeRow(fila);
+
+                    Tabladialog o=new Tabladialog(Pedido,paneltablames(datosTable,Integer.parseInt((String)numMesa.getSelectedItem())));
+                
                 });
-                jPanel3.add(botoeliminarfila,new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 450, 100, 70));
+                jPanel3.add(botongentabla,new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 450, 100, 70));
         jButton7.setForeground(new java.awt.Color(255, 255, 255));
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/atras.png"))); // NOI18N
         jButton7.setContentAreaFilled(false);
@@ -1343,92 +1334,10 @@ public class Interface_Empleados extends javax.swing.JFrame {
         jPanel5.setForeground(new java.awt.Color(255, 255, 255));
         jPanel5.setLayout(null);
 
-        jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/bars-chart.png"))); // NOI18N
-        jButton13.setContentAreaFilled(false);
-        jButton13.setRolloverEnabled(false);
-        jButton13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton13ActionPerformed(evt);
-            }
-        });
-        jPanel5.add(jButton13);
-        jButton13.setBounds(360, 50, 100, 80);
 
-        jButton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/profits.png"))); // NOI18N
-        jButton17.setContentAreaFilled(false);
-        jButton17.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton17ActionPerformed(evt);
-            }
-        });
-        jPanel5.add(jButton17);
-        jButton17.setBounds(350, 150, 100, 80);
 
-        jButton18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/line-chart.png"))); // NOI18N
-        jButton18.setContentAreaFilled(false);
-        jButton18.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton18ActionPerformed(evt);
-            }
-        });
-        jPanel5.add(jButton18);
-        jButton18.setBounds(350, 240, 97, 80);
+    
 
-        jButton20.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton20.setForeground(new java.awt.Color(255, 255, 255));
-        jButton20.setText("RESUMEN DE VENTAS - MESAS ");
-        jButton20.setContentAreaFilled(false);
-        jButton20.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton20.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton20.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton20ActionPerformed(evt);
-            }
-        });
-        jPanel5.add(jButton20);
-        jButton20.setBounds(50, 70, 270, 40);
-
-        jButton21.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton21.setForeground(new java.awt.Color(255, 255, 255));
-        jButton21.setText("NUMERO DE VENTAS REALIZADAS");
-        jButton21.setContentAreaFilled(false);
-        jButton21.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton21.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton21.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton21ActionPerformed(evt);
-            }
-        });
-        jPanel5.add(jButton21);
-        jButton21.setBounds(50, 130, 280, 40);
-
-        jButton22.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton22.setForeground(new java.awt.Color(255, 255, 255));
-        jButton22.setText("PLATO MAS VENDIDO");
-        jButton22.setContentAreaFilled(false);
-        jButton22.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton22.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton22.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton22ActionPerformed(evt);
-            }
-        });
-        jPanel5.add(jButton22);
-        jButton22.setBounds(50, 190, 270, 40);
-
-        jButton23.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton23.setForeground(new java.awt.Color(255, 255, 255));
-        jButton23.setText("MESERO DEL DIA");
-        jButton23.setContentAreaFilled(false);
-        jButton23.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton23.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton23.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton23ActionPerformed(evt);
-            }
-        });
-        jPanel5.add(jButton23);
-        jButton23.setBounds(50, 260, 270, 40);
 
         javax.swing.GroupLayout EstadisticasLayout = new javax.swing.GroupLayout(Estadisticas.getContentPane());
         Estadisticas.getContentPane().setLayout(EstadisticasLayout);
@@ -2309,186 +2218,10 @@ public class Interface_Empleados extends javax.swing.JFrame {
         }
     }                                      
 
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        // TODO add your handling code here:
-    }                                         
+                                                                           
 
-
-    private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        resumenVentas.setVisible(true);
-        resumenVentas.setLocationRelativeTo(null);
-    }                                         
-
-
-    private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        JOptionPane.showMessageDialog(null, "En el dia de hoy se realizaron" + contador + " ventas. De un total de: " + suma, "PITAKS", JOptionPane.INFORMATION_MESSAGE);
-    }                                         
-
-    private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {                                          
-//creo que esto es lo de el plato más vendido
-        int[] vector;
-        vector = new int[5];
-        int contg = 0, conts = 0, conto = 0, contp1 = 0, contp2 = 0, contb = 0;
-
-        mejorPlato.setVisible(true);
-        mejorPlato.setLocationRelativeTo(null);
-
-        if (Especialcant.getSelectedIndex() > 0) {
-            contg = contg + Especialcant.getSelectedIndex();
-            vector[0] = contg;
-        }
-
-        if (Corrientecant.getSelectedIndex() > 0) {
-            conts = conts + Corrientecant.getSelectedIndex();
-            vector[1] = conts;
-        }
-        if (Ejecutivocant.getSelectedIndex() > 0) {
-            conto = conto + Ejecutivocant.getSelectedIndex();
-            vector[2] = conto;
-        }
-
-        if (Pizzascant.getSelectedIndex() > 0) {
-            contp1 = contp1 + Pizzascant.getSelectedIndex();
-            vector[3] = contp1;
-        }
-        if (Pizzascant.getSelectedIndex() > 0) {
-            contp2 = contp2 + Pizzascant.getSelectedIndex();
-            vector[4] = contp2;
-        }
-
-        if (bebidaCant.getSelectedIndex() > 0) {
-            contb = contb + bebidaCant.getSelectedIndex();
-            vector[5] = contb;
-        }
-
-        int max;
-        max = 0;
-        String icon;
-        for (int i = 0; i < vector.length; i++) {
-            if (vector[i] > max) {
-                switch (i) {
-                    case 0: {
-                        nombrePlato0.setVisible(true);
-                        nombrePlato1.setVisible(false);
-                        nombrePlato2.setVisible(false);
-                        nombrePlato3.setVisible(false);
-                        nombrePlato4.setVisible(false);
-                        nombrePlato5.setVisible(false);
-                        icon = "/Img/pgriega.jpg";
-                        URL url0 = this.getClass().getResource(icon);
-                        ImageIcon icono = new ImageIcon(url0);
-                        fotoplato.setIcon(icono);
-                        max = vector[i];
-                        break;
-                    }
-                    case 1: {
-
-                        icon = "/Img/pOpera.jpg";
-                        URL url1 = this.getClass().getResource(icon);
-                        ImageIcon icono = new ImageIcon(url1);
-                        fotoplato.setIcon(icono);
-                        nombrePlato0.setVisible(false);
-                        nombrePlato1.setVisible(true);
-                        nombrePlato2.setVisible(false);
-                        nombrePlato3.setVisible(false);
-                        nombrePlato4.setVisible(false);
-                        nombrePlato5.setVisible(false);
-                        max = vector[i];
-                        break;
-                    }
-                    case 2: {
-
-                        icon = "/Img/pSiciliana.jpg";
-                        URL url2 = this.getClass().getResource(icon);
-                        ImageIcon icono = new ImageIcon(url2);
-                        fotoplato.setIcon(icono);
-                        nombrePlato0.setVisible(false);
-                        nombrePlato1.setVisible(false);
-                        nombrePlato2.setVisible(true);
-                        nombrePlato3.setVisible(false);
-                        nombrePlato4.setVisible(false);
-                        nombrePlato5.setVisible(false);
-                        max = vector[i];
-                        break;
-                    }
-                    case 3: {
-                        nombrePlato0.setVisible(false);
-                        nombrePlato1.setVisible(false);
-                        nombrePlato2.setVisible(false);
-                        nombrePlato3.setVisible(true);
-                        nombrePlato4.setVisible(false);
-                        nombrePlato5.setVisible(false);
-                        icon = "/Img/brasilia.png";
-                        URL url3 = this.getClass().getResource(icon);
-                        ImageIcon icono = new ImageIcon(url3);
-                        fotoplato.setIcon(icono);
-                        max = vector[i];
-                        break;
-                    }
-                    case 4: {
-                        nombrePlato0.setVisible(false);
-                        nombrePlato1.setVisible(false);
-                        nombrePlato2.setVisible(false);
-                        nombrePlato3.setVisible(false);
-                        nombrePlato4.setVisible(true);
-                        nombrePlato5.setVisible(false);
-                        icon = "/Img/damablanca.png";
-                        URL url4 = this.getClass().getResource(icon);
-                        ImageIcon icono = new ImageIcon(url4);
-                        fotoplato.setIcon(icono);
-                        max = vector[i];
-                        break;
-                    }
-                    default: {
-                        icon = "/Img/bebidastodas.png";
-                        URL url5 = this.getClass().getResource(icon);
-                        ImageIcon icono = new ImageIcon(url5);
-                        fotoplato.setIcon(icono);
-                        nombrePlato0.setVisible(false);
-                        nombrePlato1.setVisible(false);
-                        nombrePlato2.setVisible(false);
-                        nombrePlato3.setVisible(false);
-                        nombrePlato4.setVisible(false);
-                        nombrePlato5.setVisible(true);
-                        max = vector[i];
-                        break;
-                    }
-                }
-            }
-        }
-        if (max == 0) {
-            JOptionPane.showMessageDialog(null, "No existe ningun maximo.");
-        }
-
-
-    }   
-  private void guardarInfoActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        //GUARDAMOS ARCHIVO DE MESEROS
-        /*String n = nombre.getText();
-        int i = Integer.parseInt(jTextField1.getText());
-        int mesero;
-        mesero = numMesero.getSelectedIndex();
-        mesero = mesero + 1;
-        String mesa = mesasAsign.getText();
-
-        NodoMesero p = new NodoMesero();
-        ptr = agregarInfoMesero(ptr, n, i, mesero, mesa);
-        String archivo1;
-        archivo1 = "Mesero.txt";
-        JOptionPane.showMessageDialog(null, "La informacion del mesero " + n + " se ha guardado en archivo");
-        try {
-            GuardarInfoMesero(ptr);
-
-        } catch (IOException ex) {
-            Logger.getLogger(Opciones.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-    }             
-
-    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        // TODO add your handling code here:
-    }                                         
-
-
+                                     
+                        
     private void jButton28ActionPerformed(java.awt.event.ActionEvent evt) {                                          
         int index = listMesas.getSelectedIndex() + 1;
         String t = TOTALtot.getText();
@@ -2503,59 +2236,7 @@ public class Interface_Empleados extends javax.swing.JFrame {
 
     }                                         
 
-    private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        int cont = 0, cont1 = 0, cont2 = 0, cont3 = 0;
-        int[] vector2;
-        vector2 = new int[4];
-
-        if (numMeserito.getSelectedIndex() == 1) {
-            cont = cont + 1;
-            vector2[0] = cont;
-        }
-        if (numMeserito.getSelectedIndex() == 2) {
-            cont1 = cont1 + 1;
-            vector2[1] = cont1 + 1;
-        }
-        if (numMeserito.getSelectedIndex() == 3) {
-            cont2 = cont2 + 1;
-            vector2[2] = cont2 + 1;
-        }
-        if (numMeserito.getSelectedIndex() == 4) {
-            cont3 = cont3 + 1;
-            vector2[3] = cont3 + 1;
-        }
-
-        String mayor2 = null;
-        int max;
-        max = 0;
-
-        for (int i = 0; i < vector2.length; i++) {
-            if (vector2[i] > max) {
-                max = vector2[i];
-                switch (i) {
-                    case 0:
-                        mayor2 = ("JESUS F");
-                        break;
-                    case 1:
-                        mayor2 = ("MIGUEL J");
-                        break;
-                    case 2:
-                        mayor2 = ("MARLENE D");
-                        break;
-                    default:
-                        mayor2 = ("AUGUSTO S");
-                        break;
-                }
-
-            }
-        }
-
-        JOptionPane.showMessageDialog(null, "El mesero que mas ventas realizo fue: " + mayor2, "PITAKS", JOptionPane.INFORMATION_MESSAGE);
-    }                                         
-
-    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        // TODO add your handling code here:
-    }                                         
+                                                                     
 
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {                                          
 
@@ -2627,7 +2308,7 @@ public class Interface_Empleados extends javax.swing.JFrame {
         model.setRowCount(0);
     }
     
-    private JPanel paneltablames(String[][] arregloped,int numMesa){
+    private JPanel paneltablames(JTable datosTable ,int numMesa){
            /*  String[] cabeza_tabla = {"item","Producto","Cantidad"};
             String[][] contenido_mesa = Leer_estado_mesas.get_contenido_mesa(numMesa);
 
@@ -2703,11 +2384,21 @@ public class Interface_Empleados extends javax.swing.JFrame {
             tabla.getColumnModel().getColumn(1).setResizable(false);
             tabla.getColumnModel().getColumn(2).setResizable(false);
             //Lo agregamos a un scrolpane
+            
+        
+
+
+            DefaultTableModel model=(DefaultTableModel) tabla.getModel();
+
+            int cols = datosTable.getColumnCount();
+            int fils = datosTable.getRowCount();
+            for(int i=0; i<fils; i++) {
+                model.addRow(new Object[]{datosTable.getValueAt(i,0), datosTable.getValueAt(i,1),datosTable.getValueAt(i,2),datosTable.getValueAt(i,3)});
+            }
+            //model.addRow(new Object[]{y[0], y[1],y[2], bebidaCant.getSelectedIndex()});
+            
             JScrollPane scrollpane = new JScrollPane(tabla);
             panel.add(scrollpane,BorderLayout.CENTER);
-
-            
-
 
         return panel;
         }
@@ -2715,3 +2406,20 @@ public class Interface_Empleados extends javax.swing.JFrame {
 
 }
 
+class Tabladialog extends JDialog{
+ 
+    private JDialog padre;
+        public Tabladialog(JDialog padre, JPanel j){
+            
+            super(padre);
+            this.padre = padre;
+            setModal(false);
+            add(j);
+               
+            setLocation(padre.getLocationOnScreen());
+            setPreferredSize(new Dimension(500, 300));
+            setResizable(false);
+            pack();
+            setVisible(true);
+        }
+    }
