@@ -1,4 +1,4 @@
-Item;Cantidad;Descripcion auxiliar;19;true;true
+Item;Cantidad;Descripcion auxiliar;19;true;false
 5;4
 13;3
 11;2
@@ -17,3 +17,4 @@ Item;Cantidad;Descripcion auxiliar;19;true;true
 12;4
 13;4
 1;4
+3;3

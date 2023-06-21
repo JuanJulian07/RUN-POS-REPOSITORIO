@@ -28,6 +28,10 @@ public class Estado_Mesa {
     public String get_comentario(){
         return comentario;
     }
+    public String toString2(){
+    return("Mesa :"+num_mesa);
+
+    }
     public String toString(){
         return(num_mesa + " " + comentario + " " + estado_mesero + " "+estado_cocinero);
     }

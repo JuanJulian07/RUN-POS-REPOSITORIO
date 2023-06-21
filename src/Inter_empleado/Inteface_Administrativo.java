@@ -559,6 +559,18 @@ class Facturar extends JDialog{
 
 // Esta es la clase que nos permite ver el estado de los pedidos
 class Ver_pedidos extends JDialog{
+    public Ver_pedidos(JDialog padre){
+
+        super(padre, false);
+        
+        setTitle("Ver pedidos");
+        setPreferredSize(new Dimension(500,500));
+        setLocation(padre.getLocationOnScreen());
+        setResizable(true);
+        add(panel_ver_nombre());
+        pack();
+        setVisible(true);
+    }
     public Ver_pedidos(JFrame padre){
 
         super(padre, true);

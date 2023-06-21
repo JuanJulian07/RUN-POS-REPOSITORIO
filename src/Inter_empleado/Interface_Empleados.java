@@ -2,6 +2,8 @@ package Inter_empleado;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
@@ -14,10 +16,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
 import Factura.Factura;
 import Leer_Bases_de_datos.Escribir_estado_mesas;
 import Leer_Bases_de_datos.Leer_estado_mesas;
+import Inter_empleado.*;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -192,6 +196,7 @@ public class Interface_Empleados extends javax.swing.JFrame {
     private javax.swing.JLabel Pizz;
     private javax.swing.JLabel Post;
     private javax.swing.JLabel Bebid;
+    private javax.swing.JComboBox<String> Estadmesa;
     public Interface_Empleados(Empleado empleado){
 
         initComponents();
@@ -220,6 +225,7 @@ public class Interface_Empleados extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         tiposBebidas = new javax.swing.JComboBox<>();
+        Estadmesa=new javax.swing.JComboBox<>();
         terminarorden = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -933,7 +939,8 @@ public class Interface_Empleados extends javax.swing.JFrame {
 
         
         //jScrollPane2.setViewportView(datosTable);
-
+ jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/avatar3.jpg"))); // NOI18N
+        jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(-130, 0, 500, 570));
         //jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 230, 400, 230));
 
 
@@ -1024,75 +1031,46 @@ public class Interface_Empleados extends javax.swing.JFrame {
         jPanel9.setMinimumSize(new java.awt.Dimension(781, 393));
         jPanel9.setLayout(null);
 
-        datosTable2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-        datosTable2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        datosTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+          ArrayList<Estado_Mesa> esmesas;
+        Leer_estado_mesas leermes = new Leer_estado_mesas(Leer_estado_mesas.MESAS_ACTIVAS);
+        esmesas = leermes.get_mesas();
 
-            },
-            new String [] {
-                "ITEM" ,"NOMBRE", "CANTIDAD", "MESA"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class,java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false,false, false, false
-            };
+        Estadmesa.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        Estadmesa.setModel(new javax.swing.DefaultComboBoxModel<>());
+        Estadmesa.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        Estadmesa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        for(Estado_Mesa c: esmesas){
+        Estadmesa.addItem(c.toString2());}
+        jPanel9.add(Estadmesa);
+        Estadmesa.setBounds(500, 110, 230, 30);
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
+                JButton dispjdmesa= new JButton("Llamar");
+                dispjdmesa.addKeyListener(Adaptador.accion_teclado(dispjdmesa));
+                dispjdmesa.setPreferredSize(new Dimension(100, 40));
+                dispjdmesa.setBackground(new Color(66, 66, 66));
+                dispjdmesa.setForeground(Color.WHITE);
+                dispjdmesa.addActionListener((accion) ->{
+                    
+                    Ver_pedidos display=new Ver_pedidos(Cocina);
+                });
+                jPanel9.add(dispjdmesa);
+                dispjdmesa.setBounds(140, 240, 230, 40);
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane4.setViewportView(datosTable2);
-
-        jPanel9.add(jScrollPane4);
-        jScrollPane4.setBounds(90, 50, 310, 300);
-
-        jButton11.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jButton11.setText("REGISTRAR OTRO PEDIDO");
-        jButton11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
-            }
-        });
-        jPanel9.add(jButton11);
-        jButton11.setBounds(440, 240, 230, 40);
-
-        generaFact.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        generaFact.setText("GENERAR FACTURA");
-        generaFact.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        generaFact.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                generaFactActionPerformed(evt);
-            }
-        });
-        jPanel9.add(generaFact);
-        generaFact.setBounds(440, 180, 230, 40);
 
         cocinar.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.highlight"));
         cocinar.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         cocinar.setText("COCINAR");
         cocinar.setToolTipText("");
         cocinar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        cocinar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                cocinarMouseMoved(evt);
-            }
-        });
-        cocinar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cocinarActionPerformed(evt);
-            }
-        });
+       
+        cocinar.addActionListener((accion) ->{
+                    
+                    Estadmesa.getSelectedItem();
+                     Escribir_estado_mesas uplo=new Escribir_estado_mesas(esmesas.get(Estadmesa.getSelectedIndex()),dematriza(Leer_estado_mesas.get_contenido_mesa(procesar((String)Estadmesa.getSelectedItem()))),esmesas.get(Estadmesa.getSelectedIndex()).get_comentario(),true,true); 
+            
+                });
         jPanel9.add(cocinar);
-        cocinar.setBounds(440, 110, 230, 30);
+        cocinar.setBounds(480, 200, 230, 30);
 
 
         jLabel26.setBackground(new java.awt.Color(0, 0, 0));
@@ -1330,13 +1308,13 @@ public class Interface_Empleados extends javax.swing.JFrame {
         jPanel10.add(PROPINA);
         PROPINA.setBounds(520, 510, 80, 14);
 
-        jButton19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/pay-per-click (1).png"))); // NOI18N
+        /*jButton19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/pay-per-click (1).png"))); // NOI18N
         jButton19.setContentAreaFilled(false);
         jButton19.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton19ActionPerformed(evt);
             }
-        });
+        });*/
         jPanel10.add(jButton19);
         jButton19.setBounds(550, 590, 70, 70);
 
@@ -1667,9 +1645,6 @@ public class Interface_Empleados extends javax.swing.JFrame {
         pack();
     }
 
-    int contador = 0;
-    int suma = 0;
-
     private void recolectardatostabla(String[] arr){
         pedidoanterior=arr;
     }
@@ -1682,9 +1657,9 @@ public class Interface_Empleados extends javax.swing.JFrame {
     }                                       
 
     private void pagosActionPerformed(java.awt.event.ActionEvent evt) {                                      
-        Factura.setVisible(true);
-        Factura.setDefaultCloseOperation(DISPOSE_ON_CLOSE);// arreglar el cerrado de páginas
-        Cocina.dispose();
+        Cocina.setVisible(true);
+        Cocina.setDefaultCloseOperation(DISPOSE_ON_CLOSE);// arreglar el cerrado de páginas
+        
     }                                     
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
@@ -2246,11 +2221,24 @@ public class Interface_Empleados extends javax.swing.JFrame {
         }
 
 
-    }                                         
+    }          
+    
+    private String [] dematriza(String [][] mat){
+        String []arr=new String[mat.length];
+            for(int i = 0; i < mat.length; i++){
+                   arr[i]=mat[i][0]+";"+mat[i][2]; 
+
+            }
+    return arr;
+        }
+    private int procesar(String MESA){
+        String[]dos=MESA.split(":");
+        return Integer.parseInt(dos[1]);
+    }
 
                                                                      
 
-    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+    /*private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {                                          
 
         //BOTON FINALIZA FACTURA
         Factura f = new Factura();
@@ -2278,7 +2266,7 @@ public class Interface_Empleados extends javax.swing.JFrame {
             limpiarTabla(datosTable2);
 
         }
-    }                                         
+    } */                                        
 
     private void pitaGriegaActionPerformed(java.awt.event.ActionEvent evt) {                                           
         // TODO add your handling code here:
@@ -2410,3 +2398,74 @@ class Tabladialog extends JDialog{
             setVisible(true);
         }
     }
+    /*class Ver_pedidos extends JDialog{
+    public Ver_pedidos(JDialog padre){
+
+        super(padre, true);
+        
+        setTitle("Ver pedidos");
+        setPreferredSize(new Dimension(500,500));
+        setLocation(padre.getLocationOnScreen());
+        setResizable(true);
+        add(panel_ver_nombre());
+        pack();
+        setVisible(true);
+    }
+
+    public JPanel panel_ver_nombre(){
+        JPanel panel = new JPanel(){
+            @Override
+            protected void paintComponent(Graphics g){
+                super.paintComponent(g);
+                
+                    // Carga la imagen de fondo
+                ImageIcon im = new ImageIcon("src\\Recursos_fotograficos\\icono.jpg");
+                im = new ImageIcon(im.getImage().getScaledInstance(getWidth(), getHeight(),Image.SCALE_SMOOTH));
+                Image imagen_fondo = im.getImage();
+                g.drawImage(imagen_fondo, 0, 0, getWidth(), getHeight(), this);
+                
+            }
+        };
+        panel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        JButton[] botones = botones();
+             
+        if(botones != null){
+                for(int i = 0 ; i < botones.length; i++){
+                panel.add(botones[i]);
+            }
+        }
+        else{
+            panel.add(new JLabel("Actualmente no hay nada para mostrar"));
+        }
+            
+        return panel;
+    }
+        
+    private JButton[] botones(){
+        //instanciamos las variables que vamos a utilizar
+        JButton[] botones = null;
+        ArrayList<Estado_Mesa> mesas;
+            
+        Leer_estado_mesas leer = new Leer_estado_mesas(Leer_estado_mesas.MESAS_ACTIVAS);
+        mesas = leer.get_mesas();
+        if(mesas.size()>0){
+            botones = new JButton[mesas.size()];
+            for(int i = 0; i < botones.length;i++){
+                botones[i] = new JButton("Mesa"+mesas.get(i).get_num_mesa());
+                botones[i].addKeyListener(Adaptador.accion_teclado(botones[i]));
+                botones[i].setPreferredSize(new Dimension(100, 40));
+                botones[i].setBackground(new Color(66, 66, 66));
+                botones[i].setForeground(Color.WHITE);
+                int num = i; 
+                botones[i].addActionListener((accion) ->{
+                    
+                    Tabla_mesas t = new Tabla_mesas(this,mesas.get(num),Tabla_mesas.MESERO);
+                });
+            }
+        }
+            
+        return botones;
+    }
+    
+        
+}*/
