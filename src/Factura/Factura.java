@@ -1,16 +1,11 @@
 package Factura;
 
 public class Factura {
-     private Double iva;
-
-  private Double propina;
-
-   private Double precio;
-
+    private Double iva;
+    private Double propina;
+    private Double precio;
     private String concepto;
-
     private int cantidad;
-
     private Double total;
     public int numventas;
     

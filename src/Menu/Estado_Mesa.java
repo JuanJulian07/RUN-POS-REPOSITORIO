@@ -31,6 +31,9 @@ public class Estado_Mesa {
     public String toString(){
         return(num_mesa + " " + comentario + " " + estado_mesero + " "+estado_cocinero);
     }
+    public String get_mesa_format(){
+        return ("Item;"+"Cantidad;"+comentario + ";"+num_mesa+ ";"+estado_mesero+";"+estado_cocinero);
+    }
     public void set_estado_mesero(boolean b){
         estado_mesero = b;
     }
@@ -40,4 +43,5 @@ public class Estado_Mesa {
     public void set_comentario(String c){
         comentario = c;
     }
+
 }

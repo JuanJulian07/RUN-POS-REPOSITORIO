@@ -4,6 +4,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
 import Empleados.Empleado;
+import Leer_Bases_de_datos.Escribir_estado_mesas;
 import Leer_Bases_de_datos.Leer_estado_mesas;
 import Menu.Estado_Mesa;
 
@@ -224,7 +225,6 @@ class Eliminar_pedidos extends JDialog{
         setResizable(true);
         add(panel_ver_nombre());
         pack();
-        //padre.setVisible(false);
         padre.setVisible(false);
         setVisible(true);
     }
@@ -276,7 +276,8 @@ class Eliminar_pedidos extends JDialog{
                 int num = i; 
                 botones[i].addActionListener((accion) ->{
                     
-                    Tabla_mesas t = new Tabla_mesas(this,mesas.get(num),Tabla_mesas.ADMIN);
+                    Tabla_mesas t = new Tabla_mesas(this,mesas.get(num),Tabla_mesas.ADMIN_ELIMINAR);
+
                 });
             }
         }
@@ -292,9 +293,11 @@ class Tabla_mesas extends JDialog{
     public static final int ADMIN_ELIMINAR = 2;
     private Estado_Mesa mesa_mesero; 
     private String[] valores_mesa_llenos;
+    private JDialog padre;
         public Tabla_mesas(JDialog padre,Estado_Mesa mesa,int opcion){
             
             super(padre);
+            this.padre = padre;
             switch (opcion){
                 case 0:
                     setModal(false);
@@ -303,6 +306,10 @@ class Tabla_mesas extends JDialog{
                 case 1:
                     setModal(true);
                     add(paneltablames(mesa));
+                    break;
+                case 2:
+                    setModal(true);
+                    add(paneltableadmin_eli(mesa));
                     break;
             }
             setLocation(padre.getLocationOnScreen());
@@ -412,6 +419,72 @@ class Tabla_mesas extends JDialog{
 
             panel.add(guardar,BorderLayout.SOUTH);
             return panel;
+        }
+        private JPanel paneltableadmin_eli(Estado_Mesa mesa){
+            String[] cabeza_tabla = {"item","Producto","Cantidad"};
+            String[][] contenido_mesa = Leer_estado_mesas.get_contenido_mesa(mesa.get_num_mesa());
+
+            JPanel panel = new JPanel(new BorderLayout());
+            JPanel panel2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+            //Pare de la tabla
+            DefaultTableModel modelo = new DefaultTableModel(contenido_mesa, cabeza_tabla){
+                //Esto es para que la tabla no sea editable
+                @Override
+                public boolean isCellEditable(int row, int column){
+                    return column != 0;
+                }
+            };
+            
+            JTable tabla = new JTable(modelo);
+            tabla.getTableHeader().setReorderingAllowed(false);
+            tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+            //Establecemos el tamaño
+            tabla.getColumnModel().getColumn(0).setPreferredWidth(45);
+            tabla.getColumnModel().getColumn(1).setPreferredWidth(350);
+            tabla.getColumnModel().getColumn(2).setPreferredWidth(70);
+            //Hacemos que no se pueda cambiar el tamaño
+            tabla.getColumnModel().getColumn(0).setResizable(false);
+            tabla.getColumnModel().getColumn(1).setResizable(false);
+            tabla.getColumnModel().getColumn(2).setResizable(false);
+            //Lo agregamos a un scrolpane
+            JScrollPane scrollpane = new JScrollPane(tabla);
+            panel.add(scrollpane,BorderLayout.CENTER);
+
+            //Parte del comentario
+            JTextField comentario = new JTextField(mesa.get_comentario());
+            panel.add(comentario,BorderLayout.NORTH);
+
+            //Parte para guardar la info
+            JButton guardar = new JButton("Guardar");
+            guardar.addActionListener(accion ->{
+                set_mesa(mesa, comentario.getText());
+                set_valores(tabla);
+                setVisible(false);
+            });
+
+            JButton Eliminar_orden = new JButton("Eliminar orden");
+            Eliminar_orden.addActionListener(accion ->{
+                comentario.setText("Descripcion auxiliar");
+                remover_items_tabla(modelo);
+                set_valores(tabla);
+                new Escribir_estado_mesas(mesa, valores_mesa_llenos,comentario.getText(), false, false);
+                JOptionPane.showMessageDialog(this, "Eliminacion del pedido de la mesa satisfacotriamente", "Eliminaicon pedido", JOptionPane.INFORMATION_MESSAGE, null);
+                setVisible(false);
+                padre.setVisible(false);
+                padre.getParent().setVisible(true);
+                padre = new Eliminar_pedidos((JFrame)padre.getParent());
+            });
+            
+            panel2.add(guardar);
+            panel2.add(Eliminar_orden);
+            panel.add(panel2,BorderLayout.SOUTH);
+            return panel;
+        }
+        private void remover_items_tabla(DefaultTableModel tabla){
+            for(int i = 0; i < tabla.getRowCount(); i++){
+                tabla.removeRow(i);
+                i--;
+            }
         }
         private void set_mesa(Estado_Mesa mesa, String comentario){
             mesa.set_comentario(comentario);
