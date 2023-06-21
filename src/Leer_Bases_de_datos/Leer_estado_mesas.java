@@ -10,7 +10,7 @@ public class Leer_estado_mesas {
     public static final int TODOS = 0;
     public static final int MESAS_ACTIVAS = 1;
     public static final int MESAS_SATISFECHAS = 2;
-    //public static final int MESAS_INACTIVAS=3;
+    public static final int MESAS_INSATISFECHAS = 3;
 
     public Leer_estado_mesas(int opcion){
         leer_guardar();
@@ -29,6 +29,13 @@ public class Leer_estado_mesas {
             case 2:
                 for(int i = 0; i < mesas.size(); i++){
                     if(!mesas.get(i).get_estado_cocinero()){
+                        mesas.remove(i);
+                        i--;
+                    }
+                }
+            case 3:
+                for(int i = 0; i < mesas.size(); i++){
+                    if(!mesas.get(i).get_estado_mesero() || mesas.get(i).get_estado_cocinero()){
                         mesas.remove(i);
                         i--;
                     }

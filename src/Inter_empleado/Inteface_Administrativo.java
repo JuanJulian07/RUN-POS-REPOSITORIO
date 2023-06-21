@@ -103,15 +103,13 @@ public class Inteface_Administrativo extends JFrame{
         //Escuchador de facturar
         facturar.addActionListener(accion ->{
            Facturar fac = new Facturar(this);
-           setVisible(true);
            fac = null; 
         });
 
         //Escuchador de Ver_pedidos
         visualizar.addActionListener(accion -> {
-            Ver_pedidos ver = new Ver_pedidos(this);
+            new Ver_pedidos(this);
             setVisible(true);
-            ver = null;
         });
 
         eliminar.addActionListener(accion -> {
@@ -153,7 +151,7 @@ class Ver_pedidos extends JDialog{
         setResizable(true);
         add(panel_ver_nombre());
         pack();
-        //padre.setVisible(false);
+        padre.setVisible(false);
         setVisible(true);
     }
 
@@ -214,9 +212,84 @@ class Ver_pedidos extends JDialog{
     
         
 }
+// Esta clase nos permite eliminar pedidos siempre y cuando no hayan salido de cocina o no esten en preparacion
+class Eliminar_pedidos extends JDialog{
+    public Eliminar_pedidos (JFrame padre){
+
+        super(padre, true);
+        
+        setTitle("Eliminar Pedidos");
+        setPreferredSize(new Dimension(500,500));
+        setLocation(padre.getLocationOnScreen());
+        setResizable(true);
+        add(panel_ver_nombre());
+        pack();
+        //padre.setVisible(false);
+        padre.setVisible(false);
+        setVisible(true);
+    }
+
+    public JPanel panel_ver_nombre(){
+        JPanel panel = new JPanel(){
+            @Override
+            protected void paintComponent(Graphics g){
+                super.paintComponent(g);
+                
+                    // Carga la imagen de fondo
+                ImageIcon im = new ImageIcon("src\\Recursos_fotograficos\\icono.jpg");
+                im = new ImageIcon(im.getImage().getScaledInstance(getWidth(), getHeight(),Image.SCALE_SMOOTH));
+                Image imagen_fondo = im.getImage();
+                g.drawImage(imagen_fondo, 0, 0, getWidth(), getHeight(), this);
+                
+            }
+        };
+        panel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        JButton[] botones = botones();
+             
+        if(botones != null){
+                for(int i = 0 ; i < botones.length; i++){
+                panel.add(botones[i]);
+            }
+        }
+        else{
+            panel.add(new JLabel("Actualmente no hay nada para mostrar"));
+        }
+            
+        return panel;
+    }
+        
+    private JButton[] botones(){
+        //instanciamos las variables que vamos a utilizar
+        JButton[] botones = null;
+        ArrayList<Estado_Mesa> mesas;
+            
+        Leer_estado_mesas leer = new Leer_estado_mesas(Leer_estado_mesas.MESAS_INSATISFECHAS);
+        mesas = leer.get_mesas();
+        if(mesas.size()>0){
+            botones = new JButton[mesas.size()];
+            for(int i = 0; i < botones.length;i++){
+                botones[i] = new JButton("Mesa"+mesas.get(i).get_num_mesa());
+                botones[i].addKeyListener(Adaptador.accion_teclado(botones[i]));
+                botones[i].setPreferredSize(new Dimension(100, 40));
+                botones[i].setBackground(new Color(66, 66, 66));
+                botones[i].setForeground(Color.WHITE);
+                int num = i; 
+                botones[i].addActionListener((accion) ->{
+                    
+                    Tabla_mesas t = new Tabla_mesas(this,mesas.get(num),Tabla_mesas.ADMIN);
+                });
+            }
+        }
+            
+        return botones;
+    }
+    
+        
+}
 class Tabla_mesas extends JDialog{
     public static final int MESERO = 1;
     public static final int ADMIN = 0;
+    public static final int ADMIN_ELIMINAR = 2;
     private Estado_Mesa mesa_mesero; 
     private String[] valores_mesa_llenos;
         public Tabla_mesas(JDialog padre,Estado_Mesa mesa,int opcion){
@@ -378,10 +451,3 @@ class Tabla_mesas extends JDialog{
     }
     
 
-class Eliminar_pedidos extends JDialog{
-    public Eliminar_pedidos(JFrame padre){
-        super(padre, true);
-        setLocation(padre.getLocationOnScreen());
-        setVisible(true);
-    }
-}
