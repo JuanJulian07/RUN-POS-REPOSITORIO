@@ -850,7 +850,7 @@ public class Interface_Empleados extends javax.swing.JFrame {
         jPanel3.setForeground(new java.awt.Color(255, 255, 255));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 // tabla de pedidos
-datosTable.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        datosTable.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         datosTable.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         datosTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

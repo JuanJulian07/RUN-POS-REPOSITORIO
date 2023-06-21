@@ -32,7 +32,9 @@ public class Leer_estado_mesas {
                         mesas.remove(i);
                         i--;
                     }
+                    
                 }
+                break;
             case 3:
                 for(int i = 0; i < mesas.size(); i++){
                     if(!mesas.get(i).get_estado_mesero() || mesas.get(i).get_estado_cocinero()){
@@ -40,6 +42,7 @@ public class Leer_estado_mesas {
                         i--;
                     }
                 }
+                break;
         }
     }
 
@@ -100,22 +103,61 @@ public class Leer_estado_mesas {
         return contenido;
     }
 
+    public static String[][] get_contenido_mesa(int num_mesa,boolean b){
+        
+        String[][] contenido = null;
+        String [] contenido_aux = null;
+        ArrayList<String[]> aux = new ArrayList<String[]>();
+        try{
+            Scanner leer = new Scanner(new File("src\\Bases_de_datos\\Mesas\\Mesa"+num_mesa+".csv"));
+            leer.nextLine();
+            while(leer.hasNextLine()){
+                contenido_aux = leer.nextLine().split(";");
+                Valor valor = new Valor(Integer.parseInt(contenido_aux[0]), contenido_aux[1]);
+                aux.add(valor.get_valor2());
+                
+            }
+            contenido_aux = null;
+        }
+        catch(IOException e){
+            System.out.println("NO se pudo encontrar el archivo mesa");
+        }
+
+        if(aux.size()>0){
+            contenido = new String[aux.size()][];
+
+            for(int i = 0; i < aux.size(); i++){
+                contenido[i] = aux.get(i);
+            }
+            aux.clear();
+            aux = null;
+        }
+
+        return contenido;
+    }
+
     private static class Valor{
         private String item;
         private String valor1;
         private String valor2;
+        private String presio;
 
         public Valor(int item, String valor2){//val 2 es la cantidad
             Leer_Menu leer = new Leer_Menu();
             this.item = ""+item;
             this.valor1 = leer.get_menu_item(item-1).get_nombre();
             this.valor2 = valor2;
+            this.presio = ""+leer.get_menu_item(item-1).get_precio();
         }
+        
 
         public String[] get_valor(){
             String[] v = {item,valor1,valor2};
             return v;
         }
-
+        public String[] get_valor2(){
+            String[] v = {item,valor1,presio,valor2};
+            return v;
+        }
     }
 }
