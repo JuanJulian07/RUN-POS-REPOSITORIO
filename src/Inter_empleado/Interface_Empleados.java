@@ -1,5 +1,5 @@
 package Inter_empleado;
-
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -18,7 +18,10 @@ import Factura.Factura;
 import Leer_Bases_de_datos.Leer_estado_mesas;
 
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import Empleados.Empleado;
 import Menu.Estado_Mesa;
@@ -28,6 +31,7 @@ import Menu.Menu;
 public class Interface_Empleados extends javax.swing.JFrame {
      File archivo;
     //private BufferedWriter bw;
+    private String[] pedidoanterior;
     private javax.swing.JDialog AñadirProd;
     private javax.swing.JDialog Cocina;
     private javax.swing.JFrame Estadisticas;
@@ -465,21 +469,11 @@ public class Interface_Empleados extends javax.swing.JFrame {
         Postrecant.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         Postrecant.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40" }));
         Postrecant.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        Postrecant.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                damaBlancaActionPerformed(evt);
-            }
-        });
         jPanel2Menu.add(Postrecant, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 275, 40, 40));
 
         bebidaCant.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         bebidaCant.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40" }));
         bebidaCant.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        bebidaCant.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bebidaCantActionPerformed(evt);
-            }
-        });
         jPanel2Menu.add(bebidaCant, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 430, 40, 40));
 
         Pizzas.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -878,11 +872,10 @@ public class Interface_Empleados extends javax.swing.JFrame {
         jScrollPane2.setViewportView(datosTable);
 
         jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, 400, 130));
-        Tabla_mesas c=null;
         ArrayList<Estado_Mesa> mesas;
         Leer_estado_mesas leer = new Leer_estado_mesas(0);
         mesas = leer.get_mesas();
-        JButton botonetab = new JButton();
+        JButton botonetab = new JButton("Abrir");
                 botonetab.addKeyListener(Adaptador.accion_teclado(botonetab));
                 botonetab.setPreferredSize(new Dimension(100, 40));
                 botonetab.setBackground(new Color(66, 66, 66));
@@ -890,12 +883,36 @@ public class Interface_Empleados extends javax.swing.JFrame {
                 botonetab.addActionListener((accion) ->{
                     botonetab.setText("Mesa"+mesas.get(Integer.parseInt((String)numMesa.getSelectedItem())-1).get_num_mesa());
                     Tabla_mesas t = new Tabla_mesas(Pedido,mesas.get(Integer.parseInt((String)numMesa.getSelectedItem())-1),Tabla_mesas.MESERO);
-                    //c=t;
+                    Tabla_mesas c=t;
+                    recolectardatostabla(c.get_valores_mesa());
                 });
-        jPanel3.add(botonetab,new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 460, 100, 70));
+        jPanel3.add(botonetab,new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 450, 100, 70));
                 //c.get_valores_mesa();
         
+                JButton botoeliminarfila = new JButton("Eliminar");
+                 botoeliminarfila.addKeyListener(Adaptador.accion_teclado(botonetab));
+                 botoeliminarfila.setPreferredSize(new Dimension(100, 40));
+                 botoeliminarfila.setBackground(new Color(66, 66, 66));
+                 botoeliminarfila.setForeground(Color.WHITE);
+                 botoeliminarfila.addActionListener((accion) ->{
+                    int fila = datosTable.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) datosTable.getModel();
+        model.removeRow(fila);
+        //model.addRow()
+                });
+                jPanel3.add(botoeliminarfila,new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 450, 100, 70));
 
+                JButton botongentabla = new JButton("Eliminar");
+                  botongentabla.addKeyListener(Adaptador.accion_teclado(botonetab));
+                  botongentabla.setPreferredSize(new Dimension(100, 40));
+                  botongentabla.setBackground(new Color(66, 66, 66));
+                  botongentabla.setForeground(Color.WHITE);
+                  botongentabla.addActionListener((accion) ->{
+                    int fila = datosTable.getSelectedRow();
+                    DefaultTableModel model = (DefaultTableModel) datosTable.getModel();
+                    model.removeRow(fila);
+                });
+                jPanel3.add(botoeliminarfila,new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 450, 100, 70));
         jButton7.setForeground(new java.awt.Color(255, 255, 255));
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/atras.png"))); // NOI18N
         jButton7.setContentAreaFilled(false);
@@ -1070,13 +1087,6 @@ public class Interface_Empleados extends javax.swing.JFrame {
         jPanel9.add(cocinar);
         cocinar.setBounds(440, 110, 230, 30);
 
-        /*lblTime.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        lblTime.setForeground(new java.awt.Color(255, 255, 255));
-        lblTime.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTime.setText("00:00:00");
-        lblTime.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
-        jPanel9.add(lblTime);
-        lblTime.setBounds(440, 50, 230, 40);*/
 
         jLabel26.setBackground(new java.awt.Color(0, 0, 0));
         jLabel26.setForeground(new java.awt.Color(255, 255, 255));
@@ -1738,6 +1748,10 @@ public class Interface_Empleados extends javax.swing.JFrame {
 
     int contador = 0;
     int suma = 0;
+
+    private void recolectardatostabla(String[] arr){
+        pedidoanterior=arr;
+    }
     
     private void verMenuActionPerformed(java.awt.event.ActionEvent evt) {                                        
         Menu.setVisible(true);
@@ -1781,35 +1795,7 @@ public class Interface_Empleados extends javax.swing.JFrame {
         pagos.setToolTipText("*REGISTRAR PAGO");
     }                                
 
-
-    private void tiposBebidasActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        if (tiposBebidas.getSelectedIndex() == 0) { // Cambiar imagenes en las bebidas
-            String icon = "/Img/gaseosa.png";
-            URL url = this.getClass().getResource(icon);
-            ImageIcon icono = new ImageIcon(url);
-
-            ImgBebidas.setIcon(icono);
-        } else if (tiposBebidas.getSelectedIndex() == 1) {
-            String icon = "/Img/te_opt.png";
-            URL url = this.getClass().getResource(icon);
-            ImageIcon icono = new ImageIcon(url);
-
-            ImgBebidas.setIcon(icono);
-        } else {
-            String icon = "/Img/agua_opt.png";
-            URL url = this.getClass().getResource(icon);
-            ImageIcon icono = new ImageIcon(url);
-
-            ImgBebidas.setIcon(icono);
-        }
-
-    }                                            
-
-    void actualizarImagen() {
-        tiposBebidas.addItemListener((ItemEvent arg0) -> {
-            // TODO
-        });
-    }
+                                      
 
     private void doPedidoActionPerformed(java.awt.event.ActionEvent evt) {                                         
         Pedido.setVisible(true);
@@ -1818,15 +1804,7 @@ public class Interface_Empleados extends javax.swing.JFrame {
     }                                                                 
 
 
-    private void damaBlancaActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        // TODO add your handling code here:
-    }                                          
-
-
-    private void bebidaCantActionPerformed(java.awt.event.ActionEvent evt) {                                           
-
-
-    }                                          
+                                            
 
     private void verEstadisticasActionPerformed(java.awt.event.ActionEvent evt) {                                                
         Inteface_Administrativo administrativo = new Inteface_Administrativo(empleado, this);
@@ -2648,6 +2626,92 @@ public class Interface_Empleados extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
     }
-
     
+    private JPanel paneltablames(String[][] arregloped,int numMesa){
+           /*  String[] cabeza_tabla = {"item","Producto","Cantidad"};
+            String[][] contenido_mesa = Leer_estado_mesas.get_contenido_mesa(numMesa);
+
+            JPanel panel = new JPanel(new BorderLayout());
+
+            //Pare de la tabla
+            DefaultTableModel modelo = new DefaultTableModel(contenido_mesa, cabeza_tabla){
+                //Esto es para que la tabla no sea editable
+                @Override
+                public boolean isCellEditable(int row, int column){
+                    return column != 0;
+                }
+            };
+            
+        JTable tabla = new JTable();
+        tabla.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        tabla.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ITEM" ,"NOMBRE", "CANTIDAD", "MESA"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class,java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false,false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        JScrollPane scrollPane=new JScrollPane();
+        scrollPane.setViewportView(datosTable2);
+
+        //jPanel9.add(jScrollPane4);
+        //jScrollPane4.setBounds(90, 50, 310, 300);
+        panel.add(scrollPane,BorderLayout.CENTER);
+
+            return (panel);*/
+
+            String[] cabeza_tabla = {"item","Producto","Cantidad"};
+            String[][] contenido_mesa = Leer_estado_mesas.get_contenido_mesa(numMesa);
+
+            JPanel panel = new JPanel(new BorderLayout());
+
+            //Pare de la tabla
+            DefaultTableModel modelo = new DefaultTableModel(contenido_mesa, cabeza_tabla){
+                //Esto es para que la tabla no sea editable
+                @Override
+                public boolean isCellEditable(int row, int column){
+                    return column != 0;
+                }
+            };
+            
+            JTable tabla = new JTable(modelo);
+            tabla.getTableHeader().setReorderingAllowed(false);
+            tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+            //Establecemos el tamaño
+            tabla.getColumnModel().getColumn(0).setPreferredWidth(45);
+            tabla.getColumnModel().getColumn(1).setPreferredWidth(350);
+            tabla.getColumnModel().getColumn(2).setPreferredWidth(70);
+            //Hacemos que no se pueda cambiar el tamaño
+            tabla.getColumnModel().getColumn(0).setResizable(false);
+            tabla.getColumnModel().getColumn(1).setResizable(false);
+            tabla.getColumnModel().getColumn(2).setResizable(false);
+            //Lo agregamos a un scrolpane
+            JScrollPane scrollpane = new JScrollPane(tabla);
+            panel.add(scrollpane,BorderLayout.CENTER);
+
+            
+
+
+        return panel;
+        }
+
+
 }
+
