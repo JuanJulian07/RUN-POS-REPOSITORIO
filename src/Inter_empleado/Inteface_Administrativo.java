@@ -818,16 +818,16 @@ class Tabla_mesas extends JDialog{
             panel.add(comentario,BorderLayout.NORTH);
 
             //Parte para guardar la info
-            JButton guardar = new JButton("Guardar");
-            guardar.addActionListener(accion ->{
-                set_mesa(mesa, comentario.getText());
-                set_valores(tabla);
-                setVisible(false);
-            });
+            //JButton guardar = new JButton("Guardar");
+            //guardar.addActionListener(accion ->{
+                //set_mesa(mesa, comentario.getText());
+                //set_valores(tabla);
+                //setVisible(false);
+            //});
 
 
 
-            panel.add(guardar,BorderLayout.SOUTH);
+            //panel.add(guardar,BorderLayout.SOUTH);
             return panel;
         }
         private JPanel paneltableadmin_eli(Estado_Mesa mesa){

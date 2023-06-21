@@ -16,6 +16,7 @@ import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
 import Factura.Factura;
+import Leer_Bases_de_datos.Escribir_estado_mesas;
 import Leer_Bases_de_datos.Leer_estado_mesas;
 
 import javax.swing.JOptionPane;
@@ -842,11 +843,11 @@ public class Interface_Empleados extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ITEM","NOMBRE", "VALOR", "CANTIDAD"
+                "ITEM","NOMBRE", "CANTIDAD", "VALOR"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class,java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+                java.lang.String.class,java.lang.String.class, java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false,false, false, false
@@ -874,8 +875,6 @@ public class Interface_Empleados extends javax.swing.JFrame {
                 botonetab.addActionListener((accion) ->{
                     botonetab.setText("Mesa"+mesas.get(Integer.parseInt((String)numMesa.getSelectedItem())-1).get_num_mesa());
                     Tabla_mesas t = new Tabla_mesas(Pedido,mesas.get(Integer.parseInt((String)numMesa.getSelectedItem())-1),Tabla_mesas.MESERO);
-                    Tabla_mesas c=t;
-                    recolectardatostabla(c.get_valores_mesa());
                 });
         jPanel3.add(botonetab,new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 450, 100, 70));
                 //c.get_valores_mesa();
@@ -900,10 +899,27 @@ public class Interface_Empleados extends javax.swing.JFrame {
                   botongentabla.setForeground(Color.WHITE);
                   botongentabla.addActionListener((accion) ->{
 
-                    Tabladialog o=new Tabladialog(Pedido,paneltablames(datosTable,Integer.parseInt((String)numMesa.getSelectedItem())));
+                    Tabladialog o=new Tabladialog(Pedido,paneltablames(datosTable,Integer.parseInt((String)numMesa.getSelectedItem()),mesas.get(Integer.parseInt((String)numMesa.getSelectedItem())-1)));
                 
                 });
                 jPanel3.add(botongentabla,new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 450, 100, 70));
+
+                
+                
+                JButton limpiar = new JButton("Clear");
+                  limpiar.addKeyListener(Adaptador.accion_teclado(botongentabla));
+                  limpiar.setPreferredSize(new Dimension(100, 40));
+                  limpiar.setBackground(new Color(66, 66, 66));
+                  limpiar.setForeground(Color.WHITE);
+                  limpiar.addActionListener((accion) ->{
+
+                   DefaultTableModel model = (DefaultTableModel) datosTable.getModel();
+                    model.setRowCount(0);
+                
+                });
+                jPanel3.add(limpiar,new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 450, 80, 70));
+
+
         jButton7.setForeground(new java.awt.Color(255, 255, 255));
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/atras.png"))); // NOI18N
         jButton7.setContentAreaFilled(false);
@@ -1333,10 +1349,6 @@ public class Interface_Empleados extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(0, 0, 0));
         jPanel5.setForeground(new java.awt.Color(255, 255, 255));
         jPanel5.setLayout(null);
-
-
-
-    
 
 
         javax.swing.GroupLayout EstadisticasLayout = new javax.swing.GroupLayout(Estadisticas.getContentPane());
@@ -1775,35 +1787,35 @@ public class Interface_Empleados extends javax.swing.JFrame {
             String[] y;
             y = x.split(":");
 
-            model.addRow(new Object[]{y[0], y[1],y[2],Especialcant.getSelectedIndex()});
+            model.addRow(new Object[]{y[0], y[1],Especialcant.getSelectedIndex(),y[2]});
         }
 
         if (Corrientecant.getSelectedIndex() > 0) {
             String x = (String)Corriente.getSelectedItem();
             String[] y;
             y = x.split(":");
-            model.addRow(new Object[]{y[0], y[1],y[2],Corrientecant.getSelectedIndex()});
+            model.addRow(new Object[]{y[0], y[1],Corrientecant.getSelectedIndex(),y[2]});
         }
         if (Ejecutivocant.getSelectedIndex() > 0) {
             String x = (String)Ejecutivo.getSelectedItem();
             String[] y;
             y = x.split(":");
 
-            model.addRow(new Object[]{y[0], y[1],y[2],Ejecutivocant.getSelectedIndex()});
+            model.addRow(new Object[]{y[0], y[1],Ejecutivocant.getSelectedIndex(),y[2]});
         }
         if (Pizzascant.getSelectedIndex() > 0) {
             String x =(String) Pizzas.getSelectedItem();
             String[] y;
             y = x.split(":");
 
-            model.addRow(new Object[]{y[0], y[1],y[2], Pizzascant.getSelectedIndex()});
+            model.addRow(new Object[]{y[0], y[1],Pizzascant.getSelectedIndex(), y[2]});
         }
-        if (Pizzascant.getSelectedIndex() > 0) {
+        if (Postrecant.getSelectedIndex() > 0) {
             String x =(String)Postres.getSelectedItem();
             String[] y;
             y = x.split(":");
 
-            model.addRow(new Object[]{y[0], y[1],y[2], Pizzascant.getSelectedIndex()});
+            model.addRow(new Object[]{y[0], y[1],Postrecant.getSelectedIndex(), y[2]});
 
         }
         if (bebidaCant.getSelectedIndex() > 0) {
@@ -1811,7 +1823,7 @@ public class Interface_Empleados extends javax.swing.JFrame {
             String[] y;
             y = x.split(":");
 
-            model.addRow(new Object[]{y[0], y[1],y[2], bebidaCant.getSelectedIndex()});
+            model.addRow(new Object[]{y[0], y[1],bebidaCant.getSelectedIndex(),y[2]});
         }
 
         Pedido.setVisible(true);
@@ -2308,55 +2320,8 @@ public class Interface_Empleados extends javax.swing.JFrame {
         model.setRowCount(0);
     }
     
-    private JPanel paneltablames(JTable datosTable ,int numMesa){
-           /*  String[] cabeza_tabla = {"item","Producto","Cantidad"};
-            String[][] contenido_mesa = Leer_estado_mesas.get_contenido_mesa(numMesa);
-
-            JPanel panel = new JPanel(new BorderLayout());
-
-            //Pare de la tabla
-            DefaultTableModel modelo = new DefaultTableModel(contenido_mesa, cabeza_tabla){
-                //Esto es para que la tabla no sea editable
-                @Override
-                public boolean isCellEditable(int row, int column){
-                    return column != 0;
-                }
-            };
-            
-        JTable tabla = new JTable();
-        tabla.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-        tabla.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tabla.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ITEM" ,"NOMBRE", "CANTIDAD", "MESA"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class,java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false,false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        JScrollPane scrollPane=new JScrollPane();
-        scrollPane.setViewportView(datosTable2);
-
-        //jPanel9.add(jScrollPane4);
-        //jScrollPane4.setBounds(90, 50, 310, 300);
-        panel.add(scrollPane,BorderLayout.CENTER);
-
-            return (panel);*/
+    private JPanel paneltablames(JTable datosTable ,int numMesa, Estado_Mesa mesa){
+          
 
             String[] cabeza_tabla = {"item","Producto","Cantidad"};
             String[][] contenido_mesa = Leer_estado_mesas.get_contenido_mesa(numMesa);
@@ -2385,12 +2350,21 @@ public class Interface_Empleados extends javax.swing.JFrame {
             tabla.getColumnModel().getColumn(2).setResizable(false);
             //Lo agregamos a un scrolpane
             
-        
-
+        JTextField comentario = new JTextField(mesa.get_comentario());
+            panel.add(comentario,BorderLayout.NORTH);
+            //Parte para guardar la info
+        JButton guardar = new JButton("Guardar");
+            guardar.addActionListener(accion ->{
+            if(!(set_valores(tabla).length==0)){    
+            Escribir_estado_mesas upload=new Escribir_estado_mesas(mesa,set_valores(tabla),comentario.getText(),true,false);}
+            else{
+                Escribir_estado_mesas upload=new Escribir_estado_mesas(mesa,set_valores(tabla),"Descripcion auxiliar",false,false);}
+            });
+            panel.add(guardar,BorderLayout.SOUTH);
 
             DefaultTableModel model=(DefaultTableModel) tabla.getModel();
 
-            int cols = datosTable.getColumnCount();
+            //int cols = datosTable.getColumnCount();
             int fils = datosTable.getRowCount();
             for(int i=0; i<fils; i++) {
                 model.addRow(new Object[]{datosTable.getValueAt(i,0), datosTable.getValueAt(i,1),datosTable.getValueAt(i,2),datosTable.getValueAt(i,3)});
@@ -2403,6 +2377,19 @@ public class Interface_Empleados extends javax.swing.JFrame {
         return panel;
         }
 
+        private String[] set_valores(JTable tabla){
+            //Inicializamos los valores de la columna
+            String[] valores_mesa = new String[tabla.getRowCount()];
+            
+            for(int i = 0; i < tabla.getRowCount(); i++){
+                
+                
+                valores_mesa[i] = (String)tabla.getValueAt(i, 0) + ";" +tabla.getValueAt(i, 2);;
+                
+            }
+            
+            return valores_mesa;
+        }
 
 }
 
