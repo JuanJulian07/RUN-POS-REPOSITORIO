@@ -152,7 +152,6 @@ class Ver_pedidos extends JDialog{
         setResizable(true);
         add(panel_ver_nombre());
         pack();
-        padre.setVisible(false);
         setVisible(true);
     }
 
@@ -225,7 +224,7 @@ class Eliminar_pedidos extends JDialog{
         setResizable(true);
         add(panel_ver_nombre());
         pack();
-        padre.setVisible(false);
+        
         setVisible(true);
     }
 
@@ -457,11 +456,60 @@ class Tabla_mesas extends JDialog{
             //Parte para guardar la info
             JButton guardar = new JButton("Guardar");
             guardar.addActionListener(accion ->{
+                boolean band = false;
                 set_mesa(mesa, comentario.getText());
                 set_valores(tabla);
+                if(valores_mesa_llenos.length == 0){
+                    new Escribir_estado_mesas(mesa, valores_mesa_llenos, mesa.get_comentario(), false, false);
+                    band = true;
+                }
+                else{
+                    new Escribir_estado_mesas(mesa, valores_mesa_llenos, mesa.get_comentario(), true, false);
+                }
+                
                 setVisible(false);
+                if(band){
+                    padre.setVisible(false);
+                    padre = new Eliminar_pedidos((JFrame)padre.getParent());
+                }
+                
             });
 
+            //limpia todo lo seleccionado xd 
+            JButton des = new JButton("Limpiar seleccion");
+            des.addActionListener(accion ->{
+                tabla.clearSelection();
+            });
+
+            // Esto nos permite remover un item seleccionado
+            JButton eleminar_item = new JButton("Remover item");
+            eleminar_item.addActionListener(accion ->{
+                int num[] = tabla.getSelectedRows();
+                int acumulado = 0;
+                if(num.length == 0){
+                    JOptionPane.showMessageDialog(this, "No has seleccionado ninguna fila", "Sin seleccion", JOptionPane.INFORMATION_MESSAGE, null);
+                }
+                else if(num.length == 1){
+                    modelo.removeRow(num[0]);
+                }
+                else{
+                    for(int i = 0; i < num.length; i++){
+                        
+                        acumulado++;
+                        if(i< num.length-1){
+                            num[i+1] -= acumulado;
+                        }
+                        
+                        modelo.removeRow(num[i]);
+                        
+
+                    }
+                }
+                
+                
+            });
+            
+            //Esto elimina toda la orden y setea el archivo a false false
             JButton Eliminar_orden = new JButton("Eliminar orden");
             Eliminar_orden.addActionListener(accion ->{
                 comentario.setText("Descripcion auxiliar");
@@ -471,11 +519,12 @@ class Tabla_mesas extends JDialog{
                 JOptionPane.showMessageDialog(this, "Eliminacion del pedido de la mesa satisfacotriamente", "Eliminaicon pedido", JOptionPane.INFORMATION_MESSAGE, null);
                 setVisible(false);
                 padre.setVisible(false);
-                padre.getParent().setVisible(true);
                 padre = new Eliminar_pedidos((JFrame)padre.getParent());
             });
             
             panel2.add(guardar);
+            panel2.add(des);
+            panel2.add(eleminar_item);
             panel2.add(Eliminar_orden);
             panel.add(panel2,BorderLayout.SOUTH);
             return panel;

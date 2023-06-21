@@ -27,7 +27,9 @@ public class Escribir_estado_mesas {
             PrintWriter escribir = new PrintWriter(new FileWriter("src\\Bases_de_datos\\Mesas\\Mesa"+mesa.get_num_mesa()+".csv", false));
             escribir.print(mesa.get_mesa_format());
             if(!(datos.length == 0)){
-                
+                for(int i = 0; i < datos.length; i++){
+                    escribir.print("\n" + datos[i]);
+                }
             }
             escribir.close();
             
@@ -35,6 +37,6 @@ public class Escribir_estado_mesas {
         catch(IOException e){
             JOptionPane.showMessageDialog(null, "Archivo Mesa"+mesa.get_num_mesa()+", no encontrado", "Mesa no encontrada", JOptionPane.ERROR_MESSAGE);
         }
-        System.out.println("guardado exitoso");
+        
     }
 }
